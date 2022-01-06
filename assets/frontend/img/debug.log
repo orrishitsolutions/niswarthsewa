@@ -1,0 +1,104 @@
+[1124/190744.260:ERROR:browser_gpu_channel_host_factory.cc(139)] Failed to launch GPU process.
+[1124/190845.247:INFO:CONSOLE(1)] "%cUnhandled rejection Error: unknown exception type
+    at <anonymous>:1:1
+From previous event:
+    at j.F [as _captureStackTrace] (file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-butler/build/external.js:1:15958)
+    at j._resolveFromExecutor (file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-butler/build/external.js:1:45082)
+    at new j (file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-butler/build/external.js:1:38328)
+    at t.initializeDictionaries (file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-butler/build/spaces.js:1:1957)
+    at Object.<anonymous> (file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-butler/build/main.js:1:11271)
+    at o (file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-butler/build/spaces.js:1:410)
+    at window.webpackJsonp (file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-butler/build/spaces.js:1:284)
+    at file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-butler/build/main.js:1:1", source: file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-butler/build/external.js (1)
+[1124/190845.247:INFO:CONSOLE(1)] "%cUnhandled rejection Error: unknown exception type
+    at <anonymous>:1:1
+From previous event:
+    at O.M [as _captureStackTrace] (file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-rich-tooltips/build/external.js:1:15957)
+    at O._then (file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-rich-tooltips/build/external.js:1:41006)
+    at O.then (file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-rich-tooltips/build/external.js:1:39362)
+    at Object.24 (file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-rich-tooltips/build/main.js:1:33074)
+    at o (file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-rich-tooltips/build/spaces.js:1:410)
+    at window.webpackJsonp (file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-rich-tooltips/build/spaces.js:1:284)
+    at file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-rich-tooltips/build/main.js:1:1", source: file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-rich-tooltips/build/external.js (1)
+[1210/143047.683:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1210/161238.780:INFO:CONSOLE(1)] "Long rAF frame-time", source: file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-rich-tooltips/build/external.js (1)
+[1213/123822.311:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123830.812:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123830.961:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123835.826:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123852.385:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123858.842:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123903.860:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123908.873:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123913.889:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123918.900:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123923.915:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123928.919:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123933.925:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123938.939:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123943.949:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123948.965:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123953.969:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/123958.981:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124548.365:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124553.369:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124602.673:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124602.993:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124607.683:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124608.009:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124619.989:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124625.005:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124630.025:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124635.034:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124638.237:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124640.051:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124646.193:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124646.985:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124651.204:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124703.485:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124710.109:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124715.128:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124720.136:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124725.145:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124730.154:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124735.172:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124740.182:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124745.192:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124750.199:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124758.323:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124759.470:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124803.330:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124815.617:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124821.803:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124826.815:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124831.832:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124836.845:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124841.855:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124846.870:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124851.196:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124851.887:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124856.204:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124856.903:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124901.210:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124902.118:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124910.800:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124910.984:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124915.812:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124928.037:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124934.771:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124939.783:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124944.803:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124949.813:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124954.824:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/124959.833:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/125004.846:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/125009.858:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/125014.879:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/125019.899:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/125024.912:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/125029.927:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/125034.942:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/140032.703:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/140127.568:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/143141.310:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1213/143436.533:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
