@@ -43,16 +43,13 @@ class Home extends MY_Controller
 		$this->form_validation->set_rules('quantity', 'Quantity', 'required|numeric');
 		$this->form_validation->set_rules('piece', 'Piece/pieces', 'required|numeric');
 
-		if ($this->form_validation->run() == FALSE)
-		{
+		if ($this->form_validation->run() == FALSE) {
 			$data = ['message', 'quantity', 'piece'];
 			$post = $this->input->post($data);
 			$this->session->set_flashdata('quotation', $post);
 			$this->session->set_flashdata('error', validation_errors());
 			redirect(base_url());
-		}
-		else
-		{
+		} else {
 			$this->session->set_flashdata('success', '<div class="success">Your request has been sent.</div>');
 			redirect(base_url());
 		}

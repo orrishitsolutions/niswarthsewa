@@ -53,13 +53,14 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-
 $route["enquiry"] = 'home/enquiry';
 $route["category/(.*)"] = 'category';
-$route["(.*).html"] = 'product';
+$route["product/(.*)"] = 'product';
+$route["(.*).html"] = 'page';
 
 
-
+//$route['admin']='admin/admin';
+//$route['admin/(.*)']='admin/admin';
 
 /*
 // user login

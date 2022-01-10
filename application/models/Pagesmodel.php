@@ -13,10 +13,22 @@ class Pagesmodel extends MY_Model
 	 */
 	private $staticBlocks;
 
+	/**
+	 * @var string
+	 */
+	private $categoryPage;
+
+	/**
+	 * @var string
+	 */
+	private $pageCategory;
+
 	public function __construct()
 	{
 		parent::__construct();
 		$this->pages = "ns_pages";
+		$this->categoryPage = "ns_category_pages";
+		$this->pageCategory = "ns_pages_category";
 		$this->staticBlocks = "ns_static_blocks";
 	}
 
@@ -39,10 +51,11 @@ class Pagesmodel extends MY_Model
 		$this->db->where($this->pages . '.status', 1);
 		$result = $this->db->get()->row();
 
-		if (!empty($result)) {
+		if (!empty($result) && $isHome) {
 			return $this->pageContent($result->content, $data);
+		} else {
+			return $result;
 		}
-		return $result->content;
 	}
 
 	/**
@@ -196,9 +209,9 @@ class Pagesmodel extends MY_Model
 			'value' => 'Request For Quotation'
 		];
 		$str = form_open('enquiry', '');
-		$error = !empty($data['quotation']['error']) ? $data['quotation']['error'].'<script> $("html, body").animate({ scrollTop: $("#quotation").offset().top }, 1000); </script>' : "";
-		$success = !empty($data['quotation']['success']) ? $data['quotation']['success'].'<script> $("html, body").animate({ scrollTop: $("#quotation").offset().top }, 1000); </script>' : "";
-		$str .= '<div class="row">'.$error.$success.'</div>';
+		$error = !empty($data['quotation']['error']) ? $data['quotation']['error'] . '<script> $("html, body").animate({ scrollTop: $("#quotation").offset().top }, 1000); </script>' : "";
+		$success = !empty($data['quotation']['success']) ? $data['quotation']['success'] . '<script> $("html, body").animate({ scrollTop: $("#quotation").offset().top }, 1000); </script>' : "";
+		$str .= '<div class="row">' . $error . $success . '</div>';
 		$str .= '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="padding-left:0px;">';
 		$str .= '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">' . validation_errors() . '</div>';
 		$str .= '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">' . form_input($messageInput) . '</div>';
@@ -207,7 +220,7 @@ class Pagesmodel extends MY_Model
 		$str .= '</div>';
 		$str .= '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " style="padding-left: 0">' . form_input($submitInput) . '</div>';
 		$str .= form_close();
-		$content = str_replace('{{'.$formName.'}}', $str, $content);
+		$content = str_replace('{{' . $formName . '}}', $str, $content);
 
 		return $content;
 	}
@@ -228,10 +241,10 @@ class Pagesmodel extends MY_Model
 			$categories = $this->allCategoryByIds($categoryIds);
 			$str = '<div class="row ">';
 			foreach ($categories as $val) {
-				$str .= '<div class="col-lg-5c col-md-5c col-sm-5c col-xs-12 "><div class="box-colams clothe1"><img src="'.base_url($val->category_image).'"><div class="text-center "><h5>'.$val->title.'</h5><a href="'.base_url("category/" . $val->slug).'" class="btn clothe-btn ">view more</a></div></div></div>';
+				$str .= '<div class="col-lg-5c col-md-5c col-sm-5c col-xs-12 "><div class="box-colams clothe1"><img src="' . base_url($val->category_image) . '"><div class="text-center "><h5>' . $val->title . '</h5><a href="' . base_url("category/" . $val->slug) . '" class="btn clothe-btn ">view more</a></div></div></div>';
 			}
 			$str .= '</div>';
-			$content = str_replace('{{'.$matchVal.'}}', $str, $content);
+			$content = str_replace('{{' . $matchVal . '}}', $str, $content);
 		}
 
 		return $content;
@@ -256,7 +269,7 @@ class Pagesmodel extends MY_Model
 				$str .= '<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"><div class=" col-img-mid cll cll1 "><img class="img-responsive " src="' . base_url($val->category_image) . '" alt="bbookk.jpg "><div><a href="' . base_url("category/" . $val->slug) . '"><p class="price text-center ">' . $val->title . '</p><a href="' . base_url("category/" . $val->slug) . '" class="btn clothe-btn " style="  margin: 10px auto 0px; display: block;">view more</a></a></div></div></div>';
 			}
 			$str .= '</div>';
-			$content = str_replace('{{'.$matchVal.'}}', $str, $content);
+			$content = str_replace('{{' . $matchVal . '}}', $str, $content);
 		}
 
 		return $content;
@@ -282,7 +295,7 @@ class Pagesmodel extends MY_Model
 				$str .= '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 "><div class=" category "><div class=" common-view-3 "><h4 class="headings45">Categories</h4><p class="pros1pre ">' . $val->title . '</p><a href="' . base_url("category/" . $val->slug) . '" class="btn clothe-btn ">view more</a></div><div class=" category-img "><img class="img-responsive " src="' . base_url($val->category_image) . '"></div></div></div>';
 			}
 			$str .= '</div></div>';
-			$content = str_replace('{{'.$matchVal.'}}', $str, $content);
+			$content = str_replace('{{' . $matchVal . '}}', $str, $content);
 		}
 
 		return $content;
@@ -309,7 +322,7 @@ class Pagesmodel extends MY_Model
 			}
 			$str .= '</ul>';
 			$str .= '<script>$("#' . $id . '").owlCarousel({ loop:true, autoplay:false, margin:20, dots:false, nav:false, responsive:{ 0:{ items:1 }, 600:{ items:3 }, 1000:{ items:8 } } });</script>';
-			$content = str_replace('{{'.$matchVal.'}}', $str, $content);
+			$content = str_replace('{{' . $matchVal . '}}', $str, $content);
 		}
 
 		return $content;
@@ -337,7 +350,7 @@ class Pagesmodel extends MY_Model
 			$str .= '</div>';
 			$str .= '<style>#' . $id . ' .box-colams.clothe1 img { height: 300px; }</style>';
 			$str .= '<script>$("#' . $id . '").owlCarousel({ loop:true, autoplay:false, margin:20, dots:false, nav:false, responsive:{ 0:{ items:1 }, 600:{ items:3 }, 1000:{ items:4 } } });</script>';
-			$content = str_replace('{{'.$matchVal.'}}', $str, $content);
+			$content = str_replace('{{' . $matchVal . '}}', $str, $content);
 		}
 
 		return $content;
@@ -380,7 +393,7 @@ class Pagesmodel extends MY_Model
 				$i++;
 			}
 			$str .= '</div></div></div>';
-			$content = str_replace('{{'.$matchVal.'}}', $str, $content);
+			$content = str_replace('{{' . $matchVal . '}}', $str, $content);
 		}
 
 		return $content;
@@ -400,5 +413,34 @@ class Pagesmodel extends MY_Model
 		}
 
 		return $randomString;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	function pageCategory()
+	{
+		$this->db->select(['id', 'name']);
+		$this->db->from($this->categoryPage);
+		$this->db->where($this->categoryPage . '.status', 1);
+		$result = $this->db->get()->result();
+
+		return $result;
+	}
+
+	/**
+	 * @param int $categoryId
+	 * @return mixed
+	 */
+	function getPagesByCategoryId($categoryId = 0)
+	{
+		$this->db->select($this->pages . ".title, " . $this->pages . ".slug, " . $this->pages . ".menu_icon_image");
+		$this->db->from($this->pages);
+		$this->db->join($this->pageCategory, $this->pageCategory . '.pages_id = ' . $this->pages . '.id', "inner");
+		$this->db->join($this->categoryPage, $this->categoryPage . '.id = ' . $this->pageCategory . '.pages_category_id', "inner");
+		$this->db->where($this->categoryPage . '.id', $categoryId);
+		$this->db->where($this->pages . '.status', 1);
+
+		return $this->db->get()->result();
 	}
 }

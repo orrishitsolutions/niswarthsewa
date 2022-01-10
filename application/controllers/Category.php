@@ -8,6 +8,7 @@ class Category extends MY_Controller
 	{
 		parent::__construct();
 		$this->load->model("Categoriesmodel"); //
+		$this->load->model("Pagesmodel"); //
 	}
 
 	public function index()

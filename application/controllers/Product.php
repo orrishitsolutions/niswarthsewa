@@ -6,14 +6,12 @@ class Product extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model("Categoriesmodel"); //
+		$this->load->model("Pagesmodel"); //
 	}
 
-	/**
-	 *
-	 */
 	public function index()
 	{
-		$slug = substr($this->uri->segment(1), 0,-5);
+		$slug = $this->uri->segment(2);
 		$this->load->model("Productsmodel", "product");
 		$product = $this->product->getProductBySlug($slug);
 		$leftNavigation = $this->category->categoryTreeByColumn(['parent_id' => 0]);

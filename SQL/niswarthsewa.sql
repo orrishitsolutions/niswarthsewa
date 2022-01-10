@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2022 at 12:05 PM
+-- Generation Time: Jan 10, 2022 at 04:19 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -110,6 +110,30 @@ INSERT INTO `ns_category` (`id`, `parent_id`, `title`, `meta_title`, `meta_keywo
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ns_category_pages`
+--
+
+CREATE TABLE `ns_category_pages` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1 => Enabled, 2 => Disabled',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ns_category_pages`
+--
+
+INSERT INTO `ns_category_pages` (`id`, `name`, `status`, `created_at`) VALUES
+(1, 'Impect', 1, '2022-01-09 07:08:34'),
+(2, 'Help in emergencies', 1, '2022-01-09 07:10:52'),
+(3, 'Community services', 1, '2022-01-09 07:10:52'),
+(4, 'Contribute Material', 1, '2022-01-09 07:10:52'),
+(5, 'Get Involved', 1, '2022-01-09 07:10:52');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ns_pages`
 --
 
@@ -135,7 +159,68 @@ CREATE TABLE `ns_pages` (
 
 INSERT INTO `ns_pages` (`id`, `title`, `meta_title`, `meta_keyword`, `meta_description`, `slug`, `menu_icon_image`, `banner_image`, `side_image`, `content`, `is_home`, `status`, `created_at`) VALUES
 (1, 'Niswarth Sewa', 'Niswarth Sewa', 'Niswarth Sewa', 'Niswarth Sewa', '', '', '', '', '<section class=\"mensections\"><div class=\"container-fluid\"><div class=\"banner-bottom\"><section class=\"mensections\"><div class=\"container-fluid\"><div class=\"banner-bottom\">\r\n{{block block_id=\"carousel_slider\"}}\r\n</div></div></section></div></div></section>\r\n<section class=\"col-productsd35\"><div class=\"container-fluid \"><div class=\"row \"><div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-12 col-text-top-clothe \"><h4 class=\"headings45\">Donated Cloths</h4><p class=\"pros1pre \">Donate Clothes for Poor People. </p></div><div class=\"col-lg-9 col-md-9 col-sm-9 col-xs-9 col-xs-9 \"><div class=\"our-clothe\"></div></div></div><div class=\"clothe-down \">\r\n{{block block_id=\"donated_cloths\"}}\r\n</div></div></section>\r\n<section class=\"col-productsd35\"><div class=\"container-fluid \"><div class=\"row \"><div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-12 col-text-top-clothe \"><h4 class=\"headings45\">Donated Medicine</h4><p class=\"pros1pre \">Donate Clothes for Needy People.</p></div><div class=\"col-lg-9 col-md-9 col-sm-9 col-xs-9 col-xs-9 \"><div class=\"our-clothe\"></div></div></div><div class=\"clothe-down \">\r\n{{block block_id=\"donated_medicine\"}}\r\n</div></div></section>\r\n<section class=\"cordelelo23\"><div class=\"wrapper\"><div class=\"container-fluid\"><div class=\"row \" style=\"width:1000px;margin:auto;position:relative;\"><div class=\"col-lg-4 col-md-4 col-sm4 col-xs-4 text-trade text-center\"><h4 class=\"headings45\">Education Materials</h4></div><div class=\"col-lg-12 col-md-12 col-sm-12 col-xs-12 \"><div class=\"our-trade\"></div></div></div>\r\n{{block block_id=\"home_tabs\"}}\r\n</div></div></section>\r\n<section class=\"background394\"><div class=\"wrapper-quot \"><div class=\"container-fluid \"><div class=\"row \"><div class=\"col-lg-4 col-md-4 col-sm-4 col-xs-4 \"><img class=\"img-responsive \" src=\"{{store url=\"assets/frontend/img/backgroundpart12.png\"}}\"><div class=\"cat-head \"><h4 class=\"headings45\">Clothes Donate For Needy People</h4></div></div><div class=\"col-lg-4 col-md-4 col-sm-4 col-xs-4 \"><img src=\"{{store url=\"assets/frontend/img/backgroundpart21.png\"}}\"><div class=\"cat-head \"><h4 class=\"headings45\" style=\" color: #FFF;\">Educatyional Material Donate For Needy Kids</h4></div></div><div class=\"col-lg-4 col-md-4 col-sm-4 col-xs-4 \"><img src=\"{{store url=\"assets/frontend/img/backgroundpart31.png\"}}\"><div class=\"cat-head \"><h4 class=\"headings45\" style=\" color: #FFF;\">Home Appliances Donate For Needy People</h4></div></div></div></div></div></section>\r\n<section class=\"cordelelo\"><div class=\"wrapper\"><div class=\"container-fluid\"><div class=\"row\"><div class=\"col-lg-4 col-md-4 col-sm4 col-xs-4 text-trade\"><h4 class=\"headings45\">Food Products</h4><p class=\"pros1pre \">Donate food for Hungry People </p></div><div class=\"col-lg-8 col-md-8 col-sm-8 col-xs-8 \"><div class=\"our-trade\"></div></div></div><div class=\"row \"><div class=\"col-lg-3 col-md-3 col-sm-4 col-xs-4 \"><div class=\"product\"><img class=\"img-responsive \" src=\"{{store url=\"assets/frontend/img/backgrounds121.png\"}}\"><div class=\"common-view \"><h4 class=\"headings45\">Donate food for Hungry People</h4><button type=\"button \" class=\"btn clothe-btn \">view more</button></div></div></div>\r\n{{block block_id=\"food_products\"}}\r\n</div></div></div></section>\r\n<section class=\"bannsersmaolls\"><div class=\"wrapper-quot \"><div class=\"container-fluid \"><div class=\"row\"><div class=\"col-lg-6 col-md-6 col-sm-6 col-xs-6 \"><div class=\"row \"><div class=\"col-lg-6 col-md-6 col-sm4 col-xs-4 text-trade\"><h4 class=\"headings45\">Weekly Deals</h4><p class=\"pros1pre \">A Wide range of selected Goods with fast</p></div><div class=\"col-lg-6 col-md-6 col-sm-8 col-xs-8 \"><div class=\"our-trade\"></div></div></div><div class=\"row\" style=\" margin: 0px;\"><div class=\"col-lg-5 col-md-5 col-sm-6 col-xs-12 \" style=\"background-image:url({{store url=\"assets/frontend/img/backgroundformtop.png\"}});height: 200px; background-size: cover;background-position: center center;background-repeat: no-repeat;\"><div class=\"col-img-left cll\"><img class=\"img-responsive img-rounded \" src=\"{{store url=\"assets/frontend/img/produ1.png\"}}\" alt=\"books.jpg \"><div class=\"common-view-weekly \"><p class=\"pros1pre \">A Wide range of selected Goods with fast</p><a href=\"{{store url=\"category/stationary1\"}}\"  class=\"btn clothe-btn \">view more</a></div></div></div><div class=\"col-lg-7 col-md-7 col-sm-6 col-xs-12 \" style=\"background:#fff;\">\r\n{{block block_id=\"deals_category_one\"}}\r\n</div></div></div><div class=\"col-lg-6 col-md-6 col-sm-6 col-xs-6 \"><div class=\"row \"><div class=\"col-lg-7 col-md-7 col-sm-7 col-xs-12 text-trade\"><h4 class=\"headings45\">Small Commodities Market Place</h4><p class=\"pros1pre \">A Wide range of selected Goods with fast</p></div><div class=\"col-lg-5 col-md-5 col-sm-5 col-xs-12 \"><div class=\"our-trade\"></div></div></div><div class=\"row\" style=\" margin: 0px;\"><div class=\"col-lg-5 col-md-5 col-sm-6 col-xs-12 \" style=\"background-image:url({{store url=\"assets/frontend/img/backgroundformtop2.png\"}});height: 200px; background-size: cover;background-position: center center;background-repeat: no-repeat;\"><div class=\"col-img-left cll\"><img class=\"img-responsive img-rounded \" src=\"{{store url=\"assets/frontend/img/produ2.png\"}}\" alt=\"books.jpg \"><div class=\"common-view-weekly \"><p class=\"pros1pre \">A Wide range of selected Goods with fast</p><a href=\"{{store url=\"category/cloths\"}}\"  class=\"btn clothe-btn \">view more</a></div></div></div><div class=\"col-lg-7 col-md-7 col-sm-6 col-xs-12 \" style=\"background:#fff;\">\r\n{{block block_id=\"deals_category_two\"}}\r\n</div></div></div></div></div></div></div></section><section class=\"formsbanners\"><div class=\"wrapper-quot \"><div class=\"container-fluid \"><div class=\"row \"><div class=\"col-lg-4 col-md-4 col-sm4 col-xs-4 text-trade\"><h4 class=\"headings45\">Request For Quotation</h4><p class=\"pros1pre \">Niswarth Sewa to donate your products. </p></div><div class=\"col-lg-8 col-md-8 col-sm-8 col-xs-8 \"><div class=\"our-trade\"></div></div></div><div class=\" row \"><div class=\"col-md-5\"><div class=\"col-quot-img-4 \" style=\"background-image:url({{store url=\"assets/frontend/img/backform.png\"}})\"><div class=\"col-text-quot \"><div class=\"row\"><div class=\"col-lg-12 col-md-12 col-sm-12 col-xs-12 \"><h4 class=\"headings45\">Global Sourcing Marketplace</h4><p class=\"pros1pre \">Niswarth Sewa to donate your products.</p></div><div class=\"col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6 \">RFQs</div><div class=\"text-left col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6 \">Avg Quotation Duration</div><div class=\"col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6-6 \">RFQs</div><div class=\"col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6-6 \">RFQs</div><div class=\"col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12 \"><a href=\"# \"><button type=\"button \" class=\"btn learn-more \">Learn More</button></a></div></div></div></div></div><div class=\"col-md-7 \"><div class=\"col-quot-text-6 \" id=\"quotation\"><div class=\"col-lg-12 col-md-12 col-sm-12 col-xs-12 col-globe \"><h4 class=\"headings45\">One Request, Multiple Quets</h4><p class=\"pros1pre \">Cutting Grinding Wheel 4 from received 5 quotation(S) </p></div>{{block block_id=\"enquiry_form\"}}</div></div></div></div></div></section>\r\n<section class=\"col-productsd\"><div class=\"container-fluid \"><div class=\"row \"><div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-12 col-text-top-clothe \"><h4 class=\"headings45\">Grocery Products</h4><p class=\"pros1pre \">Donate food for Hungry People </p></div><div class=\"col-lg-9 col-md-9 col-sm-9 col-xs-9 col-xs-9 \"><div class=\"our-clothe\"></div></div></div>{{block block_id=\"grocery_products\"}}</div></section>\r\n<section class=\"wraper \">\r\n	<div class=\"container-fluid \">\r\n		<div class=\"row \">\r\n			<div class=\"col-lg-4 col-md-4 col-sm4 col-xs-4 text-trade\">\r\n				<h4 class=\"headings45\">Helping Services</h4>\r\n				<p class=\"pros1pre \">Niswarth Sewa to donate your services.</p>\r\n			</div>\r\n			<div class=\"col-lg-8 col-md-8 col-sm-8 col-xs-8 \">\r\n				<div class=\"our-trade\"></div>\r\n			</div>\r\n		</div>\r\n		<div class=\"row r2 \">\r\n			<div class=\"col-lg-3 col-md-2 col-sm-3 col-xs-3 image-trade \">\r\n				<img class=\"img-responsive \" src=\"{{store url=\"assets/frontend/img/trade1.png\"}}\" alt=\"ngo.jpg \">\r\n				<div class=\"row\">\r\n					<div class=\"col-lg-8 col-md-8 col-sm-10 col-xs-10 cl\">\r\n						<h5>Trade Assurance</h5>\r\n						<p class=\"pr \"> Order Protection</p>\r\n					</div>\r\n					<div class=\"col-lg-4 col-md-4 col-sm-2 col-xs-2\"><img class=\"trade-img-icon img-responsive \" src=\"{{store url=\"assets/frontend/img/tradeicon1.png\"}}\" alt=\"tradeicon1\"></div>\r\n				</div>\r\n			</div>\r\n			<div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-3 image-trade \">\r\n				<img class=\"img-responsive \" src=\"{{store url=\"assets/frontend/img/trade2.png\"}}\" alt=\"ngo.jpg \">\r\n				<div class=\"row\">\r\n					<div class=\"col-lg-8 col-md-8 col-sm-10 col-xs-10 cl\">\r\n						<h5>Payment</h5>\r\n						<p class=\"pr \">Payment Solutions</p>\r\n					</div>\r\n					<div class=\"col-lg-4 col-md-4 col-sm-2 col-xs-2\"><img class=\"trade-img-icon img-responsive \" src=\"{{store url=\"assets/frontend/img/tradeicon2.png\"}}\" alt=\"tradeicons2\"></div>\r\n				</div>\r\n			</div>\r\n			<div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-3 image-trade \">\r\n				<img class=\"img-responsive \" src=\"{{store url=\"assets/frontend/img/trade3.png\"}}\" alt=\"ngo.jpg \">\r\n				<div class=\"row\">\r\n					<div class=\"col-lg-8 col-md-8 col-sm-10 col-xs-10 cl\">\r\n						<h5>Inspection</h5>\r\n						<p class=\"pr \">Inspection Solution</p>\r\n					</div>\r\n					<div class=\"col-lg-4 col-md-4 col-sm-2 col-xs-2\"><img class=\"trade-img-icon img-responsive \" src=\"{{store url=\"assets/frontend/img/tradeicon3.png\"}}\" alt=\"tradeicon3\"></div>\r\n				</div>\r\n			</div>\r\n			<div class=\"col-lg-3 col-md-3 col-sm-3 col-xs-3 image-trade \">\r\n				<img class=\"img-responsive \" src=\"{{store url=\"assets/frontend/img/trade4.png\"}}\" alt=\"ngo.jpg \">\r\n				<div class=\"row\">\r\n					<div class=\"col-lg-8 col-md-8 col-sm-10 col-xs-10 cl\">\r\n						<h5>Ocean and air shipping</h5>\r\n						<p class=\"pr \">Logistic Service</p>\r\n					</div>\r\n					<div class=\"col-lg-4 col-md-4 col-sm-2 col-xs-2\"><img class=\"trade-img-icon img-responsive \" src=\"{{store url=\"assets/frontend/img/tradeicon4.png\"}}\" alt=\"tradeicon4\"></div>\r\n				</div>\r\n			</div>\r\n		</div>\r\n	</div>\r\n</section>', 1, 1, '2021-12-24 11:27:02'),
-(2, 'Education', 'Education', 'Education', 'Education', 'education', 'assets/frontend/upload/images/edu.png', '', '', 'Nishivarth, an Indian social development organization, is directly benefitting over 15 lakh children and their families every year. We have more than 400 live welfare projects on education, healthcare, livelihood, and women’s empowerment in over 2,000 remote villages and urban slums across 25 states of India.\r\n\r\nThe groundwork for a better life lies in education. It is the most powerful catalyst for social transformation. However, a child cannot be educated in isolation. Only an empowered family, especially the mother, would be willing to educate their child. Thus, rather than focusing on only one stage of a person\'s life, we believe in the lifecycle approach.\r\n\r\nEducation empowers an individual to earn their livelihood and also increases one\'s awareness on a range of issues. From healthcare, to appropriate social behavior, to understanding one\'s rights – Nishivarth seeks to educate, empower and cultivate better citizens.', 0, 1, '2022-01-05 11:47:51');
+(2, 'Education', 'Education', 'Education', 'Education', 'education', 'assets/frontend/upload/images/edu.png', 'assets/frontend/upload/images/bannertop.jpg', 'assets/frontend/upload/images/ecommerce-web-development-services_post.jpg', 'Nishivarth, an Indian social development organization, is directly benefitting over 15 lakh children and their families every year. We have more than 400 live welfare projects on education, healthcare, livelihood, and women’s empowerment in over 2,000 remote villages and urban slums across 25 states of India.\r\n\r\nThe groundwork for a better life lies in education. It is the most powerful catalyst for social transformation. However, a child cannot be educated in isolation. Only an empowered family, especially the mother, would be willing to educate their child. Thus, rather than focusing on only one stage of a person\'s life, we believe in the lifecycle approach.\r\n\r\nEducation empowers an individual to earn their livelihood and also increases one\'s awareness on a range of issues. From healthcare, to appropriate social behavior, to understanding one\'s rights – Nishivarth seeks to educate, empower and cultivate better citizens.', 0, 1, '2022-01-05 11:47:51'),
+(3, 'Health', 'Health', 'Health', 'Health', 'health', 'assets/frontend/upload/images/healthcare.png', 'assets/frontend/upload/images/bannertop.jpg', 'assets/frontend/upload/images/ecommerce-web-development-services_post.jpg', 'Nishivarth, an Indian social development organization, is directly benefitting over 15 lakh children and their families every year. We have more than 400 live welfare projects on education, healthcare, livelihood, and women’s empowerment in over 2,000 remote villages and urban slums across 25 states of India.\r\n\r\nThe groundwork for a better life lies in education. It is the most powerful catalyst for social transformation. However, a child cannot be educated in isolation. Only an empowered family, especially the mother, would be willing to educate their child. Thus, rather than focusing on only one stage of a person\'s life, we believe in the lifecycle approach.\r\n\r\nEducation empowers an individual to earn their livelihood and also increases one\'s awareness on a range of issues. From healthcare, to appropriate social behavior, to understanding one\'s rights – Nishivarth seeks to educate, empower and cultivate better citizens.', 0, 1, '2022-01-05 11:47:51'),
+(4, 'Livelihood', 'Livelihood', 'Livelihood', 'Livelihood', 'livelihood', 'assets/frontend/upload/images/red-envelope.png', 'assets/frontend/upload/images/bannertop.jpg', 'assets/frontend/upload/images/ecommerce-web-development-services_post.jpg', 'Nishivarth, an Indian social development organization, is directly benefitting over 15 lakh children and their families every year. We have more than 400 live welfare projects on education, healthcare, livelihood, and women’s empowerment in over 2,000 remote villages and urban slums across 25 states of India.\r\n\r\nThe groundwork for a better life lies in education. It is the most powerful catalyst for social transformation. However, a child cannot be educated in isolation. Only an empowered family, especially the mother, would be willing to educate their child. Thus, rather than focusing on only one stage of a person\'s life, we believe in the lifecycle approach.\r\n\r\nEducation empowers an individual to earn their livelihood and also increases one\'s awareness on a range of issues. From healthcare, to appropriate social behavior, to understanding one\'s rights – Nishivarth seeks to educate, empower and cultivate better citizens.', 0, 1, '2022-01-05 11:47:51'),
+(5, 'Women Empowerment', 'Women Empowerment', 'Women Empowerment', 'Women Empowerment', 'women-empowerment', 'assets/frontend/upload/images/women-rights.png', 'assets/frontend/upload/images/bannertop.jpg', 'assets/frontend/upload/images/ecommerce-web-development-services_post.jpg', 'Nishivarth, an Indian social development organization, is directly benefitting over 15 lakh children and their families every year. We have more than 400 live welfare projects on education, healthcare, livelihood, and women’s empowerment in over 2,000 remote villages and urban slums across 25 states of India.\r\n\r\nThe groundwork for a better life lies in education. It is the most powerful catalyst for social transformation. However, a child cannot be educated in isolation. Only an empowered family, especially the mother, would be willing to educate their child. Thus, rather than focusing on only one stage of a person\'s life, we believe in the lifecycle approach.\r\n\r\nEducation empowers an individual to earn their livelihood and also increases one\'s awareness on a range of issues. From healthcare, to appropriate social behavior, to understanding one\'s rights – Nishivarth seeks to educate, empower and cultivate better citizens.', 0, 1, '2022-01-05 11:47:51'),
+(6, 'Disaster Response', 'Disaster Response', 'Disaster Response', 'Disaster Response', 'disaster-response', 'assets/frontend/upload/images/natural-disaster.png', 'assets/frontend/upload/images/bannertop.jpg', 'assets/frontend/upload/images/ecommerce-web-development-services_post.jpg', 'Nishivarth, an Indian social development organization, is directly benefitting over 15 lakh children and their families every year. We have more than 400 live welfare projects on education, healthcare, livelihood, and women’s empowerment in over 2,000 remote villages and urban slums across 25 states of India.\r\n\r\nThe groundwork for a better life lies in education. It is the most powerful catalyst for social transformation. However, a child cannot be educated in isolation. Only an empowered family, especially the mother, would be willing to educate their child. Thus, rather than focusing on only one stage of a person\'s life, we believe in the lifecycle approach.\r\n\r\nEducation empowers an individual to earn their livelihood and also increases one\'s awareness on a range of issues. From healthcare, to appropriate social behavior, to understanding one\'s rights – Nishivarth seeks to educate, empower and cultivate better citizens.', 0, 1, '2022-01-05 11:47:51'),
+(7, 'Empowering Grassroots', 'Empowering Grassroots', 'Empowering Grassroots', 'Empowering Grassroots', 'empowering-grassroots', 'assets/frontend/upload/images/employees.png', 'assets/frontend/upload/images/bannertop.jpg', 'assets/frontend/upload/images/ecommerce-web-development-services_post.jpg', 'Nishivarth, an Indian social development organization, is directly benefitting over 15 lakh children and their families every year. We have more than 400 live welfare projects on education, healthcare, livelihood, and women’s empowerment in over 2,000 remote villages and urban slums across 25 states of India.\r\n\r\nThe groundwork for a better life lies in education. It is the most powerful catalyst for social transformation. However, a child cannot be educated in isolation. Only an empowered family, especially the mother, would be willing to educate their child. Thus, rather than focusing on only one stage of a person\'s life, we believe in the lifecycle approach.\r\n\r\nEducation empowers an individual to earn their livelihood and also increases one\'s awareness on a range of issues. From healthcare, to appropriate social behavior, to understanding one\'s rights – Nishivarth seeks to educate, empower and cultivate better citizens.', 0, 1, '2022-01-05 11:47:51'),
+(8, 'Menstrual Health', 'Menstrual Health', 'Menstrual Health', 'Menstrual Health', 'menstrual-health', 'assets/frontend/upload/images/menstrual-cycle.png', 'assets/frontend/upload/images/bannertop.jpg', 'assets/frontend/upload/images/ecommerce-web-development-services_post.jpg', 'Nishivarth, an Indian social development organization, is directly benefitting over 15 lakh children and their families every year. We have more than 400 live welfare projects on education, healthcare, livelihood, and women’s empowerment in over 2,000 remote villages and urban slums across 25 states of India.\r\n\r\nThe groundwork for a better life lies in education. It is the most powerful catalyst for social transformation. However, a child cannot be educated in isolation. Only an empowered family, especially the mother, would be willing to educate their child. Thus, rather than focusing on only one stage of a person\'s life, we believe in the lifecycle approach.\r\n\r\nEducation empowers an individual to earn their livelihood and also increases one\'s awareness on a range of issues. From healthcare, to appropriate social behavior, to understanding one\'s rights – Nishivarth seeks to educate, empower and cultivate better citizens.', 0, 1, '2022-01-05 11:47:51'),
+(9, 'Access & Infrastructure', 'Access & Infrastructure', 'Access & Infrastructure', 'Access & Infrastructure', 'access-infrastructure', 'assets/frontend/upload/images/accessibility.png', 'assets/frontend/upload/images/bannertop.jpg', 'assets/frontend/upload/images/ecommerce-web-development-services_post.jpg', 'Nishivarth, an Indian social development organization, is directly benefitting over 15 lakh children and their families every year. We have more than 400 live welfare projects on education, healthcare, livelihood, and women’s empowerment in over 2,000 remote villages and urban slums across 25 states of India.\r\n\r\nThe groundwork for a better life lies in education. It is the most powerful catalyst for social transformation. However, a child cannot be educated in isolation. Only an empowered family, especially the mother, would be willing to educate their child. Thus, rather than focusing on only one stage of a person\'s life, we believe in the lifecycle approach.\r\n\r\nEducation empowers an individual to earn their livelihood and also increases one\'s awareness on a range of issues. From healthcare, to appropriate social behavior, to understanding one\'s rights – Nishivarth seeks to educate, empower and cultivate better citizens.', 0, 1, '2022-01-05 11:47:51'),
+(10, 'Preparing for emergencies', 'Preparing for emergencies', 'Preparing for emergencies', 'Preparing for emergencies', 'preparing-for-emergencies', 'assets/frontend/upload/images/ideass.png', 'assets/frontend/upload/images/bannertop.jpg', 'assets/frontend/upload/images/ecommerce-web-development-services_post.jpg', 'Nishivarth, an Indian social development organization, is directly benefitting over 15 lakh children and their families every year. We have more than 400 live welfare projects on education, healthcare, livelihood, and women’s empowerment in over 2,000 remote villages and urban slums across 25 states of India.\r\n\r\nThe groundwork for a better life lies in education. It is the most powerful catalyst for social transformation. However, a child cannot be educated in isolation. Only an empowered family, especially the mother, would be willing to educate their child. Thus, rather than focusing on only one stage of a person\'s life, we believe in the lifecycle approach.\r\n\r\nEducation empowers an individual to earn their livelihood and also increases one\'s awareness on a range of issues. From healthcare, to appropriate social behavior, to understanding one\'s rights – Nishivarth seeks to educate, empower and cultivate better citizens.', 0, 1, '2022-01-05 11:47:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ns_pages_category`
+--
+
+CREATE TABLE `ns_pages_category` (
+  `id` int(11) NOT NULL,
+  `pages_id` int(11) NOT NULL,
+  `pages_category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ns_pages_category`
+--
+
+INSERT INTO `ns_pages_category` (`id`, `pages_id`, `pages_category_id`) VALUES
+(1, 2, 1),
+(2, 3, 1),
+(3, 4, 1),
+(4, 5, 1),
+(5, 6, 1),
+(6, 7, 1),
+(7, 8, 1),
+(8, 9, 1),
+(9, 10, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ns_page_info`
+--
+
+CREATE TABLE `ns_page_info` (
+  `id` int(11) NOT NULL,
+  `page_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` varchar(10000) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ns_page_info`
+--
+
+INSERT INTO `ns_page_info` (`id`, `page_id`, `title`, `content`, `status`, `created_at`) VALUES
+(1, 2, 'Our Preferred eCommerce Platforms', 'Ngo is a full-service eCommerce agency, delivering customized B2B and B2C eCommerce solutions by leveraging multiple platforms.', 1, '2022-01-09 11:01:53'),
+(2, 2, 'This made our souls happy…', 'Padla village of Banswara district, #Rajasthan, is an agricultural area where people’s main source of income is farming. Unfortunately, water scarcity and the challenges it brings led many of the locals work as laborers as well.', 1, '2022-01-09 11:03:38'),
+(3, 2, 'Nishivarth’s menstruation work during disasters', 'Nishivarth’s menstruation work during disasters…importance of MY Pads in Rahat Kits #Menstruation has always been one of the most disregarded issues in India.', 1, '2022-01-09 11:04:14'),
+(4, 2, 'A neighbor’s pride…', 'Akkolli, a remote village with little access to even bus services, is nestled in Wayanad district of Kerala, home to the tribal settlement of Churuli.', 1, '2022-01-09 11:04:51'),
+(5, 2, 'Giving wings to hope with a poultry farm', 'Narayanjote village in Jalpaiguri recently witnessed how the collective efforts and resolve of families towards the building of a community poultry farm could bring about a bright ray of hope for a stable livelihood in spite of the trials posed by Covid.', 1, '2022-01-09 11:05:27');
 
 -- --------------------------------------------------------
 
@@ -320,6 +405,33 @@ INSERT INTO `ns_product_type` (`id`, `type_name`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ns_services`
+--
+
+CREATE TABLE `ns_services` (
+  `id` int(11) NOT NULL,
+  `page_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `content` varchar(10000) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ns_services`
+--
+
+INSERT INTO `ns_services` (`id`, `page_id`, `title`, `content`, `status`, `created_at`) VALUES
+(1, 2, 'Livelihood as the way forward', 'Highlights of our work from the ground. Our endeavors to support people return \'to normal\' life, through our Vaapsi initiative.Respond to needs emerging from the ground.', 1, '2022-01-09 11:07:02'),
+(2, 2, 'Winter is going.', 'This year, winter is going to be much tougher – especially for millions flood-affected across India who are still recovering and many women who make do with just 1-2 Saree’s throughout the year.', 1, '2022-01-09 11:07:43'),
+(3, 2, 'Why Contribute for floods.', 'Why Contribute for floods to Goonj this Daan Utsav? A message from Mr. Anshu Gupta, Founder Goonj Millions of people across India are facing the wrath of floods right now.', 1, '2022-01-09 11:08:21'),
+(4, 2, 'Struggling to survive floods.', 'People in many states across India are struggling to survive massive floods. We are there reaching urgent relief materials and will continue to support and build community resilience long after the floodwaters have receded.', 1, '2022-01-09 11:08:53'),
+(5, 2, 'Developing training centers.', 'The waste cloth generated from the cities is channelised to some villages where women are learning stitching on sewing machines at a GOONJ training center. Apart from employment and income.', 1, '2022-01-09 11:09:53'),
+(6, 2, 'Restoring lives', 'Pass a beggar on the road and one often hears “kuch kaam kyu nahi karte?”(why don’t you do some work?) routinely hurled at them. Ever wondered where do these people come from – unlettered.', 1, '2022-01-09 11:10:40');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ns_static_blocks`
 --
 
@@ -422,11 +534,29 @@ ALTER TABLE `ns_category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ns_category_pages`
+--
+ALTER TABLE `ns_category_pages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ns_pages`
 --
 ALTER TABLE `ns_pages`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `slug` (`slug`);
+
+--
+-- Indexes for table `ns_pages_category`
+--
+ALTER TABLE `ns_pages_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ns_page_info`
+--
+ALTER TABLE `ns_page_info`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `ns_product`
@@ -483,6 +613,12 @@ ALTER TABLE `ns_product_type`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ns_services`
+--
+ALTER TABLE `ns_services`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ns_static_blocks`
 --
 ALTER TABLE `ns_static_blocks`
@@ -517,10 +653,28 @@ ALTER TABLE `ns_category`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
+-- AUTO_INCREMENT for table `ns_category_pages`
+--
+ALTER TABLE `ns_category_pages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `ns_pages`
 --
 ALTER TABLE `ns_pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `ns_pages_category`
+--
+ALTER TABLE `ns_pages_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `ns_page_info`
+--
+ALTER TABLE `ns_page_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ns_product`
@@ -569,6 +723,12 @@ ALTER TABLE `ns_product_product_type`
 --
 ALTER TABLE `ns_product_type`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `ns_services`
+--
+ALTER TABLE `ns_services`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ns_static_blocks`

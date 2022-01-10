@@ -67,14 +67,14 @@
 																							class="text-blue font-weight-bold"><?= $val->title; ?> </a>
 													</h5>
 													<div class="mb-2">
-														<a href="<?= base_url($val->slug . ".html"); ?>"
+														<a href="<?= base_url("product/".$val->slug); ?>"
 														   class="d-block text-center"><img class="img-fluid"
 																							src="<?= base_url($val->image); ?>"
 																							alt="<?= $val->title; ?>"></a>
 													</div>
 													<div class="flex-center-between mb-1">
 														<div class="d-none d-xl-block prodcut-add-cart"><a
-																	href="<?= base_url($val->slug . ".html"); ?>"
+																	href="<?= base_url("product/".$val->slug); ?>"
 																	class="btn-add-cart btn-primary transition-3d-hover"
 																	style=" width: 90px; font-size: 11px"> View
 																Detail</a></div>

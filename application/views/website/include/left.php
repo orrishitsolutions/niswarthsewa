@@ -20,7 +20,7 @@
 							$subCategories = $controller->Categoriesmodel->getCategory($categoryVal->id);
 							foreach ($subCategories as $subcatVal) {
 								?>
-								<li><a class="dropdown-item" href="<?= $subcatVal->slug; ?>"><?= $subcatVal->title; ?> </a></li>
+								<li><a class="dropdown-item" href="<?= site_url("category/".$subcatVal->slug); ?>"><?= $subcatVal->title; ?> </a></li>
 								<?php
 							}
 							?>
