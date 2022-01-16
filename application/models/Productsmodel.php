@@ -41,7 +41,7 @@ class Productsmodel extends CI_Model
 	public function __construct()
 	{
 		parent::__construct();
-		$this->product = "ns_product";
+		$this->product = "ns_products";
 		$this->category = "ns_category";
 		$this->productCategory = "ns_product_category";
 		$this->productImage = "ns_product_image";

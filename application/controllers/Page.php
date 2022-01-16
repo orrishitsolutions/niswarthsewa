@@ -14,12 +14,12 @@ class Page extends MY_Controller {
 	public function index()
 	{
 		$this->load->model("Pagesmodel");
-		$this->load->model("PageInfo");
-		$this->load->model("Services");
+		$this->load->model("Pageinfomodel");
+		$this->load->model("Servicesmodel");
 		$slug = substr($this->uri->segment(1), 0,-5);
 		$page = $this->Pagesmodel->getPageBySlug($slug);
-		$pageInfo = $this->PageInfo->pageInfoByPageId($page->id);
-		$service = $this->Services->pageServicesByPageId($page->id);
+		$pageInfo = !empty($page->id) ? $this->Pageinfomodel->pageInfoByPageId($page->id) : "";
+		$service = !empty($page->id) ? $this->Servicesmodel->pageServicesByPageId($page->id) : "";
 
 		$this->load->view('website/page',
 			[

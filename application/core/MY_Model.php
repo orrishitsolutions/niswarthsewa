@@ -67,4 +67,20 @@ class MY_Model extends CI_Model
 
 		return $query->result();
 	}
+
+	/**
+	 * @param int $length
+	 * @return string
+	 */
+	function generateRandomString($length = 6)
+	{
+		$characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+
+		return $randomString;
+	}
 }
