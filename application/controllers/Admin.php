@@ -543,18 +543,20 @@ class Admin extends MY_Controller
 						$productTypeMapping['product_id']  = $mapId;
 						$productTypeMapping['product_type_id']  = $data['data']['product_type_id'];
 						$this->login->updateModuleMapping("product-product-type", $mapId, $productTypeMapping);
-						$productId = $mapId;
-						$qty = $post['quantity'];
-						$attributeSetId = $data['data']['attributes_set_id'];
-						$productToAttribute = $this->login->assignProductToAttribute($productId, $qty, $attributeSetId);
-						foreach ($productToAttribute as $ptaVal) {
-							$slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $data['data']['slug'])));
-							$ptaMapping['product_id'] = $ptaVal->product_id;
-							$ptaMapping['product_attributes_value_id'] = $ptaVal->product_attributes_value_id;
-							$ptaMapping['sku'] = $ptaVal->sku."-".$slug;
-							$ptaMapping['price'] = $ptaVal->price;
-							$ptaMapping['quantity'] = $ptaVal->quantity;
-							$this->login->updateModuleMapping("product-attributes-sku", $mapId, $ptaMapping);
+						if ($data['data']['product_type_id'] == 2) {
+							$productId = $mapId;
+							$qty = $post['quantity'];
+							$attributeSetId = $data['data']['attributes_set_id'];
+							$productToAttribute = $this->login->assignProductToAttribute($productId, $qty, $attributeSetId);
+							foreach ($productToAttribute as $ptaVal) {
+								$slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $data['data']['slug'])));
+								$ptaMapping['product_id'] = $productId;
+								$ptaMapping['product_attributes_value_id'] = $ptaVal->product_attributes_value_id;
+								$ptaMapping['sku'] = $ptaVal->sku . "-" . $slug;
+								$ptaMapping['price'] = $ptaVal->price;
+								$ptaMapping['quantity'] = $ptaVal->quantity;
+								$this->login->updateModuleMapping("product-attributes-sku", $productId, $ptaMapping);
+							}
 						}
 					}
 				} catch (\Exception $e) {
