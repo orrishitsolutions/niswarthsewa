@@ -58,14 +58,15 @@ class Productsmodel extends CI_Model
 	 */
 	public function getProductsByCategory($categoryId = 0)
 	{
-		$this->db->select($this->category . ".title as category_title, " . $this->product . ".title, " . $this->product . ".slug, " . $this->category . ".category_image, " . $this->productImage . ".image");
+		$this->db->select($this->category . ".title as category_title, " . $this->product . ".title, " . $this->product . ".slug, " . $this->category . ".category_image, (SELECT ".$this->productImage.".`image` from ".$this->productImage." WHERE ".$this->productImage.".`is_main_image` = 1 AND ".$this->productImage.".`product_id`=`ns_products`.`id`) as image");
 		$this->db->from($this->product);
 		$this->db->join($this->productCategory, $this->productCategory . '.product_id = ' . $this->product . '.id', "inner");
 		$this->db->join($this->category, $this->category . '.id = ' . $this->productCategory . '.category_id', "inner");
 		$this->db->join($this->productImage, $this->product . '.id = ' . $this->productImage . '.product_id', "left");
 		$this->db->where($this->category . '.id', $categoryId);
-		$this->db->where($this->productImage . '.is_main_image', 1);
+		//$this->db->where($this->productImage . '.is_main_image', 1);
 		$this->db->where($this->product . '.status', 1);
+		$this->db->group_by($this->product . '.id');
 
 		return $this->db->get()->result();
 	}

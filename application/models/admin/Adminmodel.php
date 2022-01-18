@@ -72,6 +72,16 @@ class Adminmodel extends MY_Model
 	 */
 	private $productType;
 
+	/**
+	 * @var string
+	 */
+	private $productProductType;
+
+	/**
+	 * @var string
+	 */
+	private $productAttributesSku;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -89,6 +99,8 @@ class Adminmodel extends MY_Model
 		$this->productCategory = "ns_product_category";
 		$this->attributeSet = "ns_product_attributes_set";
 		$this->productType = "ns_product_type";
+		$this->productProductType = "ns_product_product_type";
+		$this->productAttributesSku = "ns_product_attributes_sku";
 	}
 
 	/**
@@ -148,6 +160,15 @@ class Adminmodel extends MY_Model
 				break;
 			case "product-type":
 				$module = $this->productType;
+				break;
+			case "users-products":
+				$module = $this->usersProduct;
+				break;
+			case "product-product-type":
+				$module = $this->productProductType;
+				break;
+			case "product-attributes-sku":
+				$module = $this->productAttributesSku;
 				break;
 			default:
 				$module = "ns_" . $module;
@@ -258,6 +279,18 @@ class Adminmodel extends MY_Model
 		$this->db->group_by($this->product . ".id", "asc");
 
 		return $this->db->get()->result();
+	}
+
+	public function assignProductToAttribute($productId, $qty, $attributeSetId)
+	{
+		$query = $this->db->query("SELECT ".$productId." as product_id, pav.id as product_attributes_value_id, 
+		LOWER(CONCAT(pa.slug,'-',pav.name)) as sku, 0 as price, ".$qty." as quantity FROM 
+		`ns_product_attributes_value` as pav 
+		JOIN ns_product_attributes as pa ON pav.product_attributes_id = pa.id 
+		JOIN ns_product_attributes_set as pas ON pa.attributes_set_id = pas.id 
+		where pas.id = ".$attributeSetId);
+
+		return $query->result();
 	}
 
 	function categoryTree($parentId = 0, &$subMark = '', $ids = [])

@@ -69,7 +69,7 @@
 													<div class="mb-2">
 														<a href="<?= base_url("product/".$val->slug); ?>"
 														   class="d-block text-center"><img class="img-fluid"
-																							src="<?= base_url($val->image); ?>"
+																							src="<?= !empty($val->image) ? base_url($val->image) : base_url(UPLOAD_DIR."no-image.jpg"); ?>"
 																							alt="<?= $val->title; ?>"></a>
 													</div>
 													<div class="flex-center-between mb-1">

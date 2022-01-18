@@ -33,7 +33,7 @@
 								foreach ($product as $val) {
 								?>
 								<div class="js-slide">
-									<img class="img-fluid" src="<?= site_url($val->image); ?>" alt="<?= $val->title; ?>">
+									<img class="img-fluid" src="<?= !empty($val->image) ? site_url($val->image) : base_url(UPLOAD_DIR."no-image.jpg"); ?>" alt="<?= $val->title; ?>">
 								</div>
 								<?php } ?>
 							</div>
@@ -44,7 +44,7 @@
 								foreach ($product as $val) {
 								?>
 								<div class="js-slide" style="cursor: pointer;">
-									<img class="img-fluid" src="<?= site_url($val->image); ?>" alt="<?= $val->title; ?>">
+									<img class="img-fluid" src="<?= !empty($val->image) ? site_url($val->image) : base_url(UPLOAD_DIR."no-image.jpg"); ?>" alt="<?= $val->title; ?>">
 								</div>
 								<?php
 								}
