@@ -101,7 +101,7 @@ $page = "pages";
 								</div>
 								<div class="mb-3">
 									<label for="content" class="form-label">Content</label>
-									<textarea class="form-control" name="content" id="content" rows="15"><?= !empty($data['content']) ? $data['content'] : "" ?></textarea>
+									<textarea class="form-control" name="content" <?php if(empty($data['is_home'])){ ?>id="content"<?php } ?> rows="15"><?= !empty($data['content']) ? $data['content'] : "" ?></textarea>
 								</div>
 								<div class="mb-3">
 									<label for="status" class="form-label">Status</label>
