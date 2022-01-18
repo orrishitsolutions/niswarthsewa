@@ -75,31 +75,26 @@ class Productsmodel extends CI_Model
 	public function getProductsByAttribute($categoryId = 0, $filter = "")
 	{
 		$filters = explode("&", $filter);
-
-		$this->db->select($this->category . ".title as category_title, " . $this->product . ".title, " . $this->product . ".slug, " . $this->category . ".category_image, " . $this->productImage . ".image");
-		$this->db->from($this->productAttributes);
-		$this->db->join($this->productAttributesValue, $this->productAttributes . '.id = ' . $this->productAttributesValue . '.product_attributes_id', "inner");
-		$this->db->join($this->productAttributesSku, $this->productAttributesValue . '.id = ' . $this->productAttributesSku . '.product_attributes_value_id', "inner");
-		$this->db->join($this->product, $this->productAttributesSku . '.product_id = ' . $this->product . '.id', "inner");
-		$this->db->join($this->productCategory, $this->productCategory . '.product_id = ' . $this->product . '.id', "inner");
-		$this->db->join($this->category, $this->category . '.id = ' . $this->productCategory . '.category_id', "inner");
-		$this->db->join($this->productImage, $this->product . '.id = ' . $this->productImage . '.product_id', "left");
+		$query = "SELECT $this->category.`title` as `category_title`, $this->product.`title`, $this->product.`slug`, $this->category.`category_image`, $this->productImage.`image` 
+			FROM $this->productAttributes 
+           INNER JOIN $this->productAttributesValue ON $this->productAttributes.`id` = $this->productAttributesValue.`product_attributes_id` 
+           INNER JOIN $this->productAttributesSku ON $this->productAttributesValue.`id` = $this->productAttributesSku.`product_attributes_value_id` 
+           INNER JOIN $this->product ON $this->productAttributesSku.`product_id` = $this->product.`id` 
+           INNER JOIN $this->productCategory ON $this->productCategory.`product_id` = $this->product.`id` 
+           INNER JOIN $this->category ON $this->category.`id` = $this->productCategory.`category_id` 
+           LEFT JOIN $this->productImage ON $this->product.`id` = $this->productImage.`product_id` ";
+		$query .= " WHERE ($this->category.id = $categoryId AND $this->product.status = 1) AND (";
 		foreach ($filters as $val) {
 			if (!empty($val)) {
 				$attribute = substr($val, 0, strpos($val, "-"));
 				$attributeValue = substr($val, strpos($val, "=") + 1);
-				$this->db->or_group_start();
-				$this->db->where($this->productAttributes . '.slug', $attribute);
-				$this->db->where($this->productAttributesValue . '.name', $attributeValue);
-				$this->db->group_end();
+				$query .= "($this->productAttributes.slug='".$attribute."' AND $this->productAttributesValue.name='".$attributeValue."') OR ";
 			}
 		}
-		$this->db->where($this->category . '.id', $categoryId);
-		$this->db->where($this->product . '.status', 1);
-		$this->db->group_by($this->product . ".id");
-		$this->db->order_by($this->product . '.title', 'asc');
+		$query = substr($query,0, strlen($query)-4).") GROUP BY $this->product.id ORDER BY $this->product.title ASC";
+		$query = $this->db->query($query);
 
-		return $this->db->get()->result();
+		return $query->result();
 	}
 
 	/**
