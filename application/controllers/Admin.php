@@ -54,10 +54,8 @@ class Admin extends MY_Controller
 	public function category()
 	{
 		$category = $this->login->getCategories();
-
 		$this->load->view('admin/category', ['category' => $category]);
 	}
-
 	public function change_status($module = "")
 	{
 		$param = $this->uri->segment(4);
@@ -451,7 +449,6 @@ class Admin extends MY_Controller
 
 		$this->load->view('admin/products', ['products' => $products]);
 	}
-
 	public function add_products()
 	{
 		$param = $this->uri->segment(3);
@@ -573,6 +570,211 @@ class Admin extends MY_Controller
 			}
 		}
 	}
+/// Blogs ////////
+
+
+	
+
+	public function blog()
+	{
+		//$category = $this->login->getCategories();
+		$blog_details = $this->db->from('ns_blog')->order_by('id', 'desc')->get()->result_array();
+		$this->load->view('admin/blog', compact('blog_details'));
+		// echo "<pre>";
+		// print_r($blog_details);
+		//$this->load->view('admin/blog', ['category' => $category]);
+	}
+	public function add_Blog()
+	{
+		$this->load->view('admin/add-blog');
+	}
+
+	public function insertBlog()
+	{
+		$this->load->library('form_validation');
+        $this->form_validation->set_rules('title', 'Blog Title ', 'required|max_length[70]');
+        $title = $this->security->xss_clean($this->input->POST('title'));
+        $var_date = $this->input->POST('publish_date');
+        $publish_date = str_replace('/', '-', $var_date);
+
+        $comment = $this->security->xss_clean($this->input->POST('comment'));
+        $tags_data = $this->security->xss_clean($this->input->POST('tags_data'));
+        $status = $this->security->xss_clean($this->input->POST('status'));
+        $description = $this->security->xss_clean($this->input->POST('description'));
+        $short_description = $this->security->xss_clean($this->input->POST('short_description'));
+        $meta_title = $this->security->xss_clean($this->input->POST('meta_title'));
+        $meta_description = $this->security->xss_clean($this->input->POST('meta_description'));
+        $meta_keywords = $this->security->xss_clean($this->input->POST('meta_keywords'));
+
+        if ($this->form_validation->run() == false) {
+
+            $this->session->set_flashdata(['error' => 'Oops! please check form carefully.']);
+            redirect(base_url('admin/add_blog'));
+            exit();
+        } else {
+            date_default_timezone_set("Asia/Kolkata");
+            $config['upload_path'] = 'assets\frontend\upload/blog-image/';
+            $config['allowed_types']        = 'jpg|png|jpeg|svg';
+            $config['max_size']             = 15000;
+            $config['detect_mime']          = TRUE;
+            $config['encrypt_name']         = TRUE;
+            $config['remove_spaces']        = TRUE;
+            $config['max_filename']         = 0;
+
+            $this->load->library('upload', $config);
+            $this->upload->do_upload('file');
+            $data = array(
+                'file' => $this->upload->data()
+            );
+            $file = $data['file']['file_name'];
+            $data = array(
+            	'title' => $title,
+				'comment' =>$comment,
+				'tags_data'=>$tags_data,
+				'status' =>$status,
+				'description' =>$description,
+				'publish_date' =>$publish_date,
+				'meta_title' =>$meta_title,
+				'meta_description' =>$meta_description,
+				'meta_keywords' =>$meta_keywords,
+				'file' =>$file,
+				'short_description' =>$short_description,
+				'created_at' =>date("Y-m-d H:i:s")
+            );
+            $this->db->insert('ns_blog', $data);
+            $this->session->set_flashdata(['status' => 'Hurray! Blog has been added successfully!']);
+            redirect(base_url('admin/add_blog'));
+        }
+	}
+
+	public function edit_blog()
+	{
+		$blog_id = $this->uri->segment(3);
+		$blog_details = $this->_recordChecker($blog_id, 'ns_blog');
+		$this->load->view('admin/add-blog', compact('blog_details'));
+	}
+
+	public function UpdateBlog()
+	{
+		$this->load->library('form_validation');
+        $this->form_validation->set_rules('title', 'Blog Title ', 'required|max_length[70]');
+        $title = $this->security->xss_clean($this->input->POST('title'));
+        $var_date = $this->input->POST('publish_date');
+        $publish_date = str_replace('/', '-', $var_date);
+        $comment = $this->security->xss_clean($this->input->POST('comment'));
+        $tags_data = $this->security->xss_clean($this->input->POST('tags_data'));
+        $status = $this->security->xss_clean($this->input->POST('status'));
+        $description = $this->security->xss_clean($this->input->POST('description'));
+        $short_description = $this->security->xss_clean($this->input->POST('short_description'));
+        $meta_title = $this->security->xss_clean($this->input->POST('meta_title'));
+        $meta_description = $this->security->xss_clean($this->input->POST('meta_description'));
+        $meta_keywords = $this->security->xss_clean($this->input->POST('meta_keywords'));
+
+        
+        $upId = $this->input->POST('id');
+        $up_details = $this->_recordChecker($upId, 'ns_blog');
+
+         if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata(['error' => 'Oops! please check form carefully.']);
+            redirect(base_url('admin/edit_blog/' . $upId));
+            exit();
+        } else {
+        		 if($_FILES['file']['name']){
+                        $config['upload_path'] = 'assets\frontend\upload/blog-image/';
+                        $config['allowed_types']        = 'jpg|png|jpeg|svg';
+                        $config['max_size']             = 1024;
+                        $config['detect_mime']          = TRUE;
+                        $config['encrypt_name']         = TRUE;
+                        $config['remove_spaces']        = TRUE;
+                        $config['max_filename']         = 0;
+                        $this->load->library('upload', $config);
+
+                        if(!$this->upload->do_upload('file')){
+                       echo  $this->upload->display_errors();
+                       redirect(base_url('admin/edit_blog/' . $upId));
+                        }
+                        else{                        
+                            $blog_update =[                            
+                        	'title' => $title,
+							'comment' =>$comment,
+							'tags_data'=>$tags_data,
+							'status' =>$status,
+							'description' =>$description,
+							'publish_date' =>$publish_date,
+							'meta_title' =>$meta_title,
+							'meta_description' =>$meta_description,
+							'meta_keywords' =>$meta_keywords,
+							'short_description' =>$short_description,
+                            'file' => $this->upload->data()['file_name'],
+                            'updated_at' => date("Y-m-d H:i:s")
+                        ];
+                        
+	                    if ($up_details->file && file_exists('assets\frontend\upload/blog-image/' . $up_details->file)) {
+	                    	unlink("assets/frontend/upload/blog-image/".$up_details->file);
+	                    }
+                        $this->session->set_flashdata(['status'=>'Hurray! Blog has been Update successfully!']);
+                        //$this->db->where('id',$upId)->set($blog_update)->update('ns_blog');
+                       // redirect(base_url('admin/edit_blog/' . $upId));         
+                        }
+          		}
+          		else{
+	                 $blog_update =[                            
+                        	'title' => $title,
+							'comment' =>$comment,
+							'tags_data'=>$tags_data,
+							'status' =>$status,
+							'description' =>$description,
+							'publish_date' =>$publish_date,
+							'meta_title' =>$meta_title,
+							'meta_description' =>$meta_description,
+							'meta_keywords' =>$meta_keywords,
+							'short_description' =>$short_description,
+                            'updated_at' => date("Y-m-d H:i:s")
+                        ];
+                         $this->session->set_flashdata(['status'=>'Hurray! Blog has been Update successfully!']);
+                         $this->db->where('id',$upId)->set($blog_update)->update('ns_blog');
+                       	 redirect(base_url('admin/edit_blog/' . $upId));  
+          		}
+        }
+
+	}
+
+	public function delete_blog()
+	{
+		$del_id = $this->uri->segment(3);
+		if ($del_id == "") {
+             redirect(base_url('admin/blog'));
+        } else {
+            $img = $this->_recordChecker($del_id, 'ns_blog');
+
+            if ($img->file && file_exists('assets\frontend\upload/blog-image/' . $img->file)) {
+           
+                unlink("assets/frontend/upload/blog-image/".$img->file);
+            }
+             $this->session->set_flashdata(['error' => 'Hurray! Blog has been Delect successfully!']);
+             $this->_recordDelect($del_id, 'ns_blog');
+             redirect(base_url('admin/blog'));
+        }
+
+
+	}
+
+
+
+	protected function _recordDelect($id, $table)
+    {
+        return $this->db->where('id', $id)->from($table)->delete();
+    }
+
+
+    protected function _recordChecker($id, $table)
+    {
+        return $this->db->where('id', $id)->from($table)->get()->row();
+    }
+
+
+//End Of Blogs //////////
+
 
 	public function logout()
 	{

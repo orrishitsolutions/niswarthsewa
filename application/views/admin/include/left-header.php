@@ -65,6 +65,9 @@
                      </a>
                      <div class="expand" id="authPages3" style="">
                        <ul class="nav sub-menu">
+                        <li class="nav-item">
+                        <a href="<?=base_url('admin/blog')?>" class="nav-link">Blog</a>
+                     </li>
 						   <li class="nav-item">
                               <a href="#" class="nav-link">Gallery</a>
                            </li>
