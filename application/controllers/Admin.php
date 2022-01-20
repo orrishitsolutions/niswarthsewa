@@ -713,8 +713,8 @@ class Admin extends MY_Controller
 	                    	unlink("assets/frontend/upload/blog-image/".$up_details->file);
 	                    }
                         $this->session->set_flashdata(['status'=>'Hurray! Blog has been Update successfully!']);
-                        //$this->db->where('id',$upId)->set($blog_update)->update('ns_blog');
-                       // redirect(base_url('admin/edit_blog/' . $upId));         
+                        $this->db->where('id',$upId)->set($blog_update)->update('ns_blog');
+                       redirect(base_url('admin/edit_blog/' . $upId));         
                         }
           		}
           		else{
