@@ -58,7 +58,9 @@ include('include/top-header.php');
                                 ?>
                                 <tr>
                                 	<td><?=$blog_details[$i]['id']?></td>
-									<td> <?= $blog_details[$i]['title'] ?></td>
+									<td style="white-space: unset; text-align: left;"> 
+											<?= $blog_details[$i]['title'] ?>
+									</td>
 									<td>
 										<img src="<?= base_url() ?>assets/frontend/upload/blog-image/<?= $blog_details[$i]['file'] ?>"
                                             style="width: 70px;height: 70px;object-fit: cover;">
@@ -74,14 +76,14 @@ include('include/top-header.php');
                                                 if ($blog_details[$i]['status'] == '0') {
                                                 ?>
                                         <a class="text-danger"
-                                            href="<?= base_url('admin/blog-update-Home') ?>/<?= $blog_details[$i]['id'] ?>">
+                                            href="<?= base_url('admin/home_status_blog') ?>/<?= $blog_details[$i]['id'] ?>">
                                             <i data-feather="toggle-left"></i>
                                         </a>
                                         <?php
                                                 } else {
                                                 ?>
                                         <a class="text-success "
-                                            href="<?= base_url('admin/blog-update-Home') ?>/<?= $blog_details[$i]['id'] ?>">
+                                            href="<?= base_url('admin/home_status_blog') ?>/<?= $blog_details[$i]['id'] ?>">
                                             <i data-feather="toggle-right"></i>
                                         </a>
                                         <?php

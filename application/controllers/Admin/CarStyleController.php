@@ -232,7 +232,7 @@ class CarStyleController extends CI_Controller {
     //Stats Updates
        	public function update_Home()
 	    {
-	    	 $cat_id_Home = $this->uri->segment(3);
+	    	$cat_id_Home = $this->uri->segment(3);
             if($cat_id_Home!=="")
             {
                 $status = $this->_recordChecker($cat_id_Home,'tbl_car_style');

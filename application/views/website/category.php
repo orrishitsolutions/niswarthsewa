@@ -134,9 +134,8 @@
 						<div class="col-md-6 mb-4 mb-xl-0 col-xl-3 ctch-big">
 							<a href="#" class="d-black text-gray-90">
 								<div class="min-height-132 py-1 d-flex bg-gray-1 align-items-center">
-									<div class="col-6 col-xl-5 col-wd-6 pr-0"><img class="img-fluid"
-																				   src="./assets/img/pro2aa.png"
-																				   alt="Image Description"></div>
+									<div class="col-6 col-xl-5 col-wd-6 pr-0">
+										<img class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro2aa.png"  alt="Image Description"></div>
 									<div class="col-6 col-xl-7 col-wd-6">
 										<div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23"
 											 style="color:#333e48;">CATCH BIG
@@ -155,7 +154,7 @@
 							<a href="#" class="d-black text-gray-90">
 								<div class="min-height-132 py-1 d-flex bg-gray-1 align-items-center">
 									<div class="col-6 col-xl-5 col-wd-6 pr-0"><img class="img-fluid"
-																				   src="./assets/img/pro22aa.png"
+																				   src="<?= base_url()?>assets/frontend/img/pro22aa.png"
 																				   alt="Image Description"></div>
 									<div class="col-6 col-xl-7 col-wd-6">
 										<div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23"
@@ -175,7 +174,7 @@
 							<a href="#" class="d-black text-gray-90">
 								<div class="min-height-132 py-1 d-flex bg-gray-1 align-items-center">
 									<div class="col-6 col-xl-5 col-wd-6 pr-0"><img class="img-fluid"
-																				   src="./assets/img/cloth1c.png"
+																				   src="<?= base_url()?>assets/frontend/img/cloth1c.png"
 																				   alt="Image Description"></div>
 									<div class="col-6 col-xl-7 col-wd-6">
 										<div class="mb-2 pb-1 font-size-18 font-weight-light text-ls-n1 text-lh-23"
@@ -307,7 +306,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro1aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro1aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -345,7 +344,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro6aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro6aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -383,7 +382,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro7aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro7aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -421,7 +420,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro8aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro8aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -460,7 +459,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro9aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro9aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -498,7 +497,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro10aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro10aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -542,7 +541,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro2aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro2aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -580,7 +579,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro16aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro16aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -618,7 +617,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro16aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro16aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -656,7 +655,7 @@
 																	class="text-blue font-weight-bold">Women</a>
 														</h5>
 														<div class="mb-2"><a href="#" class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro17aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro17aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -693,7 +692,7 @@
 																								class="text-blue font-weight-bold">Women</a>
 														</h5>
 														<div class="mb-2"><a href="#" class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro18aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro18aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -731,7 +730,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro19aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro19aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -775,7 +774,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro22aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro22aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -813,7 +812,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro15aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro15aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -851,7 +850,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro9aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro9aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -889,7 +888,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro16aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro16aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -927,7 +926,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro3aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro3aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -965,7 +964,7 @@
 														</h5>
 														<div class="mb-2"><a href="product-detail.html"
 																			 class="d-block text-center"><img
-																		class="img-fluid" src="./assets/img/pro27aa.png"
+																		class="img-fluid" src="<?= base_url()?>assets/frontend/img/pro27aa.png"
 																		alt="Image Description"></a>
 														</div>
 														<div class="flex-center-between mb-1">
@@ -1011,13 +1010,12 @@
 						<ul class="list-unstyled products-group">
 							<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 								<div class="col-auto">
-									<a href="product.html" class="d-block width-75 text-center"><img class="img-fluid"
-																									 src="assets/img/cloth1.png"
-																									 alt="Image Description"></a>
+									<a href="product.html" class="d-block width-75 text-center">
+										<img class="img-fluid" src="<?= base_url()?>assets/frontend/img/cloth1.png" alt="Image Description"></a>
 								</div>
 								<div class="col pl-4 d-flex flex-column">
-									<h5 class="product-item__title mb-0"><a href="product-detail.html"
-																			class="text-blue font-weight-bold">Clothes</a>
+									<h5 class="product-item__title mb-0">
+										<a href="product-detail.html" class="text-blue font-weight-bold">Clothes</a>
 									</h5>
 									<div class="prodcut-price prodcut-price2 mt-auto flex-horizontal-center">
 										<a href="product.html"><p class="font-size-15 text-decoration-none">Men
@@ -1028,7 +1026,7 @@
 							<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 								<div class="col-auto">
 									<a href="product-detail.html" class="d-block width-75 text-center"><img
-												class="img-fluid" src="assets/img/cloth1a.png" alt="Image Description"></a>
+												class="img-fluid" src="<?= base_url()?>assets/frontend/img/cloth1a.png" alt="Image Description"></a>
 								</div>
 								<div class="col pl-4 d-flex flex-column">
 									<h5 class="product-item__title mb-0"><a href="product-detail.html"
@@ -1043,7 +1041,7 @@
 							<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 								<div class="col-auto">
 									<a href="product-detail.html" class="d-block width-75 text-center"><img
-												class="img-fluid" src="assets/img/cloth1b.png" alt="Image Description"></a>
+												class="img-fluid" src="<?= base_url()?>assets/frontend/img/cloth1b.png" alt="Image Description"></a>
 								</div>
 								<div class="col pl-4 d-flex flex-column">
 									<h5 class="product-item__title mb-0"><a href="product-detail.html"
@@ -1066,7 +1064,7 @@
 						<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 							<div class="col-auto">
 								<a href="product-detail.html" class="d-block width-75 text-center"><img
-											class="img-fluid" src="assets/img/ayurvade1.png"
+											class="img-fluid" src="<?= base_url()?>assets/frontend/img/ayurvade1.png"
 											alt="Image Description"></a>
 							</div>
 							<div class="col pl-4 d-flex flex-column">
@@ -1081,7 +1079,7 @@
 						<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 							<div class="col-auto">
 								<a href="product-detail.html" class="d-block width-75 text-center"><img
-											class="img-fluid" src="assets/img/books1.png" alt="Image Description"></a>
+											class="img-fluid" src="<?= base_url()?>assets/frontend/img/books1.png" alt="Image Description"></a>
 							</div>
 							<div class="col pl-4 d-flex flex-column">
 								<h5 class="product-item__title mb-0"><a href="product3.html"
@@ -1096,7 +1094,7 @@
 						<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 							<div class="col-auto">
 								<a href="product-detail.html" class="d-block width-75 text-center"><img
-											class="img-fluid" src="assets/img/gropro1.png" alt="Image Description"></a>
+											class="img-fluid" src="<?= base_url()?>assets/frontend/img/gropro1.png" alt="Image Description"></a>
 							</div>
 							<div class="col pl-4 d-flex flex-column">
 								<h5 class="product-item__title mb-0"><a href="product4.html"
@@ -1117,7 +1115,7 @@
 						<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 							<div class="col-auto">
 								<a href="product-detail.html" class="d-block width-75 text-center"><img
-											class="img-fluid" src="assets/img/iron.png" alt="Image Description"></a>
+											class="img-fluid" src="<?= base_url()?>assets/frontend/img/iron.png" alt="Image Description"></a>
 							</div>
 							<div class="col pl-4 d-flex flex-column">
 								<h5 class="product-item__title mb-0"><a href="product5.html"
@@ -1131,7 +1129,7 @@
 						<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 							<div class="col-auto">
 								<a href="product-detail.html" class="d-block width-75 text-center"><img
-											class="img-fluid" src="assets/img/mastercook-original.png"
+											class="img-fluid" src="<?= base_url()?>assets/frontend/img/mastercook-original.png"
 											alt="Image Description"></a>
 							</div>
 							<div class="col pl-4 d-flex flex-column">
@@ -1147,7 +1145,7 @@
 						<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 							<div class="col-auto">
 								<a href="product-detail.html" class="d-block width-75 text-center"><img
-											class="img-fluid" src="assets/img/medi2.png" alt="Image Description"></a>
+											class="img-fluid" src="<?= base_url()?>assets/frontend/img/medi2.png" alt="Image Description"></a>
 							</div>
 							<div class="col pl-4 d-flex flex-column">
 								<h5 class="product-item__title mb-0"><a href="product2.html"
@@ -1161,8 +1159,8 @@
 					</ul>
 				</div>
 				<div class="col-wd-3 d-none d-wd-block">
-					<a href="#1" class="d-block"><img class="img-fluid" src="assets/img/shop1.jpg"
-													  alt="Image Description"></a>
+					<a href="#1" class="d-block">
+						<img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop1.jpg"  alt="Image Description"></a>
 				</div>
 			</div>
 		</div>

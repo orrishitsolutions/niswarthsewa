@@ -241,7 +241,7 @@ class Pagesmodel extends MY_Model
 			$categories = $this->allCategoryByIds($categoryIds);
 			$str = '<div class="row ">';
 			foreach ($categories as $val) {
-				$str .= '<div class="col-lg-5c col-md-5c col-sm-5c col-xs-12 "><div class="box-colams clothe1"><img src="' . base_url($val->category_image) . '"><div class="text-center "><h5>' . $val->title . '</h5><a href="' . base_url("category/" . $val->slug) . '" class="btn clothe-btn ">view more</a></div></div></div>';
+				$str .= '<div class="col-lg-5c col-md-5c col-sm-5c col-xs-12 mt-3"><div class="box-colams clothe1"><img src="' . base_url($val->category_image) . '"><div class="text-center "><h5>' . $val->title . '</h5><a href="' . base_url("category/" . $val->slug) . '" class="btn clothe-btn ">view more</a></div></div></div>';
 			}
 			$str .= '</div>';
 			$content = str_replace('{{' . $matchVal . '}}', $str, $content);
@@ -292,7 +292,7 @@ class Pagesmodel extends MY_Model
 			$id = $this->generateRandomString(6);
 			$str = '<div class="col-lg-9 col-md-9 col-sm-8 col-xs-8 "><div class="row " >';
 			foreach ($categories as $val) {
-				$str .= '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 "><div class=" category "><div class=" common-view-3 "><h4 class="headings45">Categories</h4><p class="pros1pre ">' . $val->title . '</p><a href="' . base_url("category/" . $val->slug) . '" class="btn clothe-btn ">view more</a></div><div class=" category-img "><img class="img-responsive " src="' . base_url($val->category_image) . '"></div></div></div>';
+				$str .= '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt-3"><div class=" category "><div class=" common-view-3 "><h4 class="headings45">Categories</h4><p class="pros1pre ">' . $val->title . '</p><a href="' . base_url("category/" . $val->slug) . '" class="btn clothe-btn ">view more</a></div><div class=" category-img "><img class="img-responsive " src="' . base_url($val->category_image) . '"></div></div></div>';
 			}
 			$str .= '</div></div>';
 			$content = str_replace('{{' . $matchVal . '}}', $str, $content);
@@ -386,7 +386,7 @@ class Pagesmodel extends MY_Model
 				$str .= '<div class="tab-pane fade ' . $activeClass . '" id="' . $id . $i . '" role="tabpanel" aria-labelledby="' . $id . $i . '-tab"><div class="panels"><div class="row "><div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 "><div class="product"><img class="img-responsive " src="' . base_url('assets/frontend/img/backgroundbanners23.png') . '"><div class="text-center partlefts"><h4 class="headings45">' . $category->tabs_text . '</h4><img src="' . base_url($category->tabs_image) . '"></div></div></div><div class="col-lg-9 col-md-9 col-sm-8 col-xs-8 "><div class="row " >';
 				$subCategories = $this->getCategoriesByParent($valDesc);
 				foreach ($subCategories as $subVal) {
-					$str .= '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 "><div class="box-colams clothe1"><img src="' . base_url($subVal->category_image) . '"><div class="text-center "><h5>' . $subVal->title . '</h5><a href="' . base_url('category/' . $subVal->slug) . '" class="btn clothe-btn " style="margin: 10px 0px;">view more</a></div></div></div>';
+					$str .= '<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12  mt-3"><div class="box-colams clothe1"><img src="' . base_url($subVal->category_image) . '"><div class="text-center "><h5>' . $subVal->title . '</h5><a href="' . base_url('category/' . $subVal->slug) . '" class="btn clothe-btn " style="margin: 10px 0px;">view more</a></div></div></div>';
 				}
 				$str .= '</div></div>';
 				$str .= '</div></div></div>';

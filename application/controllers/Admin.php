@@ -594,8 +594,10 @@ class Admin extends MY_Controller
 		$this->load->library('form_validation');
         $this->form_validation->set_rules('title', 'Blog Title ', 'required|max_length[70]');
         $title = $this->security->xss_clean($this->input->POST('title'));
-        $var_date = $this->input->POST('publish_date');
-        $publish_date = str_replace('/', '-', $var_date);
+        
+        $publish_date = $this->input->POST('publish_date');
+       	//$publish_date = str_replace('/', '-', $var_date);
+       
 
         $comment = $this->security->xss_clean($this->input->POST('comment'));
         $tags_data = $this->security->xss_clean($this->input->POST('tags_data'));
@@ -657,10 +659,10 @@ class Admin extends MY_Controller
 	public function UpdateBlog()
 	{
 		$this->load->library('form_validation');
-        $this->form_validation->set_rules('title', 'Blog Title ', 'required|max_length[70]');
+        $this->form_validation->set_rules('title', 'Blog Title ', 'required|max_length[120]');
         $title = $this->security->xss_clean($this->input->POST('title'));
-        $var_date = $this->input->POST('publish_date');
-        $publish_date = str_replace('/', '-', $var_date);
+        $publish_date = $this->input->POST('publish_date');
+        //$publish_date = str_replace('/', '-', $var_date);
         $comment = $this->security->xss_clean($this->input->POST('comment'));
         $tags_data = $this->security->xss_clean($this->input->POST('tags_data'));
         $status = $this->security->xss_clean($this->input->POST('status'));
@@ -755,18 +757,33 @@ class Admin extends MY_Controller
              $this->_recordDelect($del_id, 'ns_blog');
              redirect(base_url('admin/blog'));
         }
-
-
 	}
-
-
-
+	public function home_status_blog()
+	{
+		 $blog_id = $this->uri->segment(3);
+		    if($blog_id!=="")
+            {
+                $status = $this->_recordChecker($blog_id,'ns_blog');
+                if($status->status==1)
+                {
+                    $this->db->where('id',$blog_id)->set('status','0')->update('ns_blog');
+                     redirect(base_url('admin/blog'));
+                }
+                else
+                {
+                    $this->db->where('id',$blog_id)->set('status','1')->update('ns_blog');
+                     redirect(base_url('admin/blog'));
+                }
+            }
+            else
+            {
+                 redirect(base_url('admin/blog'));
+            }
+	}
 	protected function _recordDelect($id, $table)
     {
         return $this->db->where('id', $id)->from($table)->delete();
     }
-
-
     protected function _recordChecker($id, $table)
     {
         return $this->db->where('id', $id)->from($table)->get()->row();

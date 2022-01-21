@@ -100,7 +100,7 @@
 												<div class="amps34522">
 													<div class="ampsqwwrtuiopasd" data-aut-id="profileCard">
 														<a rel="nofollow" href="/profile/523613657">
-															<figure class="ampsqww _186ru" style=""><img src="assets/img/profile.png"></figure>
+															<figure class="ampsqww _186ru" style=""><img src="<?= base_url()?>assets/frontend/img/profile.png"></figure>
 														</a>
 														<div class="awampsqwwrtuiopasdzxc">
 															<a rel="nofollow" href="profile.html">
@@ -134,7 +134,7 @@
 										<ul class="list-unstyled" style="     width: 100%;   padding:15px 15px 0px; display: block; float: left;">
 											<li class="mb-4">
 												<div class="row">
-													<div class="col-auto col-md-3"><a href="#" class="d-block width-75"><img class="img-fluid" src="assets/img/cloth1.png" alt="Image Description"></a></div>
+													<div class="col-auto col-md-3"><a href="#" class="d-block width-75"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/cloth1.png" alt="Image Description"></a></div>
 													<div class="col col-md-4" style="    padding-left: 0px;">
 														<h3 class="text-lh-1dot2 font-size-14 mb-0" style="padding-top:16px;"><a href="#">T-Shirts</a></h3>
 														<div class="font-weight-bold"> <ins class="font-size-15 text-red text-decoration-none d-block">Karan Kumar</ins></div>
@@ -146,7 +146,7 @@
 											</li>
 											<li class="mb-4">
 												<div class="row">
-													<div class="col-auto col-md-3"><a href="#" class="d-block width-75"><img class="img-fluid" src="assets/img/cloth1.png" alt="Image Description"></a></div>
+													<div class="col-auto col-md-3"><a href="#" class="d-block width-75"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/cloth1.png" alt="Image Description"></a></div>
 													<div class="col col-md-4" style="    padding-left: 0px;">
 														<h3 class="text-lh-1dot2 font-size-14 mb-0" style="padding-top:16px;"><a href="#">T-Shirts</a></h3>
 														<div class="font-weight-bold"> <ins class="font-size-15 text-red text-decoration-none d-block">Rahul Kumar</ins></div>
@@ -158,7 +158,7 @@
 											</li>
 											<li class="mb-4">
 												<div class="row">
-													<div class="col-auto col-md-3"><a href="#" class="d-block width-75"><img class="img-fluid" src="assets/img/cloth1.png" alt="Image Description"></a></div>
+													<div class="col-auto col-md-3"><a href="#" class="d-block width-75"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/cloth1.png" alt="Image Description"></a></div>
 													<div class="col col-md-4" style="    padding-left: 0px;">
 														<h3 class="text-lh-1dot2 font-size-14 mb-0" style="padding-top:16px;"><a href="#">T-Shirts</a></h3>
 														<div class="font-weight-bold"> <ins class="font-size-15 text-red text-decoration-none d-block">Vicky Kumar</ins></div>
@@ -170,7 +170,7 @@
 											</li>
 											<li class="mb-4">
 												<div class="row">
-													<div class="col-auto col-md-3"><a href="#" class="d-block width-75"><img class="img-fluid" src="assets/img/cloth1.png" alt="Image Description"></a></div>
+													<div class="col-auto col-md-3"><a href="#" class="d-block width-75"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/cloth1.png" alt="Image Description"></a></div>
 													<div class="col col-md-4" style="    padding-left: 0px;">
 														<h3 class="text-lh-1dot2 font-size-14 mb-0" style="padding-top:16px;"><a href="#">T-Shirts</a></h3>
 														<div class="font-weight-bold"> <ins class="font-size-15 text-red text-decoration-none d-block">Karan Kumar</ins></div>
@@ -182,7 +182,7 @@
 											</li>
 											<li class="mb-4">
 												<div class="row">
-													<div class="col-auto col-md-3"><a href="#" class="d-block width-75"><img class="img-fluid" src="assets/img/cloth1.png" alt="Image Description"></a></div>
+													<div class="col-auto col-md-3"><a href="#" class="d-block width-75"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/cloth1.png" alt="Image Description"></a></div>
 													<div class="col col-md-4" style="    padding-left: 0px;">
 														<h3 class="text-lh-1dot2 font-size-14 mb-0" style="padding-top:16px;"><a href="#">T-Shirts</a></h3>
 														<div class="font-weight-bold"> <ins class="font-size-15 text-red text-decoration-none d-block">Raj</ins></div>
@@ -221,18 +221,18 @@
 															<div class="col-md-12">
 																<h3 style="font-size: 20px; text-align: center;">Upload  Up to 12 Photo</h3>
 															</div>
-															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
 														</div>
 														<div class="confirm">
 															<h4>CONFIRM YOUR LOCATION</h4>
@@ -316,7 +316,7 @@
 														<div class="review">
 															<h4>REVIEW YOUR DETAILS</h4>
 															<div class="preview text-center">
-																<img class="preview-img" src="assets/img/account.png" alt="Preview Image" width="200" height="200">
+																<img class="preview-img" src="<?= base_url()?>assets/frontend/img/account.png" alt="Preview Image" width="200" height="200">
 																<div class="browse-button">
 																	<i class="fa fa-pencil-alt"></i>
 																	<input class="browse-input" type="file" required="" name="UploadedFile" id="UploadedFile">
@@ -370,7 +370,7 @@
 										<div class="modal-body">
 											<div class="box-soldid1">
 												<div class="img23">
-													<img src="assets/img/webpoint.png" alt="">
+													<img src="<?= base_url()?>assets/frontend/img/webpoint.png" alt="">
 													<p>Keep all your favourites in one place.</p>
 												</div>
 												<div class="insljkkd">
@@ -416,9 +416,9 @@
 											<div class="colampoxe" style="box-shadow: none !important;  padding: 0px;    text-align: center;">
 												<div class="wiiimgs">
 													<div style="display:flex">
-														<img src="assets/img/avatar_1.png" alt="">
-														<img src="assets/img/arrows.png" alt="">
-														<img src="assets/img/profile.png" alt="">
+														<img src="<?= base_url()?>assets/frontend/img/avatar_1.png" alt="">
+														<img src="<?= base_url()?>assets/frontend/img/arrows.png" alt="">
+														<img src="<?= base_url()?>assets/frontend/img/profile.png" alt="">
 													</div>
 												</div>
 												<div class="d-flex justify-content-between align-items-center border-bottom border-color-1 flex-lg-nowrap flex-wrap mb-4">
@@ -512,7 +512,7 @@
 					<ul class="list-unstyled products-group">
 						<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 							<div class="col-auto">
-								<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop1.png" alt="Image Description"></a>
+								<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop1.png" alt="Image Description"></a>
 							</div>
 							<div class="col pl-4 d-flex flex-column">
 								<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -523,7 +523,7 @@
 						</li>
 						<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 							<div class="col-auto">
-								<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop2.png" alt="Image Description"></a>
+								<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop2.png" alt="Image Description"></a>
 							</div>
 							<div class="col pl-4 d-flex flex-column">
 								<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -534,7 +534,7 @@
 						</li>
 						<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 							<div class="col-auto">
-								<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop3.png" alt="Image Description"></a>
+								<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop3.png" alt="Image Description"></a>
 							</div>
 							<div class="col pl-4 d-flex flex-column">
 								<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -553,7 +553,7 @@
 				<ul class="list-unstyled products-group">
 					<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 						<div class="col-auto">
-							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop4.png" alt="Image Description"></a>
+							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop4.png" alt="Image Description"></a>
 						</div>
 						<div class="col pl-4 d-flex flex-column">
 							<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -564,7 +564,7 @@
 					</li>
 					<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 						<div class="col-auto">
-							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop5.png" alt="Image Description"></a>
+							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop5.png" alt="Image Description"></a>
 						</div>
 						<div class="col pl-4 d-flex flex-column">
 							<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -575,7 +575,7 @@
 					</li>
 					<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 						<div class="col-auto">
-							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop6.png" alt="Image Description"></a>
+							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop6.png" alt="Image Description"></a>
 						</div>
 						<div class="col pl-4 d-flex flex-column">
 							<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -593,7 +593,7 @@
 				<ul class="list-unstyled products-group">
 					<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 						<div class="col-auto">
-							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop7.png" alt="Image Description"></a>
+							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop7.png" alt="Image Description"></a>
 						</div>
 						<div class="col pl-4 d-flex flex-column">
 							<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -604,7 +604,7 @@
 					</li>
 					<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 						<div class="col-auto">
-							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop8.png" alt="Image Description"></a>
+							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop8.png" alt="Image Description"></a>
 						</div>
 						<div class="col pl-4 d-flex flex-column">
 							<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -615,7 +615,7 @@
 					</li>
 					<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 						<div class="col-auto">
-							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop9.png" alt="Image Description"></a>
+							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop9.png" alt="Image Description"></a>
 						</div>
 						<div class="col pl-4 d-flex flex-column">
 							<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -627,7 +627,7 @@
 				</ul>
 			</div>
 			<div class="col-wd-3 d-none d-wd-block">
-				<a href="#1" class="d-block"><img class="img-fluid" src="../../assets/img/330X360/img1.jpg" alt="Image Description"></a>
+				<a href="#1" class="d-block"><img class="img-fluid" src="../../<?= base_url()?>assets/frontend/img/330X360/img1.jpg" alt="Image Description"></a>
 			</div>
 		</div>
 	</div>

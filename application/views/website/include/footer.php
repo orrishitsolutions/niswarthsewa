@@ -127,7 +127,7 @@
 				</div>
 				<div class="footer-li ">
 					<ul class="footer-add ">
-						<li><a href="blog.html ">Blogs</a></li>
+						<li><a href="<?= base_url("blog")?>">Blogs</a></li>
 						<li><a href="testimonial.html">Testimonial</a></li>
 						<li><a href="gallery.html">Gallery</a></li>
 					</ul>

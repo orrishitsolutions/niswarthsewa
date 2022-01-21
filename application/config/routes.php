@@ -59,6 +59,10 @@ $route["product/(.*)"] = 'product';
 $route["(.*).html"] = 'page';
 
 
+$route["blog"] = 'page/blog_view';
+
+
+
 //$route['admin']='admin/admin';
 //$route['admin/(.*)']='admin/admin';
 
