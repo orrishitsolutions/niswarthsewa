@@ -459,7 +459,6 @@ class Admin extends MY_Controller
 		$this->form_validation->set_rules('product_type_id', 'Type Name', 'trim|required');
 		$this->form_validation->set_rules('users_id', 'Users', 'trim|required');
 		$this->form_validation->set_rules('title', 'Title', 'trim|required');
-		$this->form_validation->set_rules('slug', 'Slug', 'trim|required');
 		$this->form_validation->set_rules('sku', 'sku', 'trim|required');
 		$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required');
 		$addPage = "add-products";
@@ -491,12 +490,13 @@ class Admin extends MY_Controller
 		$data['data']['users'] = $this->login->getModule("users");
 		$data['data']['attribute_set'] = $this->login->getModule("product-attributes-set");
 		$data['data']['product_type'] = $this->login->getModule("product-type");
+		$data['controller'] = $this;
 		if ($this->form_validation->run() == FALSE) {
 			$data['data']['error'] = validation_errors();
 			$data['data']['success'] = $this->session->flashdata('success');
-			$data['controller'] = $this;
 			$this->load->view('admin/' . $addPage, $data);
 		} else {
+			$post['slug'] = $this->slugify($post['title']);
 			if (!empty($_FILES['menu_icon_image']['name'])) {
 				$image = $this->upload("menu_icon_image");
 				$post['menu_icon_image'] = !empty($image['success']['file_name']) ? UPLOAD_URL . $image['success']['file_name'] : "";
@@ -518,6 +518,7 @@ class Admin extends MY_Controller
 					unset($post['product_type']);
 					if (!empty($param)) {
 						$post['id'] = $param;
+						$post['unique_id'] = md5($param.$post['users_id']);
 						$update = $this->login->updateModule($page, $post);
 					} else {
 						$insert = $this->login->saveModule($page, $post);
@@ -527,6 +528,11 @@ class Admin extends MY_Controller
 						$data['data']['error'] = '<div class="alert alert-danger"><strong>Danger!</strong> ' . $dbError['message'] . '</div>';
 					} else {
 						$mapId = !empty($param) ? $param : $insert;
+						if (!empty($mapId)) {
+							$update['id'] = $mapId;
+							$update['unique_id'] = md5($insert . $post['users_id']);
+							$this->login->updateModule($page, $update);
+						}
 						$arr = [];
 						$this->login->deleteModuleMapping("product-category", "product_id", $mapId);
 						$this->login->deleteModuleMapping("users-products", "product_id", $mapId);
@@ -584,5 +590,32 @@ class Admin extends MY_Controller
 		];
 		$this->session->unset_userdata($user);
 		redirect(base_url('admin'));
+	}
+
+	public function slugify($text, $divider = '-')
+	{
+		// replace non letter or digits by divider
+		$text = preg_replace('~[^\pL\d]+~u', $divider, $text);
+
+		// transliterate
+		$text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+		// remove unwanted characters
+		$text = preg_replace('~[^-\w]+~', '', $text);
+
+		// trim
+		$text = trim($text, $divider);
+
+		// remove duplicate divider
+		$text = preg_replace('~-+~', $divider, $text);
+
+		// lowercase
+		$text = strtolower($text);
+
+		if (empty($text)) {
+			return 'n-a';
+		}
+
+		return $text;
 	}
 }

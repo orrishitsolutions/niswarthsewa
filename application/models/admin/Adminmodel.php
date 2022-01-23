@@ -82,6 +82,21 @@ class Adminmodel extends MY_Model
 	 */
 	private $productAttributesSku;
 
+	/**
+	 * @var string
+	 */
+	private $state;
+
+	/**
+	 * @var string
+	 */
+	private $district;
+
+	/**
+	 * @var string
+	 */
+	private $city;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -101,6 +116,9 @@ class Adminmodel extends MY_Model
 		$this->productType = "ns_product_type";
 		$this->productProductType = "ns_product_product_type";
 		$this->productAttributesSku = "ns_product_attributes_sku";
+		$this->state = "ns_state";
+		$this->district = "ns_district";
+		$this->city = "ns_city";
 	}
 
 	/**

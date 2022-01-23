@@ -83,4 +83,11 @@ class MY_Model extends CI_Model
 
 		return $randomString;
 	}
+
+	function md_in_array($array, $key, $val) {
+		foreach ($array as $item)
+			if (isset($item[$key]) && $item[$key] == $val)
+				return true;
+		return false;
+	}
 }

@@ -37429,7 +37429,7 @@ margin-bottom: -1px;
 @media (min-width: 1480px) {
   .cart-page .container,
   .checkout-page .container {
-    max-width: 1200px;
+    max-width: 1200px !important;
   }
 }
 
@@ -42766,4 +42766,8 @@ div#tablekksddescription {
 }
 .success {
 	color: green;
+}
+.note {
+	color: rgba(0,47,52,.64);
+	font-size: 12px;
 }
