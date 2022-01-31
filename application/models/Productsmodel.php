@@ -33,10 +33,25 @@ class Productsmodel extends CI_Model
 	 */
 	private $productImage;
 
-
+	/**
+	 * @var string
+	 */
 	private $productAttributesSku;
+
+	/**
+	 * @var string
+	 */
 	private $productAttributesValue;
+
+	/**
+	 * @var string
+	 */
 	private $productAttributes;
+
+	/**
+	 * @var string
+	 */
+	private $usersAddress;
 
 	public function __construct()
 	{
@@ -50,6 +65,7 @@ class Productsmodel extends CI_Model
 		$this->productAttributesSku = "ns_product_attributes_sku";
 		$this->productAttributesValue = "ns_product_attributes_value";
 		$this->productAttributes = "ns_product_attributes";
+		$this->usersAddress = "ns_users_address";
 	}
 
 	/**
@@ -58,7 +74,7 @@ class Productsmodel extends CI_Model
 	 */
 	public function getProductsByCategory($categoryId = 0)
 	{
-		$this->db->select($this->category . ".title as category_title, " . $this->product . ".title, " . $this->product . ".slug, " . $this->category . ".category_image, (SELECT ".$this->productImage.".`image` from ".$this->productImage." WHERE ".$this->productImage.".`is_main_image` = 1 AND ".$this->productImage.".`product_id`=`ns_products`.`id`) as image");
+		$this->db->select($this->category . ".title as category_title, " . $this->product . ".title, " . $this->product . ".slug, " . $this->product . ".unique_id, " . $this->category . ".category_image, (SELECT ".$this->productImage.".`image` from ".$this->productImage." WHERE ".$this->productImage.".`is_main_image` = 1 AND ".$this->productImage.".`product_id`=`ns_products`.`id`) as image");
 		$this->db->from($this->product);
 		$this->db->join($this->productCategory, $this->productCategory . '.product_id = ' . $this->product . '.id', "inner");
 		$this->db->join($this->category, $this->category . '.id = ' . $this->productCategory . '.category_id', "inner");
@@ -75,7 +91,7 @@ class Productsmodel extends CI_Model
 	public function getProductsByAttribute($categoryId = 0, $filter = "")
 	{
 		$filters = explode("&", $filter);
-		$query = "SELECT $this->category.`title` as `category_title`, $this->product.`title`, $this->product.`slug`, $this->category.`category_image`, $this->productImage.`image` 
+		$query = "SELECT $this->category.`title` as `category_title`, $this->product.`title`, $this->product.`slug`, $this->product.`unique_id`, $this->category.`category_image`, $this->productImage.`image` 
 			FROM $this->productAttributes 
            INNER JOIN $this->productAttributesValue ON $this->productAttributes.`id` = $this->productAttributesValue.`product_attributes_id` 
            INNER JOIN $this->productAttributesSku ON $this->productAttributesValue.`id` = $this->productAttributesSku.`product_attributes_value_id` 
@@ -146,8 +162,48 @@ class Productsmodel extends CI_Model
 		$this->db->join($this->productImage, $this->product . '.id = ' . $this->productImage . '.product_id', "left");
 		$this->db->join($this->usersProduct, $this->product . '.id = ' . $this->usersProduct . '.product_id', "left");
 		$this->db->join($this->users, $this->usersProduct . '.users_id = ' . $this->users . '.id', "left");
+		$this->db->join($this->usersAddress, $this->users . '.id = ' . $this->usersAddress . '.users_id', "left");
 		$this->db->where($this->product . '.slug', $slug);
 		$this->db->where($this->product . '.status', 1);
+		$this->db->group_by($this->product . '.id');
+
+		return $this->db->get()->result();
+	}
+
+	/**
+	 * @param string $slug
+	 * @return mixed
+	 */
+	public function getProductByUniqueId($id = "")
+	{
+		$this->db->select("*");
+		$this->db->from($this->product);
+		$this->db->join($this->productImage, $this->product . '.id = ' . $this->productImage . '.product_id', "left");
+		$this->db->join($this->usersProduct, $this->product . '.id = ' . $this->usersProduct . '.product_id', "left");
+		$this->db->join($this->users, $this->usersProduct . '.users_id = ' . $this->users . '.id', "left");
+		$this->db->join($this->usersAddress, $this->users . '.id = ' . $this->usersAddress . '.users_id', "left");
+		$this->db->where($this->product . '.unique_id', $id);
+		$this->db->where($this->product . '.status', 1);
+		$this->db->group_by($this->product . '.id');
+
+		return $this->db->get()->result();
+	}
+
+	/**
+	 * @param int $userId
+	 * @return mixed
+	 */
+	public function getProductsByUser($userId = 0)
+	{
+		$this->db->select("*");
+		$this->db->from($this->product);
+		$this->db->join($this->productImage, $this->product . '.id = ' . $this->productImage . '.product_id', "left");
+		$this->db->join($this->usersProduct, $this->product . '.id = ' . $this->usersProduct . '.product_id', "left");
+		$this->db->join($this->users, $this->usersProduct . '.users_id = ' . $this->users . '.id', "left");
+		$this->db->join($this->usersAddress, $this->users . '.id = ' . $this->usersAddress . '.users_id', "left");
+		$this->db->where($this->users . '.id', $userId);
+		$this->db->where($this->product . '.status', 1);
+		$this->db->group_by($this->product . '.id');
 
 		return $this->db->get()->result();
 	}

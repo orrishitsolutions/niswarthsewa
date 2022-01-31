@@ -52,12 +52,13 @@ include('include/top-header.php');
 							</thead>
 							<tbody>
 								 <?php
-
+								 $sn=0;
                                 if (count($blog_details) !== "") {
                                     for ($i = 0; $i < count($blog_details); $i++) {
+                                    	$sn++;
                                 ?>
                                 <tr>
-                                	<td><?=$blog_details[$i]['id']?></td>
+                                	<td><?=$sn?></td>
 									<td style="white-space: unset; text-align: left;"> 
 											<?= $blog_details[$i]['title'] ?>
 									</td>

@@ -21,6 +21,8 @@
 	<!-- javascript -->
 	<script src="<?= base_url('assets/frontend/js/jquery.min.js'); ?>"></script>
 	<script src="<?= base_url('assets/frontend/js/owl.carousel.js'); ?>"></script>
+
+	<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=61ed0e0a96a4850019cacd0d&product=image-share-buttons' async='async'></script>
 </head>
 <body>
 <header id="header" class="u-header u-header-left-aligned-nav">
@@ -87,13 +89,29 @@
 					<div class="col text-right text-xl-left pl-0 pl-xl-3 position-static col-md-3">
 						<ul class="updatesd">
 							<li class="">
-								<a id="sidebarNavToggler" class="target-of-invoker-has-unfolds">
-									<p><i class="fa fa-user" aria-hidden="true"></i></p>
-									Sign Free <br>Join Free
-								</a>
+								<?php
+								if (empty($controller->currentUser['logged_in'])) {
+									?>
+									<a id="sidebarNavToggler" class="target-of-invoker-has-unfolds">
+										<p><i class="fa fa-user" aria-hidden="true"></i></p>
+										Sign Free <br>Join Free
+									</a>
+									<?php
+								} else {
+									?>
+									<a style="color: #333e48;" class="target-of-invoker-has-unfolds" href="<?= base_url("profile/logout"); ?>">
+										<p><i class="fa fa-user" aria-hidden="true"></i></p>
+										Logout</a>
+									<?php
+								}
+								?>
 							</li>
-							<li class="ulineme3"><a href="doner-account.html"><i class="far fa-user-circle"></i><span
-											class="cartst"> Doner Account</span></a></li>
+							<li class="ulineme3"><a href="<?= base_url("profile"); ?>">
+								<?php
+								$userType = [1 => "Organization", 2 => "Doner", 3 => "Needy"];
+								?>
+								<i class="far fa-user-circle"></i><span class="cartst"> <?= !empty($controller->currentUser['user_type']) ? $userType[$controller->currentUser['user_type']] : ""; ?> Account</span></a>
+							</li>
 							<li class="col pr-xl-0 px-2 px-sm-3 d-none d-xl-block">
 								<a href="needy.html" style="    padding: 0px;">
 									<i class="fa fa-cart-plus" aria-hidden="true"></i>
@@ -223,7 +241,8 @@
 															{
 																if ($mf1 > 4) { break; }
 																?>
-																<li><a href="<?= base_url($valMenuSubCategories->slug.".html"); ?>" class="nav-link u-header__sub-menu-nav-link"><img src="<?= base_url($valMenuSubCategories->menu_icon_image); ?>" alt=""> &nbsp;<?= $valMenuSubCategories->title; ?></a></li>
+																<li>
+																	<a href="<?= base_url($valMenuSubCategories->slug.".html"); ?>" class="nav-link u-header__sub-menu-nav-link"><img src="<?= base_url($valMenuSubCategories->menu_icon_image); ?>" alt=""> &nbsp;<?= $valMenuSubCategories->title; ?></a></li>
 																<?php
 																$mf1++;
 															}

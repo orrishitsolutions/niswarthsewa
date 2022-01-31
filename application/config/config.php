@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-	$config['base_url'] = 'http://localhost/niswarthsewa-git/';
+	$config['base_url'] = 'http://localhost/niswarthsewa';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -452,7 +452,7 @@ $config['csrf_token_name'] = '_token';
 $config['csrf_cookie_name'] = '_token_value';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
-$config['csrf_exclude_uris'] = array('welcome/remove_cart','welcome/add_card','admin/add-stock/Add');
+$config['csrf_exclude_uris'] = array('welcome/remove_cart','welcome/add_card','admin/add-stock/Add','profile/Publish_Product');
 
 /*
 |--------------------------------------------------------------------------

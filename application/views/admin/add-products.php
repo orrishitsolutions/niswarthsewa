@@ -126,10 +126,7 @@ $addPage = "add-".$page;
 									<label for="meta_description" class="form-label">Meta Description</label>
 									<input id="meta_description" class="form-control" name="meta_description" type="text" value="<?= !empty($data['meta_description']) ? $data['meta_description'] : "" ?>">
 								</div>
-								<div class="mb-3">
-									<label for="slug" class="form-label">Slug</label>
-									<input id="slug" class="form-control" name="slug" type="text" value="<?= !empty($data['slug']) ? $data['slug'] : "" ?>">
-								</div>
+								<input id="slug" class="form-control" name="slug" type="hidden" value="<?= !empty($data['slug']) ? $data['slug'] : "" ?>">
 								<div class="mb-3">
 									<label for="sku" class="form-label">Sku</label>
 									<input id="sku" class="form-control" name="sku" type="text" value="<?= !empty($data['sku']) ? $data['sku'] : "" ?>">

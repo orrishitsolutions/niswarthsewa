@@ -27,6 +27,7 @@ class Pagesmodel extends MY_Model
 	{
 		parent::__construct();
 		$this->pages = "ns_pages";
+		$this->blog = "ns_blog";
 		$this->categoryPage = "ns_category_pages";
 		$this->pageCategory = "ns_pages_category";
 		$this->staticBlocks = "ns_static_blocks";
@@ -51,6 +52,26 @@ class Pagesmodel extends MY_Model
 		$this->db->where($this->pages . '.status', 1);
 		$result = $this->db->get()->row();
 
+		if (!empty($result) && $isHome) {
+			return $this->pageContent($result->content, $data);
+		} else {
+			return $result;
+		}
+	}
+
+	public function getPageByBlogSlug($slug = "", $data = [], $isHome = 0)
+	{
+		$this->db->select("*");
+		$this->db->from($this->blog);
+		if (!empty($slug)) {
+			$this->db->where($this->blog . '.slug', $slug);
+		}
+		if (!empty($isHome)) {
+			$this->db->where($this->ibase_blob_get(blob_handle, len) . '.is_home', 1);
+		}
+		$this->db->where($this->blog . '.status', 1);
+		
+		$result = $this->db->get()->row();
 		if (!empty($result) && $isHome) {
 			return $this->pageContent($result->content, $data);
 		} else {
@@ -262,7 +283,6 @@ class Pagesmodel extends MY_Model
 		$categoryIds = [];
 		foreach ($matches[1] as $matchVal) {
 			$categoryIds = explode(",", $matchVal);
-
 			$categories = $this->allCategoryByIds($categoryIds);
 			$str = '<div class="row ">';
 			foreach ($categories as $val) {
@@ -409,6 +429,7 @@ class Pagesmodel extends MY_Model
 		$this->db->select(['id', 'name']);
 		$this->db->from($this->categoryPage);
 		$this->db->where($this->categoryPage . '.status', 1);
+		$this->db->where($this->categoryPage . '.name!=', 'blog'); //modifyed code by Abhay
 		$result = $this->db->get()->result();
 
 		return $result;

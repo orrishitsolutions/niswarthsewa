@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Page extends MY_Controller {
+class BlogController extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -13,24 +13,40 @@ class Page extends MY_Controller {
 	 */
 	public function index()
 	{
+
 		$this->load->model("Pagesmodel");
 		$this->load->model("Pageinfomodel");
 		$this->load->model("Servicesmodel");
-		$slug = substr($this->uri->segment(1), 0,-5);
-		$page = $this->Pagesmodel->getPageBySlug($slug);
+		$slug = substr($this->uri->segment(1), 0,-4);
+		
+		$page = $this->Pagesmodel->getPageByBlogSlug($slug);
 		$pageInfo = !empty($page->id) ? $this->Pageinfomodel->pageInfoByPageId($page->id) : "";
 		$service = !empty($page->id) ? $this->Servicesmodel->pageServicesByPageId($page->id) : "";
 
-		$this->load->view('website/page',
+		// $this->load->view('website/page',
+		// 	[
+		// 		"topHeader" => $this->topHeader,
+		// 		"topNavigationCategories" => $this->topNavigation, //
+		// 		"controller" => $this, //
+		// 		"page" => $page,
+		// 		"pageInfo" => $pageInfo,
+		// 		"service" => $service
+		// 	]
+		// );
+
+		$blog_details = $this->db->where('slug',$slug)->from('ns_blog')->get()->row();
+		
+
+		$this->load->view('website/blog-details',
 			[
 				"topHeader" => $this->topHeader,
 				"topNavigationCategories" => $this->topNavigation, //
 				"controller" => $this, //
 				"page" => $page,
 				"pageInfo" => $pageInfo,
-				"service" => $service
-			]
-		);
+				"service" => $service,
+				"blog_details" => $blog_details
+			]);
 	}
 
 
@@ -46,9 +62,7 @@ class Page extends MY_Controller {
 
 		$BlogAll = $this->db->from('ns_blog')->order_by('id','desc')->get()->result_array();
 
-		// echo "<pre>";
-		// print_r($BlogAll);
-
+	
 		$this->load->view('website/blog',
 			[
 				"topHeader" => $this->topHeader,
@@ -60,33 +74,35 @@ class Page extends MY_Controller {
 				"BlogAll" => $BlogAll
 			]);
 	}
+
 	public function blog_details_view()
 	{
-		$blog_id = $this->uri->segment(2);
 
-		$this->load->model("Pagesmodel");
-		$this->load->model("Pageinfomodel");
-		$this->load->model("Servicesmodel");
-		$slug = substr($this->uri->segment(1), 0,-5);
-		$page = $this->Pagesmodel->getPageBySlug($slug);
-		$pageInfo = !empty($page->id) ? $this->Pageinfomodel->pageInfoByPageId($page->id) : "";
-		$service = !empty($page->id) ? $this->Servicesmodel->pageServicesByPageId($page->id) : "";
+		echo 'ddd';
+		die();
+		// $blog_id = $this->uri->segment(2);
 
-		$blog_details = $this->db->where('id',$blog_id)->from('ns_blog')->get()->row();
+		// $this->load->model("Pagesmodel");
+		// $this->load->model("Pageinfomodel");
+		// $this->load->model("Servicesmodel");
+
+		// $slug = substr($this->uri->segment(1), 0,-5);
+		// $page = $this->Pagesmodel->getPageBySlug($slug);
+		// $pageInfo = !empty($page->id) ? $this->Pageinfomodel->pageInfoByPageId($page->id) : "";
+		// $service = !empty($page->id) ? $this->Servicesmodel->pageServicesByPageId($page->id) : "";
+
+		// $blog_details = $this->db->where('id',$blog_id)->from('ns_blog')->get()->row();
 		
 
-		// echo "<pre>";
-		// print_r($BlogAll);
-
-		$this->load->view('website/blog-details',
-			[
-				"topHeader" => $this->topHeader,
-				"topNavigationCategories" => $this->topNavigation, //
-				"controller" => $this, //
-				"page" => $page,
-				"pageInfo" => $pageInfo,
-				"service" => $service,
-				"blog_details" => $blog_details
-			]);
+		// $this->load->view('website/blog-details',
+		// 	[
+		// 		"topHeader" => $this->topHeader,
+		// 		"topNavigationCategories" => $this->topNavigation, //
+		// 		"controller" => $this, //
+		// 		"page" => $page,
+		// 		"pageInfo" => $pageInfo,
+		// 		"service" => $service,
+		// 		"blog_details" => $blog_details
+		// 	]);
 	}
 }

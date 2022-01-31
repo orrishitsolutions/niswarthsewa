@@ -59,8 +59,8 @@ $route["product/(.*)"] = 'product';
 $route["(.*).html"] = 'page';
 
 
-$route["blog"] = 'page/blog_view';
-
+$route["blog"] = 'BlogController/blog_view';
+$route["(.*).php"] = 'BlogController';
 
 
 //$route['admin']='admin/admin';

@@ -67,7 +67,7 @@
 																							class="text-blue font-weight-bold"><?= $val->title; ?> </a>
 													</h5>
 													<div class="mb-2">
-														<a href="<?= base_url("product/".$val->slug); ?>"
+														<a href="<?= base_url("product/".$val->slug."?pid=".$val->unique_id); ?>"
 														   class="d-block text-center"><img class="img-fluid"
 																							src="<?= !empty($val->image) ? base_url($val->image) : base_url(UPLOAD_DIR."no-image.jpg"); ?>"
 																							alt="<?= $val->title; ?>"></a>

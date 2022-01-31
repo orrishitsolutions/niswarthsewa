@@ -3,6 +3,8 @@
 $page = $this->uri->segment(2);
 $Auth = $this->session->userdata();
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

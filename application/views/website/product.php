@@ -67,32 +67,34 @@
 													<div class="col-md-8">
 														<div class="mb-4">
 															<div class="d-flex align-items-baseline">
-																<ins class="font-size-36 text-decoration-none"> T-Shirts </ins>
+																<ins class="font-size-36 text-decoration-none"> <?= $product[0]->title; ?> </ins>
 															</div>
 														</div>
 													</div>
 													<div class="col-md-4">
 														<div class="detaoils" style="display:block;">
-															<p class="produstket" style="float:right;"><strong><i class="fa fa-share-alt" aria-hidden="true"></i></strong> </p>
-															<!--  <p class="produstket2s"  data-toggle="modal" data-target="#myModal"> <strong><i class="fa fa-heart" aria-hidden="true"></i></strong></p> -->
+															<!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
 														</div>
-														<div class="box-swikd">
+														<!--div class="box-swikd">
 															<span></span>
 															<ul>
 																<li><a><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
 																<li><a><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
 																<li><a><i class="fab fa-linkedin-in" aria-hidden="true"></i></a></li>
 															</ul>
-														</div>
+														</div-->
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-md-8">
-														<p>Praesent ornare, ex a interdum consectetur, lectus diam sodales elit</p>
-														<span>Bormotoria, Guwahati, Assam</span>
+														<span>
+															<?= $product[0]->state; ?>
+															<?= $product[0]->district; ?>
+															<?= $product[0]->city; ?>
+														</span>
 													</div>
 													<div class="col-md-4">
-														<a  data-toggle="modal" data-target="#myModal" ><button class="donnerdiscription1">Product Upload</button></a>
+														<a href="<?= base_url('profile/donate'); ?>" ><button class="donnerdiscription1">Product Upload</button></a>
 													</div>
 												</div>
 											</div>
@@ -100,10 +102,10 @@
 												<div class="amps34522">
 													<div class="ampsqwwrtuiopasd" data-aut-id="profileCard">
 														<a rel="nofollow" href="/profile/523613657">
-															<figure class="ampsqww _186ru" style=""><img src="<?= base_url()?>assets/frontend/img/profile.png"></figure>
+															<figure class="ampsqww _186ru" style=""><img src="<?= base_url("assets/frontend/img/profile.png"); ?>"></figure>
 														</a>
 														<div class="awampsqwwrtuiopasdzxc">
-															<a rel="nofollow" href="profile.html">
+															<a rel="nofollow" href="<?= base_url("profile"); ?>">
 																<div class="_3oOe9"><?= $product[0]->first_name." ".$product[0]->middle_name." ".$product[0]->last_name; ?> </div>
 																<span class="amps">
                                                          <svg width="18px" height="18px" viewBox="0 0 1024 1024" data-aut-id="icon" class="" fill-rule="evenodd">
@@ -132,66 +134,34 @@
 									<h2>Doner Description</h2>
 									<div class="mb-8" style="    display: block; float: left;width: 100%; margin-bottom: 0px !important;">
 										<ul class="list-unstyled" style="     width: 100%;   padding:15px 15px 0px; display: block; float: left;">
-											<li class="mb-4">
-												<div class="row">
-													<div class="col-auto col-md-3"><a href="#" class="d-block width-75"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/cloth1.png" alt="Image Description"></a></div>
-													<div class="col col-md-4" style="    padding-left: 0px;">
-														<h3 class="text-lh-1dot2 font-size-14 mb-0" style="padding-top:16px;"><a href="#">T-Shirts</a></h3>
-														<div class="font-weight-bold"> <ins class="font-size-15 text-red text-decoration-none d-block">Karan Kumar</ins></div>
+											<?php
+											foreach ($donerDescription as $valDonerDescription) {
+												?>
+												<li class="mb-4">
+													<div class="row">
+														<div class="col-auto col-md-3"><a href="<?= base_url("product/".$valDonerDescription->slug."?pid=".$valDonerDescription->unique_id); ?>"
+																						  class="d-block width-75"><img
+																		class="img-fluid" src="<?= !empty($valDonerDescription->image) ? base_url($valDonerDescription->image) : base_url(UPLOAD_DIR."no-image.jpg"); ?>"
+																		alt="Image Description"></a></div>
+														<div class="col col-md-4" style="padding-left: 0px;">
+															<h3 class="text-lh-1dot2 font-size-14 mb-0"
+																style="padding-top:16px;"><a href="<?= base_url("product/".$valDonerDescription->slug."?pid=".$valDonerDescription->unique_id); ?>"><?= $valDonerDescription->title; ?></a></h3>
+															<div class="font-weight-bold">
+																<ins class="font-size-15 text-red text-decoration-none d-block">
+																	<?= $valDonerDescription->first_name." ".$valDonerDescription->middle_name." ".$valDonerDescription->last_name; ?>
+																</ins>
+															</div>
+														</div>
+														<div class="col col-md-5">
+															<button onclick="window.location='<?= base_url("product/".$valDonerDescription->slug."?pid=".$valDonerDescription->unique_id); ?>'" id="butview" type="button"
+																	class="ampsqwwrt ampsqwwrtuiop rui-1JPTg rui-2NuAg">
+																<span>View Detail</span></button>
+														</div>
 													</div>
-													<div class="col col-md-5">
-														<button id="butview" type="button" class="ampsqwwrt ampsqwwrtuiop rui-1JPTg rui-2NuAg"><span>View Detail</span></button>
-													</div>
-												</div>
-											</li>
-											<li class="mb-4">
-												<div class="row">
-													<div class="col-auto col-md-3"><a href="#" class="d-block width-75"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/cloth1.png" alt="Image Description"></a></div>
-													<div class="col col-md-4" style="    padding-left: 0px;">
-														<h3 class="text-lh-1dot2 font-size-14 mb-0" style="padding-top:16px;"><a href="#">T-Shirts</a></h3>
-														<div class="font-weight-bold"> <ins class="font-size-15 text-red text-decoration-none d-block">Rahul Kumar</ins></div>
-													</div>
-													<div class="col col-md-5">
-														<button id="butview" type="button" class="ampsqwwrt ampsqwwrtuiop rui-1JPTg rui-2NuAg"><span>View Detail</span></button>
-													</div>
-												</div>
-											</li>
-											<li class="mb-4">
-												<div class="row">
-													<div class="col-auto col-md-3"><a href="#" class="d-block width-75"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/cloth1.png" alt="Image Description"></a></div>
-													<div class="col col-md-4" style="    padding-left: 0px;">
-														<h3 class="text-lh-1dot2 font-size-14 mb-0" style="padding-top:16px;"><a href="#">T-Shirts</a></h3>
-														<div class="font-weight-bold"> <ins class="font-size-15 text-red text-decoration-none d-block">Vicky Kumar</ins></div>
-													</div>
-													<div class="col col-md-5">
-														<button id="butview" type="button" class="ampsqwwrt ampsqwwrtuiop rui-1JPTg rui-2NuAg"><span>View Detail</span></button>
-													</div>
-												</div>
-											</li>
-											<li class="mb-4">
-												<div class="row">
-													<div class="col-auto col-md-3"><a href="#" class="d-block width-75"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/cloth1.png" alt="Image Description"></a></div>
-													<div class="col col-md-4" style="    padding-left: 0px;">
-														<h3 class="text-lh-1dot2 font-size-14 mb-0" style="padding-top:16px;"><a href="#">T-Shirts</a></h3>
-														<div class="font-weight-bold"> <ins class="font-size-15 text-red text-decoration-none d-block">Karan Kumar</ins></div>
-													</div>
-													<div class="col col-md-5">
-														<button id="butview" type="button" class="ampsqwwrt ampsqwwrtuiop rui-1JPTg rui-2NuAg"><span>View Detail</span></button>
-													</div>
-												</div>
-											</li>
-											<li class="mb-4">
-												<div class="row">
-													<div class="col-auto col-md-3"><a href="#" class="d-block width-75"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/cloth1.png" alt="Image Description"></a></div>
-													<div class="col col-md-4" style="    padding-left: 0px;">
-														<h3 class="text-lh-1dot2 font-size-14 mb-0" style="padding-top:16px;"><a href="#">T-Shirts</a></h3>
-														<div class="font-weight-bold"> <ins class="font-size-15 text-red text-decoration-none d-block">Raj</ins></div>
-													</div>
-													<div class="col col-md-5">
-														<button id="butview" type="button" class="ampsqwwrt ampsqwwrtuiop rui-1JPTg rui-2NuAg"><span>View Detail</span></button>
-													</div>
-												</div>
-											</li>
+												</li>
+												<?php
+											}
+											?>
 										</ul>
 									</div>
 								</div>
@@ -221,18 +191,18 @@
 															<div class="col-md-12">
 																<h3 style="font-size: 20px; text-align: center;">Upload  Up to 12 Photo</h3>
 															</div>
-															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
-															<div class="col-md-3"><img src="<?= base_url()?>assets/frontend/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
+															<div class="col-md-3"><img src="assets/img/cloth1.png"> </div>
 														</div>
 														<div class="confirm">
 															<h4>CONFIRM YOUR LOCATION</h4>
@@ -316,7 +286,7 @@
 														<div class="review">
 															<h4>REVIEW YOUR DETAILS</h4>
 															<div class="preview text-center">
-																<img class="preview-img" src="<?= base_url()?>assets/frontend/img/account.png" alt="Preview Image" width="200" height="200">
+																<img class="preview-img" src="assets/img/account.png" alt="Preview Image" width="200" height="200">
 																<div class="browse-button">
 																	<i class="fa fa-pencil-alt"></i>
 																	<input class="browse-input" type="file" required="" name="UploadedFile" id="UploadedFile">
@@ -355,7 +325,7 @@
 									<h2>Location</h2>
 									<ul class="footer-add ">
 										<li>
-											GH-6/160, Meera Bagh, Paschim Viahar, New Delhi-110086 (Delhi)
+											<?= $product[0]->address; ?>
 										</li>
 									</ul>
 								</div>
@@ -370,7 +340,7 @@
 										<div class="modal-body">
 											<div class="box-soldid1">
 												<div class="img23">
-													<img src="<?= base_url()?>assets/frontend/img/webpoint.png" alt="">
+													<img src="assets/img/webpoint.png" alt="">
 													<p>Keep all your favourites in one place.</p>
 												</div>
 												<div class="insljkkd">
@@ -416,14 +386,14 @@
 											<div class="colampoxe" style="box-shadow: none !important;  padding: 0px;    text-align: center;">
 												<div class="wiiimgs">
 													<div style="display:flex">
-														<img src="<?= base_url()?>assets/frontend/img/avatar_1.png" alt="">
-														<img src="<?= base_url()?>assets/frontend/img/arrows.png" alt="">
-														<img src="<?= base_url()?>assets/frontend/img/profile.png" alt="">
+														<img src="<?= base_url("assets/frontend/img/avatar_1.png"); ?>" alt="">
+														<img src="<?= base_url("assets/frontend/img/arrows.png"); ?>" alt="">
+														<img src="<?= base_url("assets/frontend/img/profile.png"); ?>" alt="">
 													</div>
 												</div>
 												<div class="d-flex justify-content-between align-items-center border-bottom border-color-1 flex-lg-nowrap flex-wrap mb-4">
 													<div class="d-flex justify-content-between border-bottom border-color-1 flex-md-nowrap flex-wrap border-sm-bottom-0 best" style="    width: 700px;">
-														<h3 class="section-title section-title__full mb-0 pb-2 font-size-22" style="text-align: center; display: block; width: 100%;">Write a message to Karan Kumar</h3>
+														<h3 class="section-title section-title__full mb-0 pb-2 font-size-22" style="text-align: center; display: block; width: 100%;">Write a message to <?= $product[0]->first_name." ".$product[0]->middle_name." ".$product[0]->last_name; ?></h3>
 													</div>
 												</div>
 												<form class="js-validate" novalidate="novalidate">
@@ -512,7 +482,7 @@
 					<ul class="list-unstyled products-group">
 						<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 							<div class="col-auto">
-								<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop1.png" alt="Image Description"></a>
+								<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop1.png" alt="Image Description"></a>
 							</div>
 							<div class="col pl-4 d-flex flex-column">
 								<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -523,7 +493,7 @@
 						</li>
 						<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 							<div class="col-auto">
-								<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop2.png" alt="Image Description"></a>
+								<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop2.png" alt="Image Description"></a>
 							</div>
 							<div class="col pl-4 d-flex flex-column">
 								<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -534,7 +504,7 @@
 						</li>
 						<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 							<div class="col-auto">
-								<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop3.png" alt="Image Description"></a>
+								<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop3.png" alt="Image Description"></a>
 							</div>
 							<div class="col pl-4 d-flex flex-column">
 								<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -553,7 +523,7 @@
 				<ul class="list-unstyled products-group">
 					<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 						<div class="col-auto">
-							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop4.png" alt="Image Description"></a>
+							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop4.png" alt="Image Description"></a>
 						</div>
 						<div class="col pl-4 d-flex flex-column">
 							<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -564,7 +534,7 @@
 					</li>
 					<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 						<div class="col-auto">
-							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop5.png" alt="Image Description"></a>
+							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop5.png" alt="Image Description"></a>
 						</div>
 						<div class="col pl-4 d-flex flex-column">
 							<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -575,7 +545,7 @@
 					</li>
 					<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 						<div class="col-auto">
-							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop6.png" alt="Image Description"></a>
+							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop6.png" alt="Image Description"></a>
 						</div>
 						<div class="col pl-4 d-flex flex-column">
 							<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -593,7 +563,7 @@
 				<ul class="list-unstyled products-group">
 					<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 						<div class="col-auto">
-							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop7.png" alt="Image Description"></a>
+							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop7.png" alt="Image Description"></a>
 						</div>
 						<div class="col pl-4 d-flex flex-column">
 							<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -604,7 +574,7 @@
 					</li>
 					<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 						<div class="col-auto">
-							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop8.png" alt="Image Description"></a>
+							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop8.png" alt="Image Description"></a>
 						</div>
 						<div class="col pl-4 d-flex flex-column">
 							<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -615,7 +585,7 @@
 					</li>
 					<li class="product-item product-item__list row no-gutters mb-6 remove-divider">
 						<div class="col-auto">
-							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="<?= base_url()?>assets/frontend/img/shop9.png" alt="Image Description"></a>
+							<a href="product-detail.html" class="d-block width-75 text-center"><img class="img-fluid" src="assets/img/shop9.png" alt="Image Description"></a>
 						</div>
 						<div class="col pl-4 d-flex flex-column">
 							<h5 class="product-item__title mb-0"><a href="product-detail.html" class="text-blue font-weight-bold">Massive Donation for Poor People</a></h5>
@@ -627,7 +597,7 @@
 				</ul>
 			</div>
 			<div class="col-wd-3 d-none d-wd-block">
-				<a href="#1" class="d-block"><img class="img-fluid" src="../../<?= base_url()?>assets/frontend/img/330X360/img1.jpg" alt="Image Description"></a>
+				<a href="#1" class="d-block"><img class="img-fluid" src="../../assets/img/330X360/img1.jpg" alt="Image Description"></a>
 			</div>
 		</div>
 	</div>
