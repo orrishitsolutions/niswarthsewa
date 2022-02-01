@@ -48,8 +48,50 @@ class Admin extends MY_Controller
 
 	public function dashboard()
 	{
-		$this->load->view('admin/dashboard');
+		$social_media = $this->db->query("SELECT * FROM `ns_social_media` WHERE `id`=1")->row();		
+		$admin_info = $this->db->query("SELECT * FROM `ns_company_info` WHERE `id`=1")->row();
+		$this->load->view('admin/dashboard', compact('social_media','admin_info'));		
 	}
+
+	///Abhay Work ----DashBord ----
+	public function Update_social()
+	{
+		$facebook = $this->security->xss_clean($this->input->POST('facebook'));
+		$linkedin = $this->security->xss_clean($this->input->POST('linkedin'));
+		$instagram = $this->security->xss_clean($this->input->POST('instagram'));
+		$twitter = $this->security->xss_clean($this->input->POST('twitter'));
+        $data_social = array(
+			'facebook' => $facebook,
+			'linkedin' => $linkedin,
+			'instagram' => $instagram,
+			'twitter' => $twitter,
+		);
+		$this->db->where('id',1)->set($data_social)->update('ns_social_media');
+		$this->session->set_flashdata(['status_social_media'=>'Hurray! Social Media has been Update successfully!']);
+		redirect(base_url('admin/dashboard'));		
+	}
+	public function Update_address()
+	{
+	
+		$admin_add = $this->security->xss_clean($this->input->POST('admin_add'));
+		$admin_email = $this->security->xss_clean($this->input->POST('admin_email'));
+		$admin_phone = $this->security->xss_clean($this->input->POST('admin_phone'));
+		$admin_mobile = $this->security->xss_clean($this->input->POST('admin_mobile'));
+		$data_admin_info = array(
+			'admin_add' => $admin_add,
+			'admin_email' => $admin_email,
+			'admin_phone' => $admin_phone,
+			'admin_mobile' => $admin_mobile
+		);
+		$this->db->where('id',1)->set($data_admin_info)->update('ns_company_info');
+		$this->session->set_flashdata(['status_admin_info'=>'Hurray! Contact Us has been Update successfully!']);
+		redirect(base_url('admin/dashboard'));			
+	}
+
+
+	//End Abhay work dashbord ----
+
+
 
 	public function category()
 	{
@@ -446,7 +488,6 @@ class Admin extends MY_Controller
 	public function products()
 	{
 		$products = $this->login->getProducts();
-
 		$this->load->view('admin/products', ['products' => $products]);
 	}
 	public function add_products()
@@ -598,7 +639,7 @@ class Admin extends MY_Controller
 	public function insertBlog()
 	{
 		$this->load->library('form_validation');
-        $this->form_validation->set_rules('title', 'Blog Title ', 'required|max_length[70]');
+        $this->form_validation->set_rules('title', 'Blog Title ', 'required|max_length[150]');
         $title = $this->security->xss_clean($this->input->POST('title'));
         
         $publish_date = $this->input->POST('publish_date');
@@ -613,6 +654,9 @@ class Admin extends MY_Controller
         $meta_title = $this->security->xss_clean($this->input->POST('meta_title'));
         $meta_description = $this->security->xss_clean($this->input->POST('meta_description'));
         $meta_keywords = $this->security->xss_clean($this->input->POST('meta_keywords'));
+
+        $slug =  strtolower(preg_replace("![^a-z0-9]+!i", "-", $title));  
+
 
         if ($this->form_validation->run() == false) {
 
@@ -645,6 +689,7 @@ class Admin extends MY_Controller
 				'meta_title' =>$meta_title,
 				'meta_description' =>$meta_description,
 				'meta_keywords' =>$meta_keywords,
+				'slug' =>$slug,
 				'file' =>$file,
 				'short_description' =>$short_description,
 				'created_at' =>date("Y-m-d H:i:s")

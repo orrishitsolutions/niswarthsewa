@@ -133,6 +133,12 @@
 							<div class="form-group" style="width: 100%">
 								<textarea placeholder="Description" class="form-control" name="content" ></textarea>
 							</div>
+							<div class="form-group" style="width: 100%">
+								<input id="sku" class="form-control" name="sku" type="text" >
+							</div>
+
+
+
 	<!-- 						<div class="form-group" style="width: 100%">
 								<input class="form-control " type="file" name="image[]" multiple="multiple"  id="image" >
 							</div> -->

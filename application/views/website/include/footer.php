@@ -62,7 +62,7 @@
 							<a href="# "><i class="fab fa-linkedin-in "></i></a>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 rad-us-1 text-center">
-							<a href="# "><i class="fas fa-camera "></i></a>
+							<a href="# "><i class="fab fa-instagram"></i></a>
 						</div>
 					</div>
 				</div>
