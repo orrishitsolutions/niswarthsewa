@@ -1,4 +1,8 @@
 <?php
+
+$errors = $this->session->flashdata();
+
+
 include('include/head.php');
 include('include/left-header.php');
 include('include/top-header.php');
@@ -88,19 +92,21 @@ include('include/top-header.php');
                   <div class="col-md-5 d-flex justify-content-md-end">
                      <ul class="nav nav-tabs" id="myTab" role="tablist">                        
                         <li class="nav-item">
-                           <a class="nav-link active" id="Change_Password-tab" data-bs-toggle="tab" href="#Change_Password" role="tab" aria-controls="Change_Password" aria-selected="false">Change Password</a>
+                           <a class="nav-link " id="Change_Password-tab" data-bs-toggle="tab" href="#Change_Password" role="tab" aria-controls="Change_Password" aria-selected="false">Change Password</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link " id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Social Media</a>
+                           <a class="nav-link active" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Social Media</a>
+                        </li>   
+                         <li class="nav-item ">
+                           <a class="nav-link " id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Information</a>
                         </li>
-                        
-                     </ul>
 
+                     </ul>
                   </div>
                </div>
                <div class="tab-content border  p-3" id="myTabContent">
                   
-                  <div class="tab-pane fade show active" id="Change_Password" role="tabpanel" aria-labelledby="Change_Password-tab">
+                  <div class="tab-pane fade " id="Change_Password" role="tabpanel" aria-labelledby="Change_Password-tab">
                      <div class="card-body">
                            <h2 class="card-title">Edit Admin Information</h2>
                            <form class="cmxform" id="signupForm" method="get" action="#">
@@ -128,33 +134,97 @@ include('include/top-header.php');
                            </form>
                         </div>
                   </div>
-                  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-					  <div class="card-body">
-						  <h2 class="card-title">Edit Social Media Information</h2>
-						  <form class="cmxform" id="socialForm" method="post" action="#">
-							  <fieldset>
-								  <div class="mb-3">
-									  <label for="facebook" class="form-label">Facebook
-									  </label>
-									  <input id="facebook" class="form-control" name="facebook" type="text" >
-								  </div>
-								  <div class="mb-3">
-									  <label for="twitter" class="form-label">Twitter</label>
-									  <input id="twitter" class="form-control" name="twitter" type="text" >
-								  </div>
-								  <div class="mb-3">
-									  <label for="linkedin" class="form-label">LinkedIn</label>
-									  <input id="linkedin" class="form-control" name="linkedin" type="text" >
-								  </div>
-								  <div class="mb-3">
-									  <label for="instagram" class="form-label">Instagram</label>
-									  <input id="instagram" class="form-control" name="instagram" type="text" >
-								  </div>
-								  <input class="btn btn-primary" type="submit" value="Submit">
-							  </fieldset>
-						  </form>
-					  </div>
+
+                  <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+   					         <?php if (!empty($errors['status_social_media'])) : ?>
+                             <div class="alert alert-success alert-dismissible fade show mt-1" role="alert">
+                                 <strong> <?= $errors['status_social_media'] ?></strong>
+                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
+                             </div>
+                            <?php endif; ?>
+                        <form  action="<?= base_url('Admin/Update_social') ?>" method="post">
+                           <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>"
+                          value="<?= $this->security->get_csrf_hash(); ?>">
+                           <div class="form-group required row mt-3">
+                              <label class="col-sm-2 control-label" for="input-name1">facebook</label>
+                              <div class="col-sm-10">
+                                 <input type="text" name="facebook" id="facebook" class="form-control" value="<?=$social_media->facebook?>">
+                              </div>
+                           </div>
+                           <div class="form-group required row mt-3">
+                              <label class="col-sm-2 control-label" for="input-name1">Twitter</label>
+                              <div class="col-sm-10">
+                                 <input type="text" name="twitter" id="twitter" class="form-control" value="<?=$social_media->twitter?>">
+                              </div>
+                           </div>
+                           <div class="form-group required row mt-3">
+                              <label class="col-sm-2 control-label" for="input-name1">linkedin</label>
+                              <div class="col-sm-10">
+                                 <input type="text" name="linkedin" id="linkedin" class="form-control" value="<?=$social_media->linkedin?>">
+                              </div>
+                           </div>
+                           <div class="form-group required row mt-3">
+                              <label class="col-sm-2 control-label" for="input-name1">instagram</label>
+                              <div class="col-sm-10">
+                                 <input type="text" name="instagram" id="instagram" class="form-control" value="<?=$social_media->instagram?>">
+                              </div>
+                           </div>
+                           
+
+                           <div class="form-group  row mt-4">
+                              <label class="col-sm-4 control-label" ></label>
+                              <div class="col-sm-4">
+                                 <input type="submit" name="" class="btn btn-primary" value="Update">
+                              </div>
+                              <label class="col-sm-4 control-label" ></label>                        
+                           </div>
+                           
+                        </form>   
                   </div>
+
+                  <div class="tab-pane fade show " id="home" role="tabpanel" aria-labelledby="home-tab">
+                     <?php if (!empty($errors['status_admin_info'])) : ?>
+                       <div class="alert alert-success alert-dismissible fade show mt-1" role="alert">
+                           <strong> <?= $errors['status_admin_info'] ?></strong>
+                           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
+                       </div>
+                       <?php endif; ?>
+                     <form  action="<?= base_url('Admin/Update_address') ?>" method="post">
+                           <input type="hidden" name="<?= $this->security->get_csrf_token_name() ?>"  value="<?= $this->security->get_csrf_hash(); ?>">
+                        <div class="row mb-3">
+                           <div class="col-md-12">
+                              <label class="form-label">Address:</label>
+                              <input class="form-control mb-4 mb-md-0" type="text" name="admin_add" value="<?=$admin_info->admin_add?>">
+                           </div>
+                           
+
+                           <div class="col-md-12">
+                              <label class="form-label">Email:</label>
+                             <input class="form-control mb-4 mb-md-0" type="text" name="admin_email" value="<?=$admin_info->admin_email?>">
+                           </div>
+                           <div class="col-md-12">
+                              <label class="form-label">Phone:</label>
+                             <input class="form-control mb-4 mb-md-0" type="text" name="admin_phone" value="<?=$admin_info->admin_phone?>">
+                           </div>
+
+                           <div class="col-md-12">
+                              <label class="form-label">Mobile </label>
+                             <input class="form-control mb-4 mb-md-0" type="text" name="admin_mobile" value="<?=$admin_info->admin_mobile?>">
+                           </div>
+
+                           
+                           <div class="form-group  row mt-4">
+                              <label class="col-sm-4 control-label" ></label>
+                              <div class="col-sm-4">
+                                 <input type="submit" name="" class="btn btn-primary" value="Update">
+                              </div>
+                              <label class="col-sm-4 control-label" ></label>                        
+                           </div>
+                           
+                        </div>
+                     </form>
+                  </div>
+
                </div>
             </div>
          </div>

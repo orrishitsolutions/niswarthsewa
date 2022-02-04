@@ -62,7 +62,7 @@
 							<a href="# "><i class="fab fa-linkedin-in "></i></a>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 rad-us-1 text-center">
-							<a href="# "><i class="fas fa-camera "></i></a>
+							<a href="# "><i class="fab fa-instagram"></i></a>
 						</div>
 					</div>
 				</div>
@@ -127,7 +127,7 @@
 				</div>
 				<div class="footer-li ">
 					<ul class="footer-add ">
-						<li><a href="blog.html ">Blogs</a></li>
+						<li><a href="<?= base_url("blog")?>">Blogs</a></li>
 						<li><a href="testimonial.html">Testimonial</a></li>
 						<li><a href="gallery.html">Gallery</a></li>
 					</ul>

@@ -27,12 +27,13 @@ class Signup extends MY_Controller
 		$inputs = [
 			'email',
 			'password',
-			'user_type'
+			'user_type',
+			'password'
 		];
 		$post = $this->input->post($inputs);
 		$submit = $this->input->post(['register']);
 		$data['signup'] = $post;
-		$data['redirect'] = !empty($redirect) ? "?redirect=".$redirect : "";
+		$data['redirect'] = !empty($redirect) ? "?redirect=" . $redirect : "";
 		if ($this->form_validation->run() == FALSE) {
 			$data['signup']['error'] = validation_errors();
 		} else {
@@ -51,7 +52,7 @@ class Signup extends MY_Controller
 		}
 
 		if (empty($data['signup']['error']) && !empty($submit['register'])) {
-			$this->session->set_flashdata('success', '<div class="alert alert-success"><strong>Success!</strong> '."You've successfully signed up, please login with same credentials.".'</div>');
+			$this->session->set_flashdata('success', '<div class="alert alert-success"><strong>Success!</strong> ' . "You've successfully signed up, please login with same credentials." . '</div>');
 			$data['signup']['success'] = $this->session->flashdata('success');
 		}
 

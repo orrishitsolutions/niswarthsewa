@@ -15,9 +15,9 @@ class AdminController extends CI_Controller {
 		$this->refer =  $this->agent->referrer();
 	}
 	public function index(){
-		
+		// $social_media = $this->db->query("SELECT * FROM `tbl_social_media` WHERE `id`=1")->row();		
+		// $this->load->view('admin-orrish/dashboard',compact('social_media'));
 		$this->load->view('admin-orrish/dashboard');
-		
 	}
 	// profile
 	public function profilePage(){

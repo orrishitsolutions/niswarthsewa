@@ -18,6 +18,7 @@ class Product extends MY_Controller {
 		$product = $this->product->getProductByUniqueId($pid);
 		$donerDescription = $this->product->getProductBySlug($slug);
 		$leftNavigation = $this->category->categoryTreeByColumn(['parent_id' => 0]);
+		//echo "<pre>";print_r($product);die;
 
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger"><strong>Danger!</strong> ', '</div>');
 		$this->form_validation->set_rules('message', 'Message', 'trim|required');

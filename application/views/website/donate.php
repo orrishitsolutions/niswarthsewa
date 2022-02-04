@@ -1,4 +1,7 @@
-<?php include('include/header.php'); ?>
+<?php
+$errors = $this->session->flashdata();
+include('include/header.php');
+?>
 <main id="content" role="main" class="checkout-page">
 	<div id="banner-tops" class="bg-gray-13 bg-md-transparent" style="background-image: url(<?= base_url("assets/frontend/upload/images/bannertop.jpg"); ?>);">
 		<div class="container">
@@ -39,9 +42,24 @@
 						</div>
 					</div>
 					<div class="row">
+						<?php if (!empty($errors['status'])) : ?>
+							<div class="alert alert-success alert-dismissible fade show mt-1" role="alert">
+								<strong> <?= $errors['status'] ?></strong>
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
+							</div>
+						<?php endif; ?>
+
+						<?php if (!empty($errors['error'])) : ?>
+							<div class="alert alert-fill-warning alert-dismissible fade show mt-1" role="alert">
+								<strong> <?= $errors['error'] ?></strong>
+								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
+							</div>
+						<?php endif; ?>
 						<?= !empty($login['error']) ? $login['error'] : ""; ?>
 						<?= !empty($login['success']) ? $login['success'] : ""; ?>
-						<form style="width: 100%;" class="js-validate" novalidate="novalidate" method="post" action="<?= base_url("profile/donate"); ?>" >
+
+						<form style="width: 100%;" class="js-validate" novalidate="novalidate" method="post" action="<?= base_url("profile/Publish_Product"); ?>" enctype="multipart/form-data" >
+
 							<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
 
 							<script>
@@ -116,9 +134,24 @@
 								<textarea placeholder="Description" class="form-control" name="content" ></textarea>
 							</div>
 							<div class="form-group" style="width: 100%">
-								<input class="form-control" type="file" name="image" >
+								<input id="sku" class="form-control" name="sku" type="text" >
+							</div>
+
+
+
+							<!-- 						<div class="form-group" style="width: 100%">
+														<input class="form-control " type="file" name="image[]" multiple="multiple"  id="image" >
+													</div> -->
+
+							<div class="form-group">
+								<div class="form-group" style="display:inline-block"></div>
+								<span id="addFile" style="cursor:pointer;" class="label-right pointer text-primary">
+		                            	<i class="fas fa-paperclip"></i>
+		                            		Attachements Image
+		                            </span>
 							</div>
 							<hr>
+							<input type="hidden" name="users_id" value="<?=$controller->profile['id']?>">
 							<div class="form-group" style="width: 100%">
 								<select class="form-control" name="state" id="state">
 									<option value="">------Select State------</option>
@@ -134,13 +167,12 @@
 								</select>
 							</div>
 							<div class="form-group" style="width: 100%" id="_district">
-
 							</div>
 							<div class="form-group" style="width: 100%" id="_city">
-
 							</div>
 							<div class="mb-1">
-								<div class="mb-3"><button name="login" value="submit" type="submit" class="btn btn-primary-dark-w px-5">Publish</button></div>
+								<div class="mb-3">
+									<button name="login" value="submit" type="submit"  class="btn btn-primary-dark-w px-5" >Publish</button></div>
 							</div>
 						</form>
 					</div>
@@ -151,7 +183,87 @@
 	</div>
 </main>
 <input type="hidden" id="token_value" value="<?= $this->security->get_csrf_hash(); ?>">
+
+
 <script>
+	$(document).ready(function(){
+		var limit = 1;
+		var active = "inbox";
+		var max = 17;
+		$('#addFile').on('click', function() {
+			limit++;
+			if (max >= limit ) {
+				html='';
+				html += '<label class="attach-file pointer attach"  style="margin-left: 5px; margin-right: 5px;"><i class="fa fa-upload"style="cursor:pointer;"></i><input type="file" name="file[]"  class="files" style="display:none"  onchange="validate_fileupload(this);"><i class="fa fa-times remove-file pointer" style="cursor:pointer;background:#000;color:#fff;border-radius: 3px;padding: 5px;font-size: 7px;"></i></label>';
+				$(this).prev().append(html);
+				$(this).removeAttr('id');
+			} else {
+				limit--;
+				console.log("maximum limit of attachment is " + max);
+				$('.label-right').hide();
+				//toastr.warning("maximum limit of attachment is " + max);
+			}
+		});
+		$(document.body).on('click', '.remove-file', function(event) {
+			event.preventDefault();
+			limit--;
+			$(this).parent().remove();
+		});
+	});
+	function validate_fileupload(thisthis)
+	{
+		var limit = 1;
+		var max = 16;
+		var size=thisthis.files[0].size/1000;
+		var maxsize = '5845';
+		var allowed_extensions =["jpg","jpeg","png","xml","sql","pdf","csv","zip","html","js","doc","php","css"]
+		if(thisthis.type == 'file') {
+			fileName = thisthis.value;
+			var file_extension = fileName.split('.').pop();
+			for(var i = 0; i <= allowed_extensions.length && limit<=max; i++)
+			{
+				if(allowed_extensions[i]==file_extension && size<maxsize)
+				{
+					var getImagePath = URL.createObjectURL(thisthis.files[0]);
+					$(thisthis).parent().css('background-image', 'url(' + getImagePath + ')');
+					$(thisthis).parent().append(file_extension);
+					limit++;
+					return true;
+				}
+			}
+		}
+		if(limit>max)
+			toastr.warning('Maximum Number of file is '+max);
+		else
+			toastr.warning("Invalid file type or size");
+		thisthis.value="";
+		return false;
+	}
+	$(document.body).on('mouseenter','.attach-file',function(){
+		$(this).children().last().css("display","inline-block");
+	});
+	$(document.body).on('mouseleave','.attach-file',function(){
+		$(this).children().last().css("display","none");
+	});
+</script>
+
+
+<script>
+	$("#image").on("change", function()
+	{
+		if ($("#image")[0].files.length > 16) {
+			alert("You can select maximum 16  images");
+			$("#image").addClass('is-invalid');
+
+		}
+		else {
+			$("#image").addClass('is-valid');
+
+		}
+	});
+
+
+
 	$('#product_type_id').on('change', function () {
 		if (this.value == 2) {
 			$("#configurable_options").css("display", "block");
@@ -186,3 +298,29 @@
 </script>
 
 <?php include('include/footer.php'); ?>
+
+
+
+<style type="text/css">
+
+	label.attach-file {
+		display: inline-block;
+		width: 65px;
+		height: 65px;
+		background: #F1F1F1;
+		border: 1px dashed #DDD;
+		border-radius: 5px;
+		text-align: center;
+		line-height: 50px;
+		overflow: hidden;
+		background-size: cover;
+		background-position: center;
+	}
+
+
+	.remove-file {
+		margin-left: 10px;
+		position: absolute;
+		display: none;
+	}
+</style>

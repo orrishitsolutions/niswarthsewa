@@ -121,6 +121,7 @@ class Profile extends MY_Controller
 		}
 	}
 
+
 	public function collect()
 	{
 		if ($this->profile['user_type'] != 1) {
@@ -177,7 +178,7 @@ class Profile extends MY_Controller
 		$state = $this->location->getModuleBycolumn($this->location->district, "state_id", $post['state']);
 		$result = '<select class="form-control" name="district" id="district"><option value="">------Select District------</option>';
 		foreach ($state as $val) {
-			$result .= '<option value="'.$val['districtid'].'">'.$val['district_title'].'</option>';
+			$result .= '<option value="' . $val['districtid'] . '">' . $val['district_title'] . '</option>';
 		}
 		$result .= '</select>';
 		$data['result'] = $result;
@@ -199,7 +200,7 @@ class Profile extends MY_Controller
 		$city = $this->location->getModuleBycolumn($this->location->city, "districtid", $post['district']);
 		$result = '<select class="form-control" name="city" id="city"><option value="">------Select City------</option>';
 		foreach ($city as $val) {
-			$result .= '<option value="'.$val['id'].'">'.$val['name'].'</option>';
+			$result .= '<option value="' . $val['id'] . '">' . $val['name'] . '</option>';
 		}
 		$result .= '</select>';
 		$data['result'] = $result;
@@ -256,7 +257,8 @@ class Profile extends MY_Controller
 	 * @return string
 	 * @throws Exception
 	 */
-	function time_elapsed_string($datetime, $full = false) {
+	function time_elapsed_string($datetime, $full = false)
+	{
 		$now = new DateTime;
 		$ago = new DateTime($datetime);
 		$diff = $now->diff($ago);
@@ -283,6 +285,95 @@ class Profile extends MY_Controller
 
 		if (!$full) $string = array_slice($string, 0, 1);
 		return $string ? implode(', ', $string) . ' ago' : 'just now';
+	}
+
+	public function Publish_Product()
+	{
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('title', 'title', 'required|max_length[70]');
+		$this->form_validation->set_rules('state', 'state Code', 'required');
+		$this->form_validation->set_rules('district', 'district Code', 'required');
+		$this->form_validation->set_rules('city', 'city Code', 'required');
+
+		if ($this->form_validation->run() == false) {
+			$this->session->set_flashdata(['error' => 'Oops! please check form carefully.']);
+			redirect(base_url('profile/donate'));
+			exit();
+		} else {
+			$product_type_id = $this->input->POST('product_type_id');
+			$attributes_set_id = $this->input->POST('attributes_set_id');
+			$title = $this->input->POST('title');
+			$content = $this->input->POST('content');
+			$state = $this->input->POST('state');
+			$district = $this->input->POST('district');
+			$city = $this->input->POST('city');
+			$users_id = $this->input->POST('users_id');
+			$unique_id = md5($this->input->POST('users_id'));
+
+			if (isset($_FILES['file']['name'])) {
+				$config['upload_path'] = 'assets/frontend/upload/product-image/';
+				$config['allowed_types'] = 'jpg|png|jpeg|svg';
+				$config['max_size'] = 1024;
+				$config['detect_mime'] = TRUE;
+				$config['encrypt_name'] = TRUE;
+				$config['remove_spaces'] = TRUE;
+				$config['max_filename'] = 0;
+
+				$cpt = count($_FILES['file']['name']);
+				$this->load->library('upload', $config);
+				$dataName = array();
+				$files = $_FILES;
+				for ($i = 0; $i < $cpt; $i++) {
+
+					if (!empty($files['file']['name'][$i])) {
+						$_FILES['file']['name'] = $files['file']['name'][$i];
+						$_FILES['file']['type'] = $files['file']['type'][$i];
+						$_FILES['file']['tmp_name'] = $files['file']['tmp_name'][$i];
+						$_FILES['file']['error'] = $files['file']['error'][$i];
+						$_FILES['file']['size'] = $files['file']['size'][$i];
+
+						$this->upload->initialize($config);
+						$this->upload->do_upload('file');
+						$data = $this->upload->data();
+						$dataName[] = $data['file_name'];
+
+					}
+				}
+
+				$Insert = [
+					'users_id' => $users_id,
+					'product_type_id' => $product_type_id,
+					'attributes_set_id' => $attributes_set_id,
+					'unique_id' => $unique_id,
+					'title' => $title,
+					'content' => $content,
+					'state' => $state,
+					'district' => $district,
+					'city' => $city,
+					'image' => json_encode($dataName)
+				];
+
+				$this->session->set_flashdata(['status' => 'Donate add.........']);
+				$this->db->insert('ns_products', $Insert);
+				redirect('profile/donate');
+			} else {
+				$Insert = [
+					'users_id' => $users_id,
+					'product_type_id' => $product_type_id,
+					'attributes_set_id' => $attributes_set_id,
+					'unique_id' => $unique_id,
+					'title' => $title,
+					'content' => $content,
+					'state' => $state,
+					'district' => $district,
+					'city' => $city
+				];
+
+				$this->session->set_flashdata(['status' => 'Donate add.........']);
+				$this->db->insert('ns_products', $Insert);
+				redirect('profile/donate');
+			}
+		}
 	}
 
 	public function logout()
