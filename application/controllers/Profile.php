@@ -80,10 +80,12 @@ class Profile extends MY_Controller
 
 	public function donate()
 	{
+		if ($this->profile['user_type'] != 2) {
+			redirect(base_url('profile'));
+		}
 		$this->load->model("admin/Adminmodel", 'admin');
 		$this->load->model("Locationmodel", "location");
 		$state = $this->location->getModule($this->location->state);
-		//echo "<pre>";print_r($state);die;
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger"><strong>Danger!</strong> ', '</div><br/>');
 		$this->form_validation->set_rules('name', 'Name', 'trim|required');
 		$this->form_validation->set_rules('mobile', 'Phone Number', 'trim|required');
@@ -106,6 +108,49 @@ class Profile extends MY_Controller
 			$profile['controller'] = $this;
 			$profile['login'] = !empty($data['login']['email']) ? $data['login'] : $this->profile;
 			$this->load->view('website/donate', $profile);
+		} else {
+			$parts = explode(' ', $data['login']['name']);
+			unset($data['login']['name']);
+			$data['login']['first_name'] = array_shift($parts);
+			$data['login']['last_name'] = array_pop($parts);
+			$data['login']['middle_name'] = trim(implode(' ', $parts));
+			$data['login']['id'] = $this->profile['id'];
+			$this->login->updateData($data['login']);
+			$this->session->set_flashdata('success', '<div class="alert alert-success"><strong>Success!</strong> Your profile has been updated.</div>');
+			redirect(base_url('profile'));
+		}
+	}
+
+	public function collect()
+	{
+		if ($this->profile['user_type'] != 1) {
+			redirect(base_url('profile'));
+		}
+		$this->load->model("admin/Adminmodel", 'admin');
+		$this->load->model("Locationmodel", "location");
+		$state = $this->location->getModule($this->location->state);
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger"><strong>Danger!</strong> ', '</div><br/>');
+		$this->form_validation->set_rules('name', 'Name', 'trim|required');
+		$this->form_validation->set_rules('mobile', 'Phone Number', 'trim|required');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+		$inputs = [
+			'name',
+			'intro',
+			'mobile',
+			'email'
+		];
+		$post = $this->input->post($inputs);
+		$data['login'] = $post;
+		$profile['attributeSet'] = $this->admin->getModule("product-attributes-set");
+		$profile['productType'] = $this->admin->getModule("product-type");
+		$profile['state'] = $state;
+		if ($this->form_validation->run() == FALSE) {
+			$data['login']['error'] = validation_errors();
+			$profile['topHeader'] = $this->topHeader;
+			$profile['topNavigationCategories'] = $this->topNavigation;
+			$profile['controller'] = $this;
+			$profile['login'] = !empty($data['login']['email']) ? $data['login'] : $this->profile;
+			$this->load->view('website/collect', $profile);
 		} else {
 			$parts = explode(' ', $data['login']['name']);
 			unset($data['login']['name']);
@@ -161,6 +206,83 @@ class Profile extends MY_Controller
 		$data['csrfHash'] = $this->security->get_csrf_hash();
 
 		echo json_encode($data);
+	}
+
+	public function chat()
+	{
+		$toUserId = $this->uri->segment(3);
+		$productId = $this->uri->segment(4);
+		$toUserId = !empty($toUserId) ? base64_decode(hex2bin($toUserId)) : 0;
+		$productId = !empty($productId) ? base64_decode(hex2bin($productId)) : 0;
+
+		$this->load->model("Productsmodel", "product");
+		$this->load->model("Messagemodel", "chat");
+		$chatUsers = ($this->currentUser['user_type'] == 2) ? $this->chat->donorChatUsers($this->currentUser['id'], 1) : $this->chat->chatUsers($this->currentUser['id'], 1);
+
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger"><strong>Danger!</strong> ', '</div>');
+		$this->form_validation->set_rules('message', 'Message', 'trim|required');
+		$inputs = [
+			'message'
+		];
+		$post = $this->input->post($inputs);
+		if ($this->form_validation->run() == FALSE) {
+			$data['error'] = validation_errors();
+		} else {
+			if (!empty($productId) && !empty($toUserId) && !empty($this->profile['id'])) {
+				$post['product_id'] = $productId;
+				$post['from_users_id'] = $this->profile['id'];
+				$post['to_users_id'] = $toUserId;
+				$insert = $this->chat->save($post);
+			}
+		}
+		$messages = (!empty($toUserId) && !empty($productId)) ? $this->chat->donorChatUsers($this->currentUser['id'], 0, $toUserId, $productId) : [];
+
+		$this->load->view(
+			'website/chat',
+			[
+				"topHeader" => $this->topHeader,
+				"topNavigationCategories" => $this->topNavigation, //
+				"controller" => $this, //
+				"login" => $this->profile,
+				"chatUsers" => $chatUsers,
+				"messages" => $messages
+			]
+		);
+	}
+
+	/**
+	 * @param $datetime
+	 * @param false $full
+	 * @return string
+	 * @throws Exception
+	 */
+	function time_elapsed_string($datetime, $full = false) {
+		$now = new DateTime;
+		$ago = new DateTime($datetime);
+		$diff = $now->diff($ago);
+
+		$diff->w = floor($diff->d / 7);
+		$diff->d -= $diff->w * 7;
+
+		$string = array(
+			'y' => 'year',
+			'm' => 'month',
+			'w' => 'week',
+			'd' => 'day',
+			'h' => 'hour',
+			'i' => 'minute',
+			's' => 'second',
+		);
+		foreach ($string as $k => &$v) {
+			if ($diff->$k) {
+				$v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+			} else {
+				unset($string[$k]);
+			}
+		}
+
+		if (!$full) $string = array_slice($string, 0, 1);
+		return $string ? implode(', ', $string) . ' ago' : 'just now';
 	}
 
 	public function logout()

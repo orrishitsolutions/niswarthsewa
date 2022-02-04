@@ -60,10 +60,10 @@
 										<div class="product-item__outer h-100 box-product-item-outer">
 											<div class="product-item__inner px-xl-4 p-3">
 												<div class="product-item__body pb-xl-2">
-													<div class="mb-2"><a href="#1"
+													<div class="mb-2"><a href="<?= base_url("product/".$val->slug."?pid=".$val->unique_id); ?>"
 																		 class="font-size-12 text-gray-5"><?= $val->category_title; ?></a>
 													</div>
-													<h5 class="mb-1 product-item__title"><a href="#1"
+													<h5 class="mb-1 product-item__title"><a href="<?= base_url("product/".$val->slug."?pid=".$val->unique_id); ?>"
 																							class="text-blue font-weight-bold"><?= $val->title; ?> </a>
 													</h5>
 													<div class="mb-2">
@@ -74,7 +74,7 @@
 													</div>
 													<div class="flex-center-between mb-1">
 														<div class="d-none d-xl-block prodcut-add-cart"><a
-																	href="<?= base_url("product/".$val->slug); ?>"
+																	href="<?= base_url("product/".$val->slug."?pid=".$val->unique_id); ?>"
 																	class="btn-add-cart btn-primary transition-3d-hover"
 																	style=" width: 90px; font-size: 11px"> View
 																Detail</a></div>

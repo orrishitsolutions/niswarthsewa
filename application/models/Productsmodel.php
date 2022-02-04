@@ -176,7 +176,7 @@ class Productsmodel extends CI_Model
 	 */
 	public function getProductByUniqueId($id = "")
 	{
-		$this->db->select("*");
+		$this->db->select("$this->product.*, `first_name`, `middle_name`, `last_name`, `registered_at`, `address`, `image`, `is_main_image`");
 		$this->db->from($this->product);
 		$this->db->join($this->productImage, $this->product . '.id = ' . $this->productImage . '.product_id', "left");
 		$this->db->join($this->usersProduct, $this->product . '.id = ' . $this->usersProduct . '.product_id', "left");
@@ -185,6 +185,7 @@ class Productsmodel extends CI_Model
 		$this->db->where($this->product . '.unique_id', $id);
 		$this->db->where($this->product . '.status', 1);
 		$this->db->group_by($this->product . '.id');
+		//echo $this->db->get_compiled_select();die;
 
 		return $this->db->get()->result();
 	}

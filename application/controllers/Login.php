@@ -18,6 +18,7 @@ class Login extends MY_Controller
 
 	public function index()
 	{
+		$redirect = $this->input->get('redirect', TRUE);
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger"><strong>Danger!</strong> ', '</div>');
 		$this->form_validation->set_rules('login_email', 'Email', 'trim|required');
 		$this->form_validation->set_rules('login_password', 'Password', 'trim|required');
@@ -29,6 +30,7 @@ class Login extends MY_Controller
 		$post = $this->input->post($inputs);
 		$submit = $this->input->post(['login']);
 		$data['login'] = $post;
+		$data['redirect'] = !empty($redirect) ? "?redirect=".$redirect : "";
 		if ($this->form_validation->run() == FALSE) {
 			$data['login']['error'] = validation_errors();
 		} else {
@@ -43,7 +45,11 @@ class Login extends MY_Controller
 						'logged_in' => TRUE
 					];
 					$this->session->set_userdata($user);
-					redirect(base_url('profile'));
+					if (!empty($redirect)) {
+						redirect(base_url($redirect));
+					} else {
+						redirect(base_url('profile'));
+					}
 				} else {
 					$data['login']['error'] = '<div class="alert alert-danger"><strong>Danger!</strong> ' . "Invalid login credentials." . '</div>';
 				}
@@ -58,7 +64,8 @@ class Login extends MY_Controller
 				"topHeader" => $this->topHeader,
 				"topNavigationCategories" => $this->topNavigation, //
 				"controller" => $this, //
-				"login" => $data['login']
+				"login" => $data['login'],
+				"data" => $data
 			]
 		);
 	}

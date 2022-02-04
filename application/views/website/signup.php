@@ -25,7 +25,7 @@
 						<?= !empty($login['error']) ? $login['error'] : ""; ?>
 						<?= !empty($login['success']) ? $login['success'] : ""; ?>
 						<p class="text-gray-901 mb-4">Welcome back! Sign in to your account.</p>
-						<form class="js-validate" novalidate="novalidate" method="post" action="<?= base_url("login"); ?>" >
+						<form class="js-validate" novalidate="novalidate" method="post" action="<?= base_url("login".$data['redirect']); ?>" >
 							<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
 							<div class="js-form-message form-group"><input value="<?= !empty($login['login_email']) ? $login['login_email'] : ""; ?>" type="email" class="form-control" name="login_email" id="signinSrEmailExample3" placeholder="Email address" aria-label="Email address" requireddata-msg="Please enter a valid email address."data-error-class="u-has-error"data-success-class="u-has-success"></div>
 							<div class="js-form-message form-group"><input value="<?= !empty($login['login_password']) ? $login['login_password'] : ""; ?>" type="password" class="form-control" name="login_password" id="signinSrPasswordExample2" placeholder="Password" aria-label="Password" requireddata-msg="Your password is invalid. Please try again."data-error-class="u-has-error"data-success-class="u-has-success"></div>
@@ -53,8 +53,13 @@
 						<?= !empty($signup['error']) ? $signup['error'] : ""; ?>
 						<?= !empty($signup['success']) ? $signup['success'] : ""; ?>
 						<p class="text-gray-901 mb-4">Create new account today to reap the benefits of a personalized shopping experience.</p>
-						<form class="js-validate" novalidate="novalidate" method="post" action="<?= base_url("signup"); ?>" >
+						<form class="js-validate" novalidate="novalidate" method="post" action="<?= base_url("signup".$data['redirect']); ?>" >
 							<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+							<div class="js-form-message form-group mb-5">
+								 <input type="radio"  name="user_type" value="2" <?= !empty($signup['user_type']) ? ($signup['user_type'] == 2 ? 'checked="checked"' : "") : 'checked="checked"'; ?> > Donor
+								 <input type="radio"  name="user_type" value="3" <?= !empty($signup['user_type']) ? ($signup['user_type'] == 3 ? 'checked="checked"' : "") : ''; ?> > Needy
+								 <input type="radio"  name="user_type" value="1" <?= !empty($signup['user_type']) ? ($signup['user_type'] == 1 ? 'checked="checked"' : "") : ''; ?> > Organization
+							</div>
 							<div class="js-form-message form-group mb-5"><input value="<?= !empty($signup['email']) ? $signup['email'] : ""; ?>" type="email" class="form-control" name="email" placeholder="Email address" ></div>
 							<div class="js-form-message form-group mb-5"><input type="password" class="form-control" name="password" placeholder="Password" ></div>
 							<p class="text-gray-901 mb-4">Your personal data will be used to support your experience throughout this website, to manage your account, and for other purposes described in our <a href="privacy-policy.html" class="text-blue">privacy policy.</a></p>
