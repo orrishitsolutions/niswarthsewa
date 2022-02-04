@@ -53,7 +53,6 @@ class Admin extends MY_Controller
 		$this->load->view('admin/dashboard', compact('social_media','admin_info'));		
 	}
 
-	///Abhay Work ----DashBord ----
 	public function Update_social()
 	{
 		$facebook = $this->security->xss_clean($this->input->POST('facebook'));
@@ -87,11 +86,6 @@ class Admin extends MY_Controller
 		$this->session->set_flashdata(['status_admin_info'=>'Hurray! Contact Us has been Update successfully!']);
 		redirect(base_url('admin/dashboard'));			
 	}
-
-
-	//End Abhay work dashbord ----
-
-
 
 	public function category()
 	{
