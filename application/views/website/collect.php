@@ -65,8 +65,8 @@
 							<div class="form-group" style="width: 100%" id="_city">
 
 							</div>
-							<div class="mb-1">
-								<div class="mb-3"><button name="login" value="submit" type="submit" class="btn btn-primary-dark-w px-5">Search</button></div>
+							<div class="form-group" style="width: 100%" id="_display_product">
+
 							</div>
 						</form>
 					</div>
@@ -107,6 +107,41 @@
 				$("#_city").html(obj.result);
 			});
 	});
+
+	//Product
+	$(document).on('change', "#city", function (e) {
+		$.post( "<?= base_url("profile/show-product"); ?>", { state: $("#state").val(), district: $("#district").val(), city: $("#city").val(), '<?= $this->security->get_csrf_token_name(); ?>': $("#token_value").val() })
+			.done(function( data ) {
+				var obj = jQuery.parseJSON(data);
+				arr = obj.result;
+				var productStr = "";
+				for (var key in arr) {
+					var value = arr[key];
+					productStr += '<div class="row"><div class="col-md-2 col-sm-2 col-12"><div class="d-img"><img src="'+value.image+'"  alt="img2" style="width:100%;height:110px;"></div></div>';
+					productStr += '<div class="col-md-10 col-sm-10 col-12"><div class="one-bed"><div class="breaks"><div class="headingsection"><h4>'+value.title+'</h4></div></div>';
+					productStr += '<div class="fast"><p style="text-align: right;"><input id="product_'+value.id+'" onclick="collect('+value.id+')" class="btn btn-primary-dark-w px-5" type="button" value="Collect" ></p></div></div></div></div><hr>';
+				}
+				$("#token_value").val(obj.csrfHash);
+				$("#_display_product").html(productStr);
+			});
+	});
+
+	//Collect
+	function collect(product_id)
+	{
+		$.post( "<?= base_url("profile/collect-product"); ?>", { id: product_id, '<?= $this->security->get_csrf_token_name(); ?>': $("#token_value").val() })
+			.done(function( data ) {
+				var obj = jQuery.parseJSON(data);
+				arr = obj.result;
+				var productStr = "";
+				for (var key in arr) {
+					var value = arr[key];
+					console.log(key, value);
+				}
+				$("#token_value").val(obj.csrfHash);
+				$("#product_"+product_id).val("Collected");
+			})
+	}
 
 
 </script>

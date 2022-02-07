@@ -60,4 +60,13 @@ class Signupmodel extends MY_Model
 
 		return $this->db->get()->row();
 	}
+
+	public function getUserByParentUser($id)
+	{
+		$this->db->select("*");
+		$this->db->from($this->signup);
+		$this->db->where($this->signup . '.parent_user', $id);
+
+		return $this->db->get()->result();
+	}
 }

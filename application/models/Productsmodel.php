@@ -74,7 +74,7 @@ class Productsmodel extends CI_Model
 	 */
 	public function getProductsByCategory($categoryId = 0)
 	{
-		$this->db->select($this->category . ".title as category_title, " . $this->product . ".title, " . $this->product . ".slug, " . $this->product . ".unique_id, " . $this->category . ".category_image, (SELECT ".$this->productImage.".`image` from ".$this->productImage." WHERE ".$this->productImage.".`is_main_image` = 1 AND ".$this->productImage.".`product_id`=`ns_products`.`id`) as image");
+		$this->db->select($this->category . ".title as category_title, " . $this->product . ".title, " . $this->product . ".slug, " . $this->product . ".unique_id, " . $this->category . ".category_image, (SELECT " . $this->productImage . ".`image` from " . $this->productImage . " WHERE " . $this->productImage . ".`is_main_image` = 1 AND " . $this->productImage . ".`product_id`=`ns_products`.`id`) as image");
 		$this->db->from($this->product);
 		$this->db->join($this->productCategory, $this->productCategory . '.product_id = ' . $this->product . '.id', "inner");
 		$this->db->join($this->category, $this->category . '.id = ' . $this->productCategory . '.category_id', "inner");
@@ -104,10 +104,10 @@ class Productsmodel extends CI_Model
 			if (!empty($val)) {
 				$attribute = substr($val, 0, strpos($val, "-"));
 				$attributeValue = substr($val, strpos($val, "=") + 1);
-				$query .= "($this->productAttributes.slug='".$attribute."' AND $this->productAttributesValue.name='".$attributeValue."') OR ";
+				$query .= "($this->productAttributes.slug='" . $attribute . "' AND $this->productAttributesValue.name='" . $attributeValue . "') OR ";
 			}
 		}
-		$query = substr($query,0, strlen($query)-4).") GROUP BY $this->product.id ORDER BY $this->product.title ASC";
+		$query = substr($query, 0, strlen($query) - 4) . ") GROUP BY $this->product.id ORDER BY $this->product.title ASC";
 		$query = $this->db->query($query);
 
 		return $query->result();
@@ -207,6 +207,50 @@ class Productsmodel extends CI_Model
 		$this->db->group_by($this->product . '.id');
 
 		return $this->db->get()->result();
+	}
+
+	/**
+	 * @param int $userId
+	 * @return mixed
+	 */
+	public function getProductsCollectedByUser($userId = 0)
+	{
+		$this->db->select("*");
+		$this->db->from($this->product);
+		$this->db->join($this->productImage, $this->product . '.id = ' . $this->productImage . '.product_id', "left");
+		$this->db->join($this->usersProduct, $this->product . '.id = ' . $this->usersProduct . '.product_id', "left");
+		$this->db->join($this->users, $this->usersProduct . '.users_id = ' . $this->users . '.id', "left");
+		$this->db->join($this->usersAddress, $this->users . '.id = ' . $this->usersAddress . '.users_id', "left");
+		$this->db->where($this->product . '.collected_by', $userId);
+		$this->db->where($this->product . '.status', 1);
+		$this->db->group_by($this->product . '.id');
+
+		return $this->db->get()->result();
+	}
+
+
+	public function getProductsByLocation($state = 0, $district = 0, $city = 0)
+	{
+		$this->db->select("$this->product.*, $this->productImage.image");
+		$this->db->from($this->product);
+		$this->db->join($this->productImage, $this->product . '.id = ' . $this->productImage . '.product_id', "left");
+		$this->db->join($this->usersProduct, $this->product . '.id = ' . $this->usersProduct . '.product_id', "left");
+		$this->db->join($this->users, $this->usersProduct . '.users_id = ' . $this->users . '.id', "left");
+		$this->db->join($this->usersAddress, $this->users . '.id = ' . $this->usersAddress . '.users_id', "left");
+		$this->db->where($this->product . '.state', $state);
+		$this->db->where($this->product . '.district', $district);
+		$this->db->where($this->product . '.city', $city);
+		$this->db->where($this->product . '.status', 1);
+		$this->db->where($this->product . '.collected_by', 0);
+		$this->db->group_by($this->product . '.id');
+
+		return $this->db->get()->result();
+	}
+
+	public function updateById($data = [])
+	{
+		$this->db->where('id', $data['id']);
+		$this->db->update($this->product, $data);
 	}
 
 }

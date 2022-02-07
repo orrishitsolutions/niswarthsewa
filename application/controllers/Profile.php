@@ -27,6 +27,7 @@ class Profile extends MY_Controller
 	{
 		$this->load->model("Productsmodel", "product");
 		$donatedProducts = $this->product->getProductsByUser($this->currentUser['id']);
+		$collectedProducts = $this->product->getProductsCollectedByUser($this->currentUser['id']);
 
 		$this->load->view(
 			'website/profile',
@@ -35,9 +36,62 @@ class Profile extends MY_Controller
 				"topNavigationCategories" => $this->topNavigation, //
 				"controller" => $this, //
 				"login" => $this->profile,
-				"donatedProducts" => $donatedProducts
+				"donatedProducts" => $donatedProducts,
+				"collectedProducts" => $collectedProducts
 			]
 		);
+	}
+
+	public function volunteer()
+	{
+		$this->form_validation->set_error_delimiters('<div style="width: 100%" class="alert alert-danger"><strong>Danger!</strong> ', '</div><br/>');
+		$this->form_validation->set_rules('name', 'Name', 'trim|required');
+		$this->form_validation->set_rules('mobile', 'Phone Number', 'trim|required');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+		$inputs = [
+			'name',
+			'mobile',
+			'email'
+		];
+		$post = $this->input->post($inputs);
+		$data['volunteer'] = $post;
+		$load = 0;
+		if ($this->form_validation->run() == FALSE) {
+			$load = 1;
+			$data['volunteer']['error'] = validation_errors();
+		} else {
+			$parts = explode(' ', $data['volunteer']['name']);
+			unset($data['volunteer']['name']);
+			$data['volunteer']['password'] = $this->generateRandomString(8);
+			$data['volunteer']['user_type'] = 4;
+			$data['volunteer']['first_name'] = array_shift($parts);
+			$data['volunteer']['last_name'] = array_pop($parts);
+			$data['volunteer']['middle_name'] = trim(implode(' ', $parts));
+			try {
+				$this->login->saveData($data['volunteer']);
+				$dbError = $this->db->error();
+				if (!empty($dbError['message'])) {
+					$data['volunteer']['error'] = '<div class="alert alert-danger"><strong>Danger!</strong> ' . $dbError['message'] . '</div>';
+				}
+			} catch (\Exception $e) {
+				$data['volunteer']['error'] = '<div class="alert alert-danger"><strong>Danger!</strong> ' . $e->getMessage() . '</div>';
+			}
+		}
+		if (!empty($data['volunteer']['error']) xor $load) {
+			$data['volunteer']['users'] = $this->login->getUserByParentUser($this->profile['id']);
+			$this->load->view(
+				'website/volunteer',
+				[
+					"topHeader" => $this->topHeader,
+					"topNavigationCategories" => $this->topNavigation, //
+					"controller" => $this, //
+					"volunteer" => $data['volunteer']
+				]
+			);
+		} else {
+			$this->session->set_flashdata('success', '<div style="width: 100%" class="alert alert-success"><strong>Success!</strong> Volunteer created successfully.</div>');
+			redirect(base_url('profile/volunteer'));
+		}
 	}
 
 	public function edit()
@@ -204,6 +258,53 @@ class Profile extends MY_Controller
 		}
 		$result .= '</select>';
 		$data['result'] = $result;
+		$data['csrfHash'] = $this->security->get_csrf_hash();
+
+		echo json_encode($data);
+	}
+
+	public function show_product()
+	{
+		if (!$this->input->is_ajax_request()) {
+			die('No direct script access allowed');
+		}
+		$this->load->model("Productsmodel", "product");
+		$inputs = [
+			'state',
+			'district',
+			'city'
+		];
+		$post = $this->input->post($inputs);
+		$products = $this->product->getProductsByLocation($post['state'], $post['district'], $post['city']);
+		$result = [];
+		$i = 0;
+		foreach ($products as $val) {
+			$product['id'] = $val->id;
+			$product['unique_id'] = $val->unique_id;
+			$product['title'] = $val->title;
+			$product['slug'] = $val->slug;
+			$product['image'] = !empty($val->image) ? base_url($val->image) : base_url('assets/frontend/upload/images/no-image.jpg');
+			$result[$i] = $product;
+			$i++;
+		}
+		$data['result'] = $result;
+		$data['csrfHash'] = $this->security->get_csrf_hash();
+
+		echo json_encode($data);
+	}
+
+	public function collect_product()
+	{
+		if (!$this->input->is_ajax_request()) {
+			die('No direct script access allowed');
+		}
+		$this->load->model("Productsmodel", "product");
+		$inputs = [
+			'id'
+		];
+		$post = $this->input->post($inputs);
+		$post['collected_by'] = $this->profile['id'];
+		$this->product->updateById($post);
 		$data['csrfHash'] = $this->security->get_csrf_hash();
 
 		echo json_encode($data);

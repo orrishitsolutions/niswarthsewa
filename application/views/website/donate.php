@@ -45,14 +45,12 @@ include('include/header.php');
 						<?php if (!empty($errors['status'])) : ?>
 							<div class="alert alert-success alert-dismissible fade show mt-1" role="alert">
 								<strong> <?= $errors['status'] ?></strong>
-								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
 							</div>
 						<?php endif; ?>
 
 						<?php if (!empty($errors['error'])) : ?>
-							<div class="alert alert-fill-warning alert-dismissible fade show mt-1" role="alert">
+							<div class="alert alert-danger" role="alert">
 								<strong> <?= $errors['error'] ?></strong>
-								<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"></button>
 							</div>
 						<?php endif; ?>
 						<?= !empty($login['error']) ? $login['error'] : ""; ?>

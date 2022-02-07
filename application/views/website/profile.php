@@ -143,6 +143,57 @@
 					<?php
 				}
 				?>
+				<?php
+				if (in_array($login['user_type'], [1,4])) {
+					?>
+					<div class="divaridkldf">
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-12">
+								<h3>
+									Collected History <span style="color: #0a1122; font-size: 12px;">
+								</h3>
+							</div>
+						</div>
+						<?php
+						if (!empty($collectedProducts)) {
+							foreach ($collectedProducts as $valProducts) {
+								?>
+								<div class="row">
+									<div class="col-md-2 col-sm-2 col-12">
+										<div class="d-img">
+											<img src="<?= !empty($valProducts->image) ? $valProducts->image : UPLOAD_DIR . "no-image.jpg"; ?>"
+												 alt="img2" style="width:100%;height:110px;">
+										</div>
+									</div>
+									<div class="col-md-10 col-sm-10 col-12">
+										<div class="one-bed">
+											<div class="breaks">
+												<div class="headingsection">
+													<h4><?= $valProducts->title; ?></h4>
+													<p><?= date("M d, Y", strtotime($valProducts->created_at)); ?></p>
+												</div>
+											</div>
+											<div class="fast">
+												<p style="    text-align: right;">
+												</p>
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<hr>
+								<?php
+							}
+						} else {
+							?>
+							You've not collected yet.
+							<?php
+						}
+						?>
+					</div>
+					<?php
+				}
+				?>
 			</div>
 		</section>
 
