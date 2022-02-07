@@ -56,7 +56,7 @@ include('include/header.php');
 						<?= !empty($login['error']) ? $login['error'] : ""; ?>
 						<?= !empty($login['success']) ? $login['success'] : ""; ?>
 
-						<form style="width: 100%;" class="js-validate" novalidate="novalidate" method="post" action="<?= base_url("profile/Publish_Product"); ?>" enctype="multipart/form-data" >
+						<form style="width: 100%;" class="js-validate" novalidate="novalidate" method="post" action="<?= base_url("profile/publish-product"); ?>" enctype="multipart/form-data" >
 
 							<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
 

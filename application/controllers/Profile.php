@@ -388,7 +388,7 @@ class Profile extends MY_Controller
 		return $string ? implode(', ', $string) . ' ago' : 'just now';
 	}
 
-	public function Publish_Product()
+	public function publish_product()
 	{
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('title', 'title', 'required|max_length[70]');
