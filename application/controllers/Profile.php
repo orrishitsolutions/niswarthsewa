@@ -137,42 +137,169 @@ class Profile extends MY_Controller
 		if ($this->profile['user_type'] != 2) {
 			redirect(base_url('profile'));
 		}
+
+		//
 		$this->load->model("admin/Adminmodel", 'admin');
-		$this->load->model("Locationmodel", "location");
-		$state = $this->location->getModule($this->location->state);
-		$this->form_validation->set_error_delimiters('<div class="alert alert-danger"><strong>Danger!</strong> ', '</div><br/>');
-		$this->form_validation->set_rules('name', 'Name', 'trim|required');
-		$this->form_validation->set_rules('mobile', 'Phone Number', 'trim|required');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+		$param = "";
+		$this->form_validation->set_error_delimiters('<div style="width: 100%" class="alert alert-danger"><strong>Danger!</strong> ', '</div>');
+		$this->form_validation->set_rules('product_type_id', 'Type Name', 'trim|required');
+		$this->form_validation->set_rules('users_id', 'Users', 'trim|required');
+		$this->form_validation->set_rules('title', 'Title', 'trim|required');
+		//$this->form_validation->set_rules('sku', 'sku', 'trim|required');
+		$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required');
+		$addPage = "add-products";
+		$page = "products";
+
 		$inputs = [
-			'name',
-			'intro',
-			'mobile',
-			'email'
+			'category',
+			'product_type_id',
+			'attributes_set_id',
+			'users_id',
+			'title',
+			'meta_title',
+			'meta_keyword',
+			'meta_description',
+			'slug',
+			'sku',
+			'quantity',
+			'content',
+			'status'
 		];
 		$post = $this->input->post($inputs);
-		$data['login'] = $post;
-		$profile['attributeSet'] = $this->admin->getModule("product-attributes-set");
-		$profile['productType'] = $this->admin->getModule("product-type");
-		$profile['state'] = $state;
-		if ($this->form_validation->run() == FALSE) {
-			$data['login']['error'] = validation_errors();
-			$profile['topHeader'] = $this->topHeader;
-			$profile['topNavigationCategories'] = $this->topNavigation;
-			$profile['controller'] = $this;
-			$profile['login'] = !empty($data['login']['email']) ? $data['login'] : $this->profile;
-			$this->load->view('website/donate', $profile);
-		} else {
-			$parts = explode(' ', $data['login']['name']);
-			unset($data['login']['name']);
-			$data['login']['first_name'] = array_shift($parts);
-			$data['login']['last_name'] = array_pop($parts);
-			$data['login']['middle_name'] = trim(implode(' ', $parts));
-			$data['login']['id'] = $this->profile['id'];
-			$this->login->updateData($data['login']);
-			$this->session->set_flashdata('success', '<div class="alert alert-success"><strong>Success!</strong> Your profile has been updated.</div>');
-			redirect(base_url('profile'));
+		$submit = $this->input->post('submit');
+		$data['data'] = $post;
+		if (!empty($param)) {
+			$data['data'] = $this->admin->getModuleById($page, $param);
+			$data['data']['param'] = $param;
+			$data['data']['category'] = $this->admin->getModuleBycolumn("product-category", ["category_id"], "product_id", $param);
 		}
+		$data['data']['users'] = $this->admin->getModule("users");
+		$data['data']['attribute_set'] = $this->admin->getModule("product-attributes-set");
+		$data['data']['product_type'] = $this->admin->getModule("product-type");
+		$data['controller'] = $this;
+
+		$data['topHeader'] = $this->topHeader;
+		$data['topNavigationCategories'] = $this->topNavigation;
+		$data['login'] = $this->profile;
+
+		$data['attributeSet'] = $this->admin->getModule("product-attributes-set");
+		$data['productType'] = $this->admin->getModule("product-type");
+		$this->load->model("Locationmodel", "location");
+		$data['state'] = $state = $this->location->getModule($this->location->state);
+
+		if ($this->form_validation->run() == FALSE) {
+			$data['data']['error'] = validation_errors();
+			$data['data']['success'] = $this->session->flashdata('success');
+			$this->load->view('website/donate', $data);
+		} else {
+			$post['slug'] = $this->slugify($post['title']);
+			$post['meta_title'] = $post['title'];
+			$post['meta_keyword'] = $post['title'];
+			$post['meta_description'] = $post['title'];
+			$post['sku'] = md5($this->generateRandomString(10) . time());
+			$post['status'] = 1;
+			if (!empty($_FILES['menu_icon_image']['name'])) {
+				$image = $this->upload("menu_icon_image");
+				$post['menu_icon_image'] = !empty($image['success']['file_name']) ? UPLOAD_URL . $image['success']['file_name'] : "";
+			}
+			if (empty($image['error']) && !empty($_FILES['banner_image']['name'])) {
+				$image = $this->upload("banner_image");
+				$post['banner_image'] = !empty($image['success']['file_name']) ? UPLOAD_URL . $image['success']['file_name'] : "";
+			}
+			if (empty($image['error']) && !empty($_FILES['side_image']['name'])) {
+				$image = $this->upload("side_image");
+				$post['side_image'] = !empty($image['success']['file_name']) ? UPLOAD_URL . $image['success']['file_name'] : "";
+			}
+			if (empty($image['error'])) {
+				try {
+					$categoryPage['category'] = $post['category'];
+					unset($post['category']);
+					unset($post['users']);
+					unset($post['attribute_set']);
+					unset($post['product_type']);
+					if (!empty($param)) {
+						$post['id'] = $param;
+						$post['unique_id'] = md5($param . $post['users_id']);
+						$update = $this->admin->updateModule($page, $post);
+					} else {
+						$insert = $this->admin->saveModule($page, $post);
+					}
+					$dbError = $this->db->error();
+					if (!empty($dbError['message'])) {
+						$data['data']['error'] = '<div class="alert alert-danger"><strong>Danger!</strong> ' . $dbError['message'] . '</div>';
+					} else {
+						$mapId = !empty($param) ? $param : $insert;
+						if (!empty($mapId)) {
+							$update['id'] = $mapId;
+							$update['unique_id'] = md5($insert . $post['users_id']);
+							$this->admin->updateModule($page, $update);
+							$files = $_FILES;
+							if (!empty($files['file']['name'])) {
+								for ($i = 0; $i < count($files['file']['name']); $i++) {
+									$_FILES = array();
+									foreach ($files['file'] as $k => $v) {
+										$_FILES['file'][$k] = $v[$i];
+									}
+									$image = $this->upload("file");
+									$productImage['is_main_image'] = ($i == 0) ? 1 : 0;
+									$productImage['product_id'] = $insert;
+									$productImage['image'] = !empty($image['success']['file_name']) ? UPLOAD_URL . $image['success']['file_name'] : "";
+									$imageModule = $this->admin->productImage;
+									$this->admin->saveModule('product-image', $productImage);
+									$dbError = $this->db->error();
+									if (!empty($dbError['message'])) {
+										$data['data']['error'] = '<div class="alert alert-danger"><strong>Danger!</strong> ' . $dbError['message'] . '</div>';
+									}
+								}
+							}
+						}
+						$arr = [];
+						$this->admin->deleteModuleMapping("product-category", "product_id", $mapId);
+						$this->admin->deleteModuleMapping("users-products", "product_id", $mapId);
+						$this->admin->deleteModuleMapping("product-product-type", "product_id", $mapId);
+						$this->admin->deleteModuleMapping("product-attributes-sku", "product_id", $mapId);
+						foreach ($categoryPage['category'] as $cVal) {
+							$arr['product_id'] = $mapId;
+							$arr['category_id'] = $cVal;
+							$this->admin->updateModuleMapping("product-category", $mapId, $arr);
+						}
+						$userArr['product_id'] = $mapId;
+						$userArr['users_id'] = $data['data']['users_id'];
+						$this->admin->updateModuleMapping("users-products", $mapId, $userArr);
+						$productTypeMapping['product_id'] = $mapId;
+						$productTypeMapping['product_type_id'] = $data['data']['product_type_id'];
+						$this->admin->updateModuleMapping("product-product-type", $mapId, $productTypeMapping);
+						if ($data['data']['product_type_id'] == 2) {
+							$productId = $mapId;
+							$qty = $post['quantity'];
+							$attributeSetId = $data['data']['attributes_set_id'];
+							$productToAttribute = $this->admin->assignProductToAttribute($productId, $qty, $attributeSetId);
+							foreach ($productToAttribute as $ptaVal) {
+								$slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $data['data']['slug'])));
+								$ptaMapping['product_id'] = $productId;
+								$ptaMapping['product_attributes_value_id'] = $ptaVal->product_attributes_value_id;
+								$ptaMapping['sku'] = $ptaVal->sku . "-" . $slug;
+								$ptaMapping['price'] = $ptaVal->price;
+								$ptaMapping['quantity'] = $ptaVal->quantity;
+								$this->admin->updateModuleMapping("product-attributes-sku", $productId, $ptaMapping);
+							}
+						}
+					}
+				} catch (\Exception $e) {
+					$data['data']['error'] = '<div class="alert alert-danger"><strong>Danger!</strong> ' . $e->getMessage() . '</div>';
+				}
+			} else {
+				$data['data']['error'] = '<div class="alert alert-danger"><strong>Danger!</strong> ' . $image['error'] . '</div>';
+			}
+			//echo "<pre>";print_r($data);die;
+			if ($data['data']['error']) {
+				$this->load->view("website/donate", $data);
+			} else {
+				$this->session->set_flashdata('success', '<div class="alert alert-success"><strong>Success!</strong> You\'ve successfully donated a products, thanks for your contribution.</div>');
+				redirect(base_url('profile/donate'));
+			}
+		}
+
 	}
 
 
@@ -388,6 +515,135 @@ class Profile extends MY_Controller
 		return $string ? implode(', ', $string) . ' ago' : 'just now';
 	}
 
+	public function add_products()
+	{
+		$this->load->model("admin/Adminmodel", 'admin');
+		$param = "add-products";
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger"><strong>Danger!</strong> ', '</div>');
+		$this->form_validation->set_rules('product_type_id', 'Type Name', 'trim|required');
+		$this->form_validation->set_rules('users_id', 'Users', 'trim|required');
+		$this->form_validation->set_rules('title', 'Title', 'trim|required');
+		$this->form_validation->set_rules('sku', 'sku', 'trim|required');
+		$this->form_validation->set_rules('quantity', 'Quantity', 'trim|required');
+		$addPage = "add-products";
+		$page = "products";
+
+		$inputs = [
+			'category',
+			'product_type_id',
+			'attributes_set_id',
+			'users_id',
+			'title',
+			'meta_title',
+			'meta_keyword',
+			'meta_description',
+			'slug',
+			'sku',
+			'quantity',
+			'content',
+			'status'
+		];
+		$post = $this->input->post($inputs);
+		$submit = $this->input->post('submit');
+		$data['data'] = $post;
+		if (!empty($param)) {
+			$data['data'] = $this->admin->getModuleById($page, $param);
+			$data['data']['param'] = $param;
+			$data['data']['category'] = $this->admin->getModuleBycolumn("product-category", ["category_id"], "product_id", $param);
+		}
+		$data['data']['users'] = $this->admin->getModule("users");
+		$data['data']['attribute_set'] = $this->admin->getModule("product-attributes-set");
+		$data['data']['product_type'] = $this->admin->getModule("product-type");
+		$data['controller'] = $this;
+		if ($this->form_validation->run() == FALSE) {
+			$data['data']['error'] = validation_errors();
+			$data['data']['success'] = $this->session->flashdata('success');
+			$this->load->view('website/donate', $data);
+		} else {
+			$post['slug'] = $this->slugify($post['title']);
+			if (!empty($_FILES['menu_icon_image']['name'])) {
+				$image = $this->upload("menu_icon_image");
+				$post['menu_icon_image'] = !empty($image['success']['file_name']) ? UPLOAD_URL . $image['success']['file_name'] : "";
+			}
+			if (empty($image['error']) && !empty($_FILES['banner_image']['name'])) {
+				$image = $this->upload("banner_image");
+				$post['banner_image'] = !empty($image['success']['file_name']) ? UPLOAD_URL . $image['success']['file_name'] : "";
+			}
+			if (empty($image['error']) && !empty($_FILES['side_image']['name'])) {
+				$image = $this->upload("side_image");
+				$post['side_image'] = !empty($image['success']['file_name']) ? UPLOAD_URL . $image['success']['file_name'] : "";
+			}
+			if (empty($image['error'])) {
+				try {
+					$categoryPage['category'] = $post['category'];
+					unset($post['category']);
+					unset($post['users']);
+					unset($post['attribute_set']);
+					unset($post['product_type']);
+					if (!empty($param)) {
+						$post['id'] = $param;
+						$post['unique_id'] = md5($param . $post['users_id']);
+						$update = $this->admin->updateModule($page, $post);
+					} else {
+						$insert = $this->admin->saveModule($page, $post);
+					}
+					$dbError = $this->db->error();
+					if (!empty($dbError['message'])) {
+						$data['data']['error'] = '<div class="alert alert-danger"><strong>Danger!</strong> ' . $dbError['message'] . '</div>';
+					} else {
+						$mapId = !empty($param) ? $param : $insert;
+						if (!empty($mapId)) {
+							$update['id'] = $mapId;
+							$update['unique_id'] = md5($insert . $post['users_id']);
+							$this->admin->updateModule($page, $update);
+						}
+						$arr = [];
+						$this->admin->deleteModuleMapping("product-category", "product_id", $mapId);
+						$this->admin->deleteModuleMapping("users-products", "product_id", $mapId);
+						$this->admin->deleteModuleMapping("product-product-type", "product_id", $mapId);
+						$this->admin->deleteModuleMapping("product-attributes-sku", "product_id", $mapId);
+						foreach ($categoryPage['category'] as $cVal) {
+							$arr['product_id'] = $mapId;
+							$arr['category_id'] = $cVal;
+							$this->admin->updateModuleMapping("product-category", $mapId, $arr);
+						}
+						$userArr['product_id'] = $mapId;
+						$userArr['users_id'] = $data['data']['users_id'];
+						$this->admin->updateModuleMapping("users-products", $mapId, $userArr);
+						$productTypeMapping['product_id'] = $mapId;
+						$productTypeMapping['product_type_id'] = $data['data']['product_type_id'];
+						$this->admin->updateModuleMapping("product-product-type", $mapId, $productTypeMapping);
+						if ($data['data']['product_type_id'] == 2) {
+							$productId = $mapId;
+							$qty = $post['quantity'];
+							$attributeSetId = $data['data']['attributes_set_id'];
+							$productToAttribute = $this->admin->assignProductToAttribute($productId, $qty, $attributeSetId);
+							foreach ($productToAttribute as $ptaVal) {
+								$slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $data['data']['slug'])));
+								$ptaMapping['product_id'] = $productId;
+								$ptaMapping['product_attributes_value_id'] = $ptaVal->product_attributes_value_id;
+								$ptaMapping['sku'] = $ptaVal->sku . "-" . $slug;
+								$ptaMapping['price'] = $ptaVal->price;
+								$ptaMapping['quantity'] = $ptaVal->quantity;
+								$this->admin->updateModuleMapping("product-attributes-sku", $productId, $ptaMapping);
+							}
+						}
+					}
+				} catch (\Exception $e) {
+					$data['data']['error'] = '<div class="alert alert-danger"><strong>Danger!</strong> ' . $e->getMessage() . '</div>';
+				}
+			} else {
+				$data['data']['error'] = '<div class="alert alert-danger"><strong>Danger!</strong> ' . $image['error'] . '</div>';
+			}
+			if ($data['data']['error']) {
+				$this->load->view("website/donate", $data);
+			} else {
+				$this->session->set_flashdata('success', '<div class="alert alert-success"><strong>Success!</strong> You\'ve successfully donated a products, thanks for your contribution.</div>');
+				redirect(base_url('profile/donate'));
+			}
+		}
+	}
+
 	public function publish_product()
 	{
 		$this->load->library('form_validation');
@@ -454,7 +710,7 @@ class Profile extends MY_Controller
 					'image' => json_encode($dataName)
 				];
 
-				$this->session->set_flashdata(['status' => 'Donate add.........']);
+				$this->session->set_flashdata(['status' => "You've successfully donated a product."]);
 				$this->db->insert('ns_products', $Insert);
 				redirect('profile/donate');
 			} else {
@@ -470,7 +726,7 @@ class Profile extends MY_Controller
 					'city' => $city
 				];
 
-				$this->session->set_flashdata(['status' => 'Donate add.........']);
+				$this->session->set_flashdata(['status' => "You've successfully donated a product."]);
 				$this->db->insert('ns_products', $Insert);
 				redirect('profile/donate');
 			}

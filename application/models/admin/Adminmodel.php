@@ -25,7 +25,7 @@ class Adminmodel extends MY_Model
 	/**
 	 * @var string
 	 */
-	private $productImage;
+	public $productImage;
 
 	/**
 	 * @var string
@@ -187,6 +187,9 @@ class Adminmodel extends MY_Model
 				break;
 			case "product-attributes-sku":
 				$module = $this->productAttributesSku;
+				break;
+			case "product-image":
+				$module = $this->productImage;
 				break;
 			default:
 				$module = "ns_" . $module;

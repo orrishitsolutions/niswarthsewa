@@ -53,12 +53,12 @@ include('include/header.php');
 								<strong> <?= $errors['error'] ?></strong>
 							</div>
 						<?php endif; ?>
-						<?= !empty($login['error']) ? $login['error'] : ""; ?>
-						<?= !empty($login['success']) ? $login['success'] : ""; ?>
+						<?= !empty($data['error']) ? $data['error'] : ""; ?>
+						<?= !empty($data['success']) ? $data['success'] : ""; ?>
 
-						<form style="width: 100%;" class="js-validate" novalidate="novalidate" method="post" action="<?= base_url("profile/publish-product"); ?>" enctype="multipart/form-data" >
+						<form style="width: 100%;" class="js-validate" novalidate="novalidate" method="post" action="<?= base_url("profile/donate"); ?>" enctype="multipart/form-data" >
 
-							<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+							<input type="hidden" id="token_value" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
 
 							<script>
 								$(document).ready(function () {
@@ -129,10 +129,10 @@ include('include/header.php');
 								<input value="" type="title" class="form-control" name="title" placeholder="Title" >
 							</div>
 							<div class="form-group" style="width: 100%">
-								<textarea placeholder="Description" class="form-control" name="content" ></textarea>
+								<input value="<?= !empty($data['quantity']) ? $data['quantity'] : "" ?>" type="quantity" class="form-control" name="quantity" placeholder="Quantity" >
 							</div>
 							<div class="form-group" style="width: 100%">
-								<input id="sku" class="form-control" name="sku" type="text" >
+								<textarea placeholder="Description" class="form-control" name="content" ></textarea>
 							</div>
 
 
@@ -180,7 +180,7 @@ include('include/header.php');
 
 	</div>
 </main>
-<input type="hidden" id="token_value" value="<?= $this->security->get_csrf_hash(); ?>">
+<!--input type="hidden" id="token_value" value="<?php //echo $this->security->get_csrf_hash(); ?>"-->
 
 
 <script>
