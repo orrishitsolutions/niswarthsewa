@@ -84,4 +84,80 @@ class MY_Controller extends CI_Controller{
 
 		return $data;
 	}
+
+	public function resend($link = "", $to = "", $subject = "", $message = "")
+	{
+		if ($this->input->is_ajax_request()) {
+			$post = $this->input->post(['module']);
+			if (!empty($post['module']) && $post['module'] == "login") {
+				$to = $post['to'];
+				$subject = "Niswarth Sewa: Email Verification";
+				$message = "Hello, <br><br>Please visit below link to verify your account.<br><br>' . $link . '<br><br>--<br>All the best,<br>Niswarth Sewa Team";
+				$link = "";
+				$this->load->model("Signupmodel", "login");
+				$login = $this->login->checkEmailExists($to);
+				if (!empty($login)) {
+					$postUpdate['id'] = $login->id;
+					$postUpdate['verify'] = md5($postUpdate['id'] . $to);
+					$this->login->updateData($postUpdate);
+					$this->resend($link, $to, $subject, $message);
+				}
+			}
+		}
+		if (!$this->input->is_ajax_request() && empty($link)) {
+			die('No direct script access allowed');
+		}
+		$from = "noreply@niswarthsewa.com";
+		$config = [
+			'mailtype' => 'html',
+			'charset' => 'iso-8859-1',
+			'wordwrap' => TRUE
+		];
+		$this->load->library('email', $config);
+		$this->email->from($from, 'Niswarth Sewa');
+		$this->email->to($to);
+		$this->email->subject($subject);
+		$this->email->message($message);
+		$this->email->send();
+		$data['csrfHash'] = $this->security->get_csrf_hash();
+		#$this->sendMail($from, $to, $subject, $message);
+
+		echo json_encode($data);
+	}
+
+	function sendMail($from, $to, $subject, $message)
+	{
+		$config = [
+			'protocol' => 'smtp',
+			'smtp_host' => 'ssl://smtp.googlemail.com',
+			'smtp_port' => 465,
+			'smtp_user' => 'thisankitisunique@gmail.com', // change it to yours
+			'smtp_pass' => 'xxxxx', // change it to yours
+			'mailtype' => 'html',
+			'charset' => 'iso-8859-1',
+			'wordwrap' => TRUE
+		];
+
+		$this->load->library('email', $config);
+		$this->email->set_newline("\r\n");
+		$this->email->from($from); // change it to yours
+		$this->email->to($to);// change it to yours
+		$this->email->subject($subject);
+		$this->email->message($message);
+		if ($this->email->send()) {
+			return 1;
+		} else {
+			return show_error($this->email->print_debugger());
+		}
+
+	}
+
+	public function check_strong_password($str)
+	{
+		if (preg_match('#[0-9]#', $str) && preg_match('#[a-zA-Z]#', $str)) {
+			return TRUE;
+		}
+		$this->form_validation->set_message('check_strong_password', 'The password field must be contains at least one letter and one digit.');
+		return FALSE;
+	}
 }

@@ -35,7 +35,7 @@ class Signupmodel extends MY_Model
 
 	public function checkLogin($email, $password)
 	{
-		$this->db->select(['id','email', 'user_type']);
+		$this->db->select(['id', 'email', 'user_type', 'status']);
 		$this->db->from($this->signup);
 		$this->db->where($this->signup . '.email', $email);
 		$this->db->where($this->signup . '.password', md5($password));
@@ -43,9 +43,36 @@ class Signupmodel extends MY_Model
 		return $this->db->get()->row();
 	}
 
+	public function recoverPassword($email)
+	{
+		$this->db->select(['id', 'email', 'user_type', 'status']);
+		$this->db->from($this->signup);
+		$this->db->where($this->signup . '.email', $email);
+
+		return $this->db->get()->row();
+	}
+
+	public function checkVerify($verify)
+	{
+		$this->db->select(['id', 'email', 'user_type', 'status']);
+		$this->db->from($this->signup);
+		$this->db->where($this->signup . '.verify', $verify);
+
+		return $this->db->get()->row();
+	}
+
+	public function checkVerifyRecoverPassword($verify)
+	{
+		$this->db->select(['id', 'email', 'user_type', 'status']);
+		$this->db->from($this->signup);
+		$this->db->where($this->signup . '.verify', $verify);
+
+		return $this->db->get()->row();
+	}
+
 	public function checkEmailExists($email)
 	{
-		$this->db->select(['email']);
+		$this->db->select(['id', 'email']);
 		$this->db->from($this->signup);
 		$this->db->where($this->signup . '.email', $email);
 

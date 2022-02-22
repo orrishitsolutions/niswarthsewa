@@ -224,40 +224,43 @@
 									 style="position:relative; top:0; left:0;" dir="ltr">
 									<div class="u-sidebar__content u-header-sidebar__content">
 
-											<div id="login" data-target-group="idForm">
+										<div id="login" data-target-group="idForm">
 
 
-												<div class="position-relative position-md-static">
-													<ul class="nav nav-classic nav-tab nav-tab-lg justify-content-xl-center flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble border-0 pb-1 pb-xl-0 mb-n1 mb-xl-0"
-														id="pills-tab-8" role="tablist">
-														<li class="nav-item"><a class="nav-link"
-																				id="Jpills-two-example1-tab4"
-																				data-toggle="pill"
-																				href="#Jpills-two-example114" role="tab"
-																				aria-controls="Jpills-two-example11"
-																				aria-selected="false"> Org Login </a>
-														</li>
-														<li class="nav-item"><a class="nav-link active"
-																				id="Jpills-one-example1-tab3"
-																				data-toggle="pill"
-																				href="#Jpills-one-example113" role="tab"
-																				aria-controls="Jpills-one-example11"
-																				aria-selected="true"> Donor Login</a>
-														</li>
-													</ul>
-												</div>
-												<div class="borders-radius-17 p-4 mt-4 mt-md-0 px-lg-10 py-lg-9"
-													 style="    padding: 0px !important;   width: 100%;display: block; float: left;">
-													<div class="tab-content" id="Jpills-tabContent">
-														<div class="tab-pane fade active show"
-															 id="Jpills-one-example113" role="tabpanel"
-															 aria-labelledby="Jpills-one-example1-tab3">
-															<header class="text-center mb-7">
-																<h2 class="h4 mb-0">Donor Login </h2>
-																<p>Login to manage your account.</p>
-															</header>
-															<form class="js-validate" novalidate="novalidate" method="post" action="<?= base_url("login"); ?>" >
-																<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+											<div class="position-relative position-md-static">
+												<ul class="nav nav-classic nav-tab nav-tab-lg justify-content-xl-center flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble border-0 pb-1 pb-xl-0 mb-n1 mb-xl-0"
+													id="pills-tab-8" role="tablist">
+													<li class="nav-item"><a class="nav-link"
+																			id="Jpills-two-example1-tab4"
+																			data-toggle="pill"
+																			href="#Jpills-two-example114" role="tab"
+																			aria-controls="Jpills-two-example11"
+																			aria-selected="false"> Org Login </a>
+													</li>
+													<li class="nav-item"><a class="nav-link active"
+																			id="Jpills-one-example1-tab3"
+																			data-toggle="pill"
+																			href="#Jpills-one-example113" role="tab"
+																			aria-controls="Jpills-one-example11"
+																			aria-selected="true"> Donor Login</a>
+													</li>
+												</ul>
+											</div>
+											<div class="borders-radius-17 p-4 mt-4 mt-md-0 px-lg-10 py-lg-9"
+												 style="    padding: 0px !important;   width: 100%;display: block; float: left;">
+												<div class="tab-content" id="Jpills-tabContent">
+													<div class="tab-pane fade active show"
+														 id="Jpills-one-example113" role="tabpanel"
+														 aria-labelledby="Jpills-one-example1-tab3">
+														<header class="text-center mb-7">
+															<h2 class="h4 mb-0">Donor Login </h2>
+															<p>Login to manage your account.</p>
+														</header>
+														<form class="js-validate" novalidate="novalidate" method="post"
+															  action="<?= base_url("login"); ?>">
+															<input type="hidden"
+																   name="<?php echo $this->security->get_csrf_token_name(); ?>"
+																   value="<?php echo $this->security->get_csrf_hash(); ?>">
 															<div class="form-group">
 																<div class="js-form-message js-focus-state">
 																	<label class="sr-only"
@@ -314,23 +317,26 @@
 																	Login
 																</button>
 															</div>
-															</form>
-															<div class="text-center mb-4"><span
-																		class="small text-muted">Do not have an account?</span><a
-																		class="js-animation-link small text-dark"
-																		href="javascript:;" data-target="#signup"
-																		data-link-group="idForm"
-																		data-animation-in="slideInUp">Signup</a></div>
+														</form>
+														<div class="text-center mb-4"><span
+																	class="small text-muted">Do not have an account?</span><a
+																	class="js-animation-link small text-dark"
+																	href="javascript:;" data-target="#signup"
+																	data-link-group="idForm"
+																	data-animation-in="slideInUp">Signup</a></div>
 
-														</div>
-														<div class="tab-pane fade" id="Jpills-two-example114"
-															 role="tabpanel" aria-labelledby="Jpills-two-example1-tab4">
-															<header class="text-center mb-7">
-																<h2 class="h4 mb-0">Organization Login</h2>
-																<p>Login to manage your account.</p>
-															</header>
-															<form class="js-validate" novalidate="novalidate" method="post" action="<?= base_url("login"); ?>" >
-																<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+													</div>
+													<div class="tab-pane fade" id="Jpills-two-example114"
+														 role="tabpanel" aria-labelledby="Jpills-two-example1-tab4">
+														<header class="text-center mb-7">
+															<h2 class="h4 mb-0">Organization Login</h2>
+															<p>Login to manage your account.</p>
+														</header>
+														<form class="js-validate" novalidate="novalidate" method="post"
+															  action="<?= base_url("login"); ?>">
+															<input type="hidden"
+																   name="<?php echo $this->security->get_csrf_token_name(); ?>"
+																   value="<?php echo $this->security->get_csrf_hash(); ?>">
 															<div class="form-group">
 																<div class="js-form-message js-focus-state">
 																	<label class="sr-only"
@@ -387,109 +393,122 @@
 																	Login
 																</button>
 															</div>
-															</form>
-															<div class="text-center mb-4"><span
-																		class="small text-muted">Do not have an account?</span><a
-																		class="js-animation-link small text-dark"
-																		href="javascript:;" data-target="#signup"
-																		data-link-group="idForm"
-																		data-animation-in="slideInUp">Signup</a></div>
+														</form>
+														<div class="text-center mb-4"><span
+																	class="small text-muted">Do not have an account?</span><a
+																	class="js-animation-link small text-dark"
+																	href="javascript:;" data-target="#signup"
+																	data-link-group="idForm"
+																	data-animation-in="slideInUp">Signup</a></div>
 
-														</div>
 													</div>
 												</div>
 											</div>
-											<div id="signup" style="display: none; opacity: 0;"
-												 data-target-group="idForm">
-												<form class="js-validate" novalidate="novalidate" method="post" action="<?= base_url("signup"); ?>" >
-													<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-													<header class="text-center mb-7">
-														<h2 class="h4 mb-0">Welcome to Nishivarth</h2>
-														<p>Fill out the form to get started.</p>
-													</header>
-													<div class="form-group">
-														<input type="radio"  name="user_type" value="2" <?= !empty($signup['user_type']) ? ($signup['user_type'] == 2 ? 'checked="checked"' : "") : 'checked="checked"'; ?> > Donor
-														<input type="radio"  name="user_type" value="3" <?= !empty($signup['user_type']) ? ($signup['user_type'] == 3 ? 'checked="checked"' : "") : ''; ?> > Needy
-														<input type="radio"  name="user_type" value="1" <?= !empty($signup['user_type']) ? ($signup['user_type'] == 1 ? 'checked="checked"' : "") : ''; ?> > Organization
-													</div>
-													<div class="form-group">
-														<div class="js-form-message js-focus-state">
-															<label class="sr-only" for="signupEmail">Email</label>
-															<div class="input-group">
-																<div class="input-group-prepend"><span
-																			class="input-group-text"
-																			id="signupEmailLabel"><span
-																				class="fas fa-user"></span></span></div>
-																<input type="email" class="form-control" name="email"
-																	   id="signupEmail" placeholder="Email"
-																	   aria-label="Email"
-																	   aria-describedby="signupEmailLabel" required=""
-																	   data-msg="Please enter a valid email address."
-																	   data-error-class="u-has-error"
-																	   data-success-class="u-has-success">
-															</div>
-														</div>
-													</div>
-													<div class="form-group">
-														<div class="js-form-message js-focus-state">
-															<label class="sr-only" for="signupPassword">Password</label>
-															<div class="input-group">
-																<div class="input-group-prepend"><span
-																			class="input-group-text"
-																			id="signupPasswordLabel"><span
-																				class="fas fa-lock"></span></span></div>
-																<input type="password" class="form-control"
-																	   name="password" id="signupPassword"
-																	   placeholder="Password" aria-label="Password"
-																	   aria-describedby="signupPasswordLabel"
-																	   required=""
-																	   data-msg="Your password is invalid. Please try again."
-																	   data-error-class="u-has-error"
-																	   data-success-class="u-has-success">
-															</div>
-														</div>
-													</div>
-													<div class="form-group">
-														<div class="js-form-message js-focus-state">
-															<label class="sr-only" for="signupConfirmPassword">Confirm
-																Password</label>
-															<div class="input-group">
-																<div class="input-group-prepend"><span
-																			class="input-group-text"
-																			id="signupConfirmPasswordLabel"><span
-																				class="fas fa-key"></span></span></div>
-																<input type="password" class="form-control"
-																	   name="confirmPassword" id="signupConfirmPassword"
-																	   placeholder="Confirm Password"
-																	   aria-label="Confirm Password"
-																	   aria-describedby="signupConfirmPasswordLabel"
-																	   required=""
-																	   data-msg="Password does not match the confirm password."
-																	   data-error-class="u-has-error"
-																	   data-success-class="u-has-success">
-															</div>
-														</div>
-													</div>
-													<div class="mb-2">
-														<button type="submit"
-																class="btn btn-block btn-sm btn-primary transition-3d-hover">
-															Get Started
-														</button>
-													</div>
-													<div class="text-center mb-4"><span class="small text-muted">Already have an account?</span><a
-																class="js-animation-link small text-dark"
-																href="javascript:;" data-target="#login"
-																data-link-group="idForm" data-animation-in="slideInUp">Login</a>
-													</div>
-												</form>
-											</div>
-											<div id="forgotPassword" style="display: none; opacity: 0;"
-												 data-target-group="idForm">
+										</div>
+										<div id="signup" style="display: none; opacity: 0;"
+											 data-target-group="idForm">
+											<form class="js-validate" novalidate="novalidate" method="post"
+												  action="<?= base_url("signup"); ?>">
+												<input type="hidden"
+													   name="<?php echo $this->security->get_csrf_token_name(); ?>"
+													   value="<?php echo $this->security->get_csrf_hash(); ?>">
 												<header class="text-center mb-7">
-													<h2 class="h4 mb-0">Recover Password.</h2>
-													<p>Enter your email address and an email with instructions will be
-														sent to you.</p>
+													<h2 class="h4 mb-0">Welcome to Nishivarth</h2>
+													<p>Fill out the form to get started.</p>
 												</header>
+												<div class="form-group">
+													<input type="radio" name="user_type"
+														   value="2" <?= !empty($signup['user_type']) ? ($signup['user_type'] == 2 ? 'checked="checked"' : "") : 'checked="checked"'; ?> >
+													Donor
+													<input type="radio" name="user_type"
+														   value="3" <?= !empty($signup['user_type']) ? ($signup['user_type'] == 3 ? 'checked="checked"' : "") : ''; ?> >
+													Needy
+													<input type="radio" name="user_type"
+														   value="1" <?= !empty($signup['user_type']) ? ($signup['user_type'] == 1 ? 'checked="checked"' : "") : ''; ?> >
+													Organization
+												</div>
+												<div class="form-group">
+													<div class="js-form-message js-focus-state">
+														<label class="sr-only" for="signupEmail">Email</label>
+														<div class="input-group">
+															<div class="input-group-prepend"><span
+																		class="input-group-text"
+																		id="signupEmailLabel"><span
+																			class="fas fa-user"></span></span></div>
+															<input type="email" class="form-control" name="email"
+																   id="signupEmail" placeholder="Email"
+																   aria-label="Email"
+																   aria-describedby="signupEmailLabel" required=""
+																   data-msg="Please enter a valid email address."
+																   data-error-class="u-has-error"
+																   data-success-class="u-has-success">
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="js-form-message js-focus-state">
+														<label class="sr-only" for="signupPassword">Password</label>
+														<div class="input-group">
+															<div class="input-group-prepend"><span
+																		class="input-group-text"
+																		id="signupPasswordLabel"><span
+																			class="fas fa-lock"></span></span></div>
+															<input type="password" class="form-control"
+																   name="password" id="signupPassword"
+																   placeholder="Password" aria-label="Password"
+																   aria-describedby="signupPasswordLabel"
+																   required=""
+																   data-msg="Your password is invalid. Please try again."
+																   data-error-class="u-has-error"
+																   data-success-class="u-has-success">
+														</div>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="js-form-message js-focus-state">
+														<label class="sr-only" for="signupConfirmPassword">Confirm
+															Password</label>
+														<div class="input-group">
+															<div class="input-group-prepend"><span
+																		class="input-group-text"
+																		id="signupConfirmPasswordLabel"><span
+																			class="fas fa-key"></span></span></div>
+															<input type="password" class="form-control"
+																   name="confirmPassword" id="signupConfirmPassword"
+																   placeholder="Confirm Password"
+																   aria-label="Confirm Password"
+																   aria-describedby="signupConfirmPasswordLabel"
+																   required=""
+																   data-msg="Password does not match the confirm password."
+																   data-error-class="u-has-error"
+																   data-success-class="u-has-success">
+														</div>
+													</div>
+												</div>
+												<div class="mb-2">
+													<button type="submit"
+															class="btn btn-block btn-sm btn-primary transition-3d-hover">
+														Get Started
+													</button>
+												</div>
+												<div class="text-center mb-4"><span class="small text-muted">Already have an account?</span><a
+															class="js-animation-link small text-dark"
+															href="javascript:;" data-target="#login"
+															data-link-group="idForm"
+															data-animation-in="slideInUp">Login</a>
+												</div>
+											</form>
+										</div>
+										<div id="forgotPassword" style="display: none; opacity: 0;"
+											 data-target-group="idForm">
+											<header class="text-center mb-7">
+												<h2 class="h4 mb-0">Recover Password.</h2>
+												<p>Enter your email address and an email with instructions will be
+													sent to you.</p>
+											</header>
+											<form class="js-validate" novalidate="novalidate" method="post"
+												  action="<?= base_url("login/recover-password"); ?>">
+												<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
 												<div class="form-group">
 													<div class="js-form-message js-focus-state">
 														<label class="sr-only" for="recoverEmail">Your email</label>
@@ -497,7 +516,7 @@
 															<div class="input-group-prepend"><span
 																		class="input-group-text" id="recoverEmailLabel"><span
 																			class="fas fa-user"></span></span></div>
-															<input type="email" class="form-control" name="email"
+															<input type="email" class="form-control" name="login_email"
 																   id="recoverEmail" placeholder="Your email"
 																   aria-label="Your email"
 																   aria-describedby="recoverEmailLabel" required=""
@@ -513,11 +532,12 @@
 														Recover Password
 													</button>
 												</div>
-												<div class="text-center mb-4"><span class="small text-muted">Remember your password?</span><a
-															class="js-animation-link small" href="javascript:;"
-															data-target="#login" data-link-group="idForm"
-															data-animation-in="slideInUp">Login</a></div>
-											</div>
+											</form>
+											<div class="text-center mb-4"><span class="small text-muted">Remember your password?</span><a
+														class="js-animation-link small" href="javascript:;"
+														data-target="#login" data-link-group="idForm"
+														data-animation-in="slideInUp">Login</a></div>
+										</div>
 
 									</div>
 								</div>
